@@ -83,7 +83,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #252122;
+		background: #f5f5f5;
 		background-image: url("images/bg02.png");
 	}
 
@@ -1562,13 +1562,13 @@ input, select, textarea {
 		header.major {
 			position: relative;
 			text-align: center;
-			border-top: solid 3px #b81e1e;
+			border-top: solid 10px #b81e1e;
 			top: 1em;
 			margin: 0 0 3em 0;
 		}
 
 			header.major h2 {
-				background: #fff;
+				background: #db3535;
 				position: relative;
 				top: -0.65em;
 				display: inline;
@@ -1583,9 +1583,10 @@ input, select, textarea {
 /* Box */
 
 	.box {
-		background: #c0bebe;
-		border-bottom: solid 1px #aa0c0c;
+		background: #faf9f9;
+		/*border-bottom: solid 3px #464646; */
 		padding: 2.75em 1.75em 2.75em 1.75em;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 	}
 
 		.box .image.featured {
@@ -1596,6 +1597,7 @@ input, select, textarea {
 			margin: -4.5em 0 4.25em -3.5em;
 		}
 
+		
 		.box.post header {
 			padding-top: 1em;
 			margin: 0 0 2em 0;
@@ -1729,6 +1731,26 @@ input, select, textarea {
 			margin: 0 0 2em 0;
 		}
 
+		.image.featured::after {
+  		content: "";
+  		position: absolute;
+  		inset: 0;
+  		pointer-events: none;
+  		background:
+    		radial-gradient(circle at top left,    rgba(0,0,0,0.6) 0%, transparent 50%),
+    radial-gradient(circle at top right,   rgba(0,0,0,0.6) 0%, transparent 50%),
+    radial-gradient(circle at bottom left, rgba(0,0,0,0.6) 0%, transparent 50%),
+    radial-gradient(circle at bottom right,rgba(0,0,0,0.6) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.image.featured img {
+  display: block;
+  /* opcional: asegúrate de que la img quede bajo el overlay */
+  position: relative;
+  z-index: 0;
+}
+
 		.image.left {
 			float: left;
 			margin: 0 2em 2em 0;
@@ -1800,8 +1822,8 @@ input, select, textarea {
 
 		ul.contact li {
 			position: relative;
-			border-top: solid 1px #ddd;
-			padding: 1.3em 0 1.3em 7em;
+			border-top: solid 1px #000000;
+			padding: 1.3em 0 2.3em 10em;
 		}
 
 			ul.contact li h3 {
@@ -2092,6 +2114,7 @@ input, select, textarea {
 			font-size: 2.5em;
 			letter-spacing: -0.035em;
 			line-height: 1;
+			
 		}
 
 /* Nav */
@@ -2195,13 +2218,15 @@ input, select, textarea {
 		position: relative;
 		padding: 8em 0;
 		margin: 4em 0 0 0;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 	}
 
 		#banner header {
-			background-color: rgba(34, 30, 31, 0.98);
+			background-color: rgba(0, 0, 0, 0.98);
 			display: inline-block;
 			padding: 2.5em 5em;
 			border-radius: 5px;
+			box-shadow: 0 4px 35px rgba(0, 0, 0, 0.4);
 		}
 
 			#banner header h2 {
@@ -2212,11 +2237,12 @@ input, select, textarea {
 			}
 
 			#banner header p {
-				color: #d52349;
+				color: #aa0c0c;
 				padding: 0;
 				font-style: normal;
 				margin: 0;
-				font-size: 1.5em;
+				font-size: 2em;
+				
 			}
 
 /* Intro */
@@ -2304,7 +2330,7 @@ input, select, textarea {
 
 	#footer {
 		position: relative;
-		color: #858484;
+		color: #000000;
 		padding: 4em 0;
 	}
 
@@ -2321,7 +2347,7 @@ input, select, textarea {
 		}
 
 		#footer a {
-			color: #c5c4c4;
+			color: #ad0000;
 		}
 
 		#footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
@@ -2919,7 +2945,33 @@ input, select, textarea {
 				padding: 40px 0 20px 0;
 			}
 
-			
+/* animación pulse */
+@keyframes clickPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+}
+
+/* asegúrate de que es inline-block para poder escalarlo */
+.button.alt {
+  display: inline-block;
+}
+
+/* clase que dispara la animación */
+.button.alt.spotify-anim {
+  animation: clickPulse 0.4s ease-out;
+  transform-origin: center center;
+}
+
 
 
 	}
