@@ -152,7 +152,7 @@ input, select, textarea {
 	}
 
 	a {
-		color: #d52349;
+		color: #b81e1e;
 		text-decoration: underline;
 	}
 
@@ -1568,7 +1568,7 @@ input, select, textarea {
 		}
 
 			header.major h2 {
-				background: #db3535;
+				background: #b81e1e;
 				position: relative;
 				top: -0.65em;
 				display: inline;
@@ -1630,7 +1630,7 @@ input, select, textarea {
 		cursor: pointer;
 		border: 0;
 		border-radius: 5px;
-		background: #d52349;
+		background: 	#b81e1e;
 		color: #fff !important;
 		font-weight: 700;
 		outline: 0;
@@ -1648,7 +1648,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: #e53359;
+			background: #000000;
 		}
 
 		input[type="button"]:active,
@@ -1656,7 +1656,7 @@ input, select, textarea {
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background: #c51349;
+			background: #b81e1e;
 		}
 
 		input[type="button"].alt,
@@ -1672,7 +1672,7 @@ input, select, textarea {
 			input[type="reset"].alt:hover,
 			button.alt:hover,
 			.button.alt:hover {
-				background: #353132;
+				background: #b81e1e;
 			}
 
 			input[type="button"].alt:active,
@@ -1864,7 +1864,7 @@ input, select, textarea {
 			position: absolute;
 			left: 0;
 			top: 1.3em;
-			background-color: #d52349;
+			background-color: #b81e1e;
 			height: 3.5em;
 			text-align: center;
 			color: #fff;
@@ -1879,7 +1879,7 @@ input, select, textarea {
 				position: absolute;
 				bottom: 0;
 				right: -1.2em;
-				border-left: solid 1.25em #d52349;
+				border-left: solid 1.25em #b81e1e;
 				border-top: solid 1.8em transparent;
 				border-bottom: solid 1.8em transparent;
 			}
@@ -1950,7 +1950,7 @@ input, select, textarea {
 				height: 3em;
 				text-align: center;
 				border-radius: 5px;
-				background: #888;
+				background: #f7f7f7;
 				-moz-transition: background-color .25s ease-in-out;
 				-webkit-transition: background-color .25s ease-in-out;
 				-ms-transition: background-color .25s ease-in-out;
@@ -1958,7 +1958,7 @@ input, select, textarea {
 			}
 
 				ul.social li a:before {
-					color: #fff;
+					color: #000000;
 					font-size: 2em;
 					line-height: 1.5em;
 				}
@@ -2209,41 +2209,52 @@ input, select, textarea {
 
 /* Banner */
 
-	#banner {
-		background: #aa0c0c url("../../images/dani.svg");
-		background-position: center center;
-		background-size: auto 100%;
-		background-repeat: no-repeat;
-		text-align: center;
-		position: relative;
-		padding: 8em 0;
-		margin: 4em 0 0 0;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-	}
+	/* 1) En lugar de usar el SVG como background directo, quitas la imagen de #banner */
+#banner {
+  background-color: #aa0c0c;
+  /* quitamos: url("../../images/dani.svg") */
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  position: relative;  /* para que el ::before quede posicionado respecto a este contenedor */
+  padding: 8em 0;
+  margin: 4em 0 0 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
 
-		/*#banner header {
-			background-color: rgba(0, 0, 0, 0.98);
-			display: inline-block;
-			padding: 2.5em 5em;
-			border-radius: 5px;
-			box-shadow: 0 4px 35px rgba(0, 0, 0, 0.4);
-		}*/
+/* 2) Creamos el pseudo-elemento que llevará el logo y lo animamos */
+#banner::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;    /* ajusta al tamaño que necesites */
+  height: 200px;   /* idem */
+  background: url("../../images/dani.svg") no-repeat center/contain;
+  transform: translate(-50%, -50%) rotate(-360deg) scale(0);
+  animation: logo-entra-girando 1s ease-out forwards;
+  z-index: 0;
+}
 
-			#banner header h2 {
-				color: #fff;
-				font-weight: 700;
-				font-size: 2.5em;
-				margin: 0 0 0.65em 0;
-			}
+/* 3) Aseguramos que el texto del header vaya por encima del logo */
+#banner > header {
+  position: relative;
+  z-index: 1;
+}
 
-			#banner header p {
-				color: #aa0c0c;
-				padding: 0;
-				font-style: normal;
-				margin: 0;
-				font-size: 2em;
-				
-			}
+/* 4) Definimos los keyframes de la animación */
+@keyframes logo-entra-girando {
+  from {
+    transform: translate(-50%, -50%) rotate(-360deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
 
 /* Intro */
 
@@ -2348,7 +2359,7 @@ input, select, textarea {
 
 		#footer a {
 			color: #ad0000;
-			padding: 1em;
+			padding: 30px;
 		}
 
 		#footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
@@ -2363,7 +2374,7 @@ input, select, textarea {
 		#footer ul.dates li,
 		#footer ul.divided li {
 			border-top-color: #353434;
-			border-top-color: rgba(255, 255, 255, 0.05);
+			border-top-color: rgba(187, 16, 16, 0.05);
 		}
 
 		#footer header {
@@ -2384,7 +2395,7 @@ input, select, textarea {
 		#copyright ul.links {
 			display: inline-block;
 			background: #2C2929;
-			background: rgba(255, 255, 255, 0.05);
+			background: rgba(173, 173, 173, 0.849);
 			border-radius: 5px;
 			margin: 0;
 			padding: 0.85em 2.25em 0.85em 2.25em;
