@@ -9,13 +9,16 @@
     <title>Dani Miralles Oficial</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/main.css" />
+
     <!-- AOS CSS for scroll animations -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 
-<body class="homepage is-preload">
+<!-- Aquí, sólo "homepage" (quitamos is-preload) -->
+<body class="homepage">
     <div id="page-wrapper">
 
         <!-- Header -->
@@ -38,12 +41,12 @@
             </section>
 
             <!-- Intro -->
-            <section id="intro" class="container" data-aos="fade-up">
+            <section id="intro" class="container">
                 <div class="row">
                     <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="100">
                         <a href="https://youtube.com/@danimirallesmusic" target="_blank" class="box-link">
                             <section class="first">
-                                <i class="icon brands fa-youtube icon-large" data-aos="fade-up"></i>
+                                <i class="icon brands fa-youtube icon-large"></i>
                                 <header><h2>YouTube</h2></header>
                                 <p>Aquí podrás ver mis videoclips y todo el contenido audiovisual</p>
                             </section>
@@ -52,7 +55,7 @@
                     <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="200">
                         <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg" target="_blank" class="box-link">
                             <section class="middle">
-                                <i class="icon brands fa-spotify icon-large" data-aos="fade-up"></i>
+                                <i class="icon brands fa-spotify icon-large"></i>
                                 <header><h2>Spotify</h2></header>
                                 <p>Escucha mis últimos lanzamientos y playlists.</p>
                             </section>
@@ -61,7 +64,7 @@
                     <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="300">
                         <a href="https://instagram.com/danimiralles_oficial" target="_blank" class="box-link">
                             <section class="last">
-                                <i class="icon brands fa-instagram icon-large" data-aos="fade-up"></i>
+                                <i class="icon brands fa-instagram icon-large"></i>
                                 <header><h2>Instagram</h2></header>
                                 <p>Sígueme para ver fotos, novedades y más arte.</p>
                             </section>
@@ -170,7 +173,6 @@
                                 <li>
                                     <span class="date">Mes <strong>Día</strong></span>
                                     <h3><a href="#">Todavía sin definir</a></h3>
-                                    <p></p>
                                 </li>
                             </ul>
                         </section>
@@ -182,24 +184,19 @@
                                 <li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
                             </ul>
                             <ul class="contact">
-                                <li>
-                                    <h3>Dirección</h3>
-                                </li>
+                                <li><h3>Dirección</h3></li>
                                 <li>
                                     <h3>Email de contacto</h3>
-                                    <p><a href="#">danimirallesoficial@gmail.com</a></p>
+                                    <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
                                 </li>
-                                <li>
-                                    <h3>Teléfono</h3>
-                                    <p></p>
-                                </li>
+                                <li><h3>Teléfono</h3></li>
                             </ul>
                         </section>
                     </div>
                     <div class="col-12">
                         <div id="copyright">
                             <ul class="links">
-                                <li>&copy; Untitled. Todos los derechos reservados 2025</li>
+                                <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
                                 <li>Creada Por: David Castillo Gallardo</li>
                             </ul>
                         </div>
@@ -210,7 +207,7 @@
 
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts: mantenemos los tuyos más nuestra llamada a AOS -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
@@ -220,22 +217,25 @@
     <script src="assets/js/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Inicializar AOS
-        AOS.init({ duration: 800, once: true });
-        // Forzar scroll para animar elementos ya visibles
+        // 1) Inicializar AOS
+        AOS.init({
+          duration: 800,
+          once: true,
+          offset: 0
+        });
+        // 2) Refrescar posiciones y forzar un scroll trivial
+        AOS.refresh();
         window.dispatchEvent(new Event('scroll'));
 
-        // Pulse en mousedown para Spotify
-        document
-          .querySelectorAll('a.button.alt[href*="spotify.com"]')
-          .forEach(function(btn) {
-            btn.addEventListener('mousedown', function() {
-              btn.classList.add('spotify-anim');
-              setTimeout(function() {
-                btn.classList.remove('spotify-anim');
-              }, 400);
-            });
+        // 3) Efecto "pulse" al pulsar Spotify
+        document.querySelectorAll('a.button.alt[href*="spotify.com"]').forEach(function(btn) {
+          btn.addEventListener('mousedown', function() {
+            btn.classList.add('spotify-anim');
+            setTimeout(function() {
+              btn.classList.remove('spotify-anim');
+            }, 400);
           });
+        });
       });
     </script>
 </body>
