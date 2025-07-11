@@ -2154,8 +2154,8 @@ input, select, textarea {
 				}
 
 				#nav > ul > li.current > a {
-					background: #302b2c;
-					color: #fff !important;
+					background: #838282;
+					color: #000000 !important;
 					font-weight: 700;
 				}
 
@@ -2210,7 +2210,7 @@ input, select, textarea {
 /* Banner */
 
 	#banner {
-		background: #aa0c0c /*url("../../images/pic01.jpg")*/;
+		background: #aa0c0c url("../../images/dani.svg");
 		background-position: center center;
 		background-size: auto 100%;
 		background-repeat: no-repeat;
@@ -2221,13 +2221,13 @@ input, select, textarea {
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 	}
 
-		#banner header {
+		/*#banner header {
 			background-color: rgba(0, 0, 0, 0.98);
 			display: inline-block;
 			padding: 2.5em 5em;
 			border-radius: 5px;
 			box-shadow: 0 4px 35px rgba(0, 0, 0, 0.4);
-		}
+		}*/
 
 			#banner header h2 {
 				color: #fff;
@@ -2348,6 +2348,7 @@ input, select, textarea {
 
 		#footer a {
 			color: #ad0000;
+			padding: 1em;
 		}
 
 		#footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
@@ -2716,7 +2717,8 @@ input, select, textarea {
 				}
 
 				#navPanel .depth-0 {
-					color: #fff;
+					color: #0c0c0c;
+					font-size: 18pt;
 				}
 
 			body.navPanel-visible #page-wrapper {
