@@ -2231,7 +2231,7 @@ input, select, textarea {
   left: 50%;
   width: 200px;    /* ajusta al tamaño que necesites */
   height: 200px;   /* idem */
-  background: url("../../images/dani.svg") no-repeat center/contain;
+  background: url("../../images/dani.gif") no-repeat center/contain;
   transform: translate(-50%, -50%) rotate(-360deg) scale(0);
   animation: logo-entra-girando 1s ease-out forwards;
   z-index: 0;
