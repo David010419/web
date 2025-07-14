@@ -35,17 +35,22 @@
         <h2>Contacto</h2>
         <p>Escríbeme para colaboraciones, eventos o más información</p>
       </header>
-      <form
-        name="contacto"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-      >
-        <!-- Campo honeypot (anti-spam) -->
-        <input type="hidden" name="bot-field" />
 
-        <!-- Nombre interno del formulario para Netlify -->
-        <input type="hidden" name="form-name" value="contacto" />
+      <form
+        action="https://formsubmit.co/danimirallesoficial@gmail.com"
+        method="POST"
+      >
+        <!-- Honeypot anti-spam (no visible) -->
+        <input type="text" name="_honey" style="display:none" />
+
+        <!-- Desactivar el captcha de FormSubmit si no lo necesitas -->
+        <input type="hidden" name="_captcha" value="false" />
+
+        <!-- Personaliza el asunto del correo -->
+        <input type="hidden" name="_subject" value="🤙 Nuevo mensaje desde tu web" />
+
+        <!-- (Opcional) Redirigir a una página de gracias tras el envío -->
+        <!-- <input type="hidden" name="_next" value="https://tusitio.com/gracias.html" /> -->
 
         <div class="row gtr-50 gtr-uniform">
           <div class="col-6 col-12-mobilep">
@@ -80,7 +85,9 @@
               <li>
                 <input type="submit" value="Enviar mensaje" class="primary" />
               </li>
-              <li><input type="reset" value="Limpiar" /></li>
+              <li>
+                <input type="reset" value="Limpiar" />
+              </li>
             </ul>
           </div>
         </div>
