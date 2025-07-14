@@ -27,35 +27,68 @@
       </section>
 
       <!-- Main -->
-      <section id="main">
-        <div class="container">
-          <article class="box post">
-            <header>
-              <h2>Contacto</h2>
-              <p>Escríbeme para colaboraciones, eventos o más información</p>
-            </header>
-            <form method="post" action="https://script.google.com/macros/s/AKfycbzgluT6E52hmXxvz97GZKZKbq4eEDwRoH71MuAjmZTL-M-S_aEuxBd2gMM1DacPR6vE/exec" enctype="text/plain">
-              <div class="row gtr-50 gtr-uniform">
-                <div class="col-6 col-12-mobilep">
-                  <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required />
-                </div>
-                <div class="col-6 col-12-mobilep">
-                  <input type="email" name="email" id="email" placeholder="Tu correo electrónico" required />
-                </div>
-                <div class="col-12">
-                  <textarea name="mensaje" id="mensaje" placeholder="Tu mensaje" rows="6" required></textarea>
-                </div>
-                <div class="col-12">
-                  <ul class="actions">
-                    <li><input type="submit" value="Enviar mensaje" class="primary" /></li>
-                    <li><input type="reset" value="Limpiar" /></li>
-                  </ul>
-                </div>
-              </div>
-            </form>
-          </article>
+      <!-- Main -->
+<section id="main">
+  <div class="container">
+    <article class="box post">
+      <header>
+        <h2>Contacto</h2>
+        <p>Escríbeme para colaboraciones, eventos o más información</p>
+      </header>
+      <form
+        name="contacto"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <!-- Campo honeypot (anti-spam) -->
+        <input type="hidden" name="bot-field" />
+
+        <!-- Nombre interno del formulario para Netlify -->
+        <input type="hidden" name="form-name" value="contacto" />
+
+        <div class="row gtr-50 gtr-uniform">
+          <div class="col-6 col-12-mobilep">
+            <input
+              type="text"
+              name="nombre"
+              id="nombre"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+          <div class="col-6 col-12-mobilep">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Tu correo electrónico"
+              required
+            />
+          </div>
+          <div class="col-12">
+            <textarea
+              name="mensaje"
+              id="mensaje"
+              placeholder="Tu mensaje"
+              rows="6"
+              required
+            ></textarea>
+          </div>
+          <div class="col-12">
+            <ul class="actions">
+              <li>
+                <input type="submit" value="Enviar mensaje" class="primary" />
+              </li>
+              <li><input type="reset" value="Limpiar" /></li>
+            </ul>
+          </div>
         </div>
-      </section>
+      </form>
+    </article>
+  </div>
+</section>
+
 
       <!-- Footer -->
       <section id="footer">
