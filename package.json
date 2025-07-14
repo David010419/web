@@ -1,4 +1,10 @@
 {
+  "name": "tu-sitio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo \"No hay paso de build necesario\""
+  },
   "dependencies": {
     "nodemailer": "^6.9.0"
   }
