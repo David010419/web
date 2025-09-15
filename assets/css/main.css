@@ -2975,9 +2975,7 @@ input, select, textarea {
 }
 
 /* asegúrate de que es inline-block para poder escalarlo */
-.button.alt {
-  display: inline-block;
-}
+.button.alt { display: inline-block; }
 
 /* clase que dispara la animación */
 .button.alt.spotify-anim {
@@ -2985,6 +2983,261 @@ input, select, textarea {
   transform-origin: center center;
 }
 
+/* >>> CIERRA EL @media AQUÍ <<< */
+}  /* <-- cierre de @media screen and (max-width: 736px) */
 
 
-	}
+/* ===== Modal promocional de vídeo (Dani Miralles) ===== */
+body.dm-modal-open {
+  overflow: hidden;
+}
+
+#dm-video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+  z-index: 11000; /* por encima de #navPanel (10002) */
+}
+
+#dm-video-modal.is-active { opacity: 1; pointer-events: auto; }
+
+.dm-modal__content {
+  position: relative;
+  width: min(92vw, 820px);
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  animation: dm-pop .45s ease;
+}
+
+/* Franja superior del modal (dentro del cajón negro) */
+.dm-modal__ribbon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: .5rem 2rem;
+  padding-right: 10px;        /* deja hueco para el botón de cerrar */
+  background: linear-gradient(90deg, #b81e1e, #8f0f0f 60%, #b81e1e);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 900;
+  font-size: clamp(12px, 2.2vw, 15px);
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0);
+}
+
+.dm-modal__ribbon span {
+  display: inline-block;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* brillo sutil que se desplaza (sin ser molesto) */
+.dm-modal__ribbon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);
+  mix-blend-mode: screen;
+  transform: translateX(-100%);
+  animation: dm-ribbon-shine 3.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes dm-ribbon-shine {
+  to { transform: translateX(100%); }
+}
+
+/* Respeto a prefiere-reducir-movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .dm-modal__ribbon::after { animation: none; }
+}
+
+
+
+.dm-modal__render img {
+  max-width: 220px;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  animation: dm-render-pop .6s ease;
+}
+
+@keyframes dm-render-pop {
+  from { transform: translateY(40px) scale(0.9); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+.dm-modal__video { position: relative; padding-bottom: 56.25%; height: 0; }
+.dm-modal__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.dm-modal__close {
+  position: absolute; top: 8px; right: 10px;
+  border: 0; background: rgba(0,0,0,.5); color: #fff;
+  width: 40px; height: 40px; border-radius: 8px;
+  cursor: pointer; font-size: 1.6rem; line-height: 40px;
+}
+
+.dm-modal__footer {
+  display: flex; gap: .75rem; justify-content: center; align-items: center;
+  padding: .75rem 1rem 1rem; background: #000;
+}
+
+.dm-modal__cta {
+  text-decoration: none; border-radius: 6px; background: #b81e1e;
+  color: #fff !important; font-weight: 700; padding: .6em 1em; display: inline-block;
+}
+.dm-modal__cta:hover { background: #000; }
+
+/* Render debajo de los botones del modal */
+.dm-modal__render-under {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.75rem 1rem 1.25rem;   /* espacio alrededor del render */
+  background: transparent;         /* no tocamos el fondo del modal */
+}
+
+.dm-modal__render-under img {
+  max-width: min(320px, 70%);
+  height: auto;
+  pointer-events: none;
+  /* Como el render es oscuro sobre fondo negro, le damos “halo” para que se vea */
+  filter: drop-shadow(0 6px 18px rgba(255,255,255,0.08))
+          drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  /* Borde muy sutil para separarlo del fondo */
+  outline: 1px solid rgba(255,255,255,0.06);
+  outline-offset: -1px;
+}
+
+/* Apilar contenido del modal en columna para poner el render debajo */
+#dm-video-modal {
+  display: flex;          /* ya lo tienes en flex por defecto */
+  flex-direction: column; /* <--- clave para que vaya debajo */
+  align-items: center;    /* centrado horizontal del stack */
+}
+
+/* El cajón del vídeo no debe crecer por el render */
+.dm-modal__content {
+  overflow: hidden;       /* mantiene el recorte del 16:9 y bordes */
+  background: #ffffff;       /* tu caja negra como antes */
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+
+/* Overlay del modal (ya lo tienes); añadimos scroll y padding de seguridad */
+#dm-video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+  z-index: 11000;
+  overflow: auto;        /* permite ver el render si el alto es justo */
+  padding: 4vh 0;        /* margen superior/inferior para respirar */
+}
+#dm-video-modal.is-active { opacity: 1; pointer-events: auto; }
+
+body.dm-modal-open { overflow: hidden; }
+
+/* Contenedor “stack” que agrupa caja y render */
+.dm-modal__stack {
+  position: relative;          /* clave para posicionar el render */
+  width: min(92vw, 820px);
+  overflow: visible;           /* que el render pueda salirse por debajo */
+}
+
+/* Cajón negro: SOLO contiene video + botones y NO crece por el render */
+.dm-modal__content {
+  position: relative;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;            /* respeta 16:9 y bordes */
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+
+/* Vídeo 16:9 */
+.dm-modal__video { position: relative; padding-bottom: 56.25%; height: 0; }
+.dm-modal__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Botón cerrar (como ya tenías) */
+.dm-modal__close {
+  position: absolute; top: 8px; right: 10px;
+  border: 0; background: rgba(0,0,0,.5); color: #fff;
+  width: 40px; height: 40px; border-radius: 8px;
+  cursor: pointer; font-size: 1.6rem; line-height: 40px;
+}
+
+/* Footer con CTAs (igual) */
+.dm-modal__footer {
+  display: flex; gap: .75rem; justify-content: center; align-items: center;
+  padding: .75rem 1rem 1rem; background: #000;
+}
+.dm-modal__cta {
+  text-decoration: none; border-radius: 6px; background: #b81e1e;
+  color: #fff !important; font-weight: 700; padding: .6em 1em; display: inline-block;
+}
+.dm-modal__cta:hover { background: #000; }
+
+/* === Render debajo del cajón, sobre el fondo difuminado === */
+.dm-modal__render {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100% + 10px);        /* 10px por debajo del cajón */
+  width: clamp(180px, 35%, 320px);
+  height: auto;
+  pointer-events: none;           /* no intercepta clics (útil para cerrar fuera) */
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.7))
+          drop-shadow(0 4px 10px rgba(255,255,255,.09));
+}
+
+/* opcional: halo/peana suave debajo del render */
+.dm-modal__stack::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 28px);         /* ajusta con el top del render */
+  transform: translateX(-50%);
+  width: 55%;
+  height: 16px;
+  background: radial-gradient(ellipse at center,
+              rgba(255,255,255,.18), rgba(255,255,255,0) 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  #dm-video-modal { transition: none; }
+}
+@media (max-width: 480px) {
+  .dm-modal__render { top: calc(100% + 8px); width: clamp(150px, 48%, 260px); }
+}
+
+
+/* Ajuste móvil */
+@media (max-width: 480px) {
+  .dm-modal__render img { width: 78%; max-width: none; }
+}
+
+
+
