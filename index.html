@@ -1,253 +1,311 @@
 <!DOCTYPE HTML>
-
 <html>
-<head >
+<head>
     <title>Dani Miralles Oficial</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta name="google-site-verification" content="luKO0pPkkFBRJGfkaPcTMLRPCFOAl5XkewVdzyNLKjY" />
+    <meta name="google-site-verification" content="luKO0pPkkFBRJGfkaPcTMLRPCFOAl5XkewVdzyNLKjY" />
 
-<meta name="description" content="Web de Dani Miralles Oficial, Música, Cantoautor, Artista">
-<meta name="keywords" content="Que suba el hielo, 100 años del sueño del chepa, me da igual, artista, dani miralles, dani miralles web">
-<meta name="author" content="Dani Miralles Oficial">
-
+    <meta name="description" content="Web de Dani Miralles Oficial, Música, Cantoautor, Artista">
+    <meta name="keywords" content="Que suba el hielo, 100 años del sueño del chepa, me da igual, artista, dani miralles, dani miralles web">
+    <meta name="author" content="Dani Miralles Oficial">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/main.css" />
 
-    <!-- AOS CSS for scroll animations -->
+    <!-- AOS CSS for scroll animations -->  
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
     <link rel="manifest" href="/images/site.webmanifest" />
-    </head>
+</head>
 
 <!-- Aquí, sólo "homepage" (quitamos is-preload) -->
 <body class="homepage">
-    <div id="page-wrapper">
 
-        <!-- Header -->
-        <section id="header">
+<!-- ===== Modal promocional de vídeo ===== -->
+<div id="dm-video-modal" aria-hidden="true" role="dialog" aria-label="Nuevo lanzamiento">
+  <div class="dm-modal__stack">
+    <div class="dm-modal__content">
+      <button class="dm-modal__close" id="dm-close-modal" aria-label="Cerrar">&times;</button>
+  <!-- 👇 NUEVO: franja superior -->
+      <div class="dm-modal__ribbon" aria-hidden="true">
+        <span>NUEVO LANZAMIENTO! <strong>OVEJAS NEGRAS</strong></span>
+      </div>
+      <div class="dm-modal__video">
+        <iframe id="dm-youtube"
+          src="https://www.youtube-nocookie.com/embed/O-3UzMua1R4?autoplay=1&mute=1&rel=0&showinfo=0"
+          title="Videoclip - Dani Miralles"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
 
-            <!-- Nav -->
-            <nav id="nav" data-aos="fade-down">
-                <ul>
-                    <li class="current"><a href="index.html">Inicio</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-
-            <!-- Banner -->
-            <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
-                <header>
-                    <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
-                    <p>¡Puedes seguirme en mis redes sociales!</p>-->
-                </header>
-            </section>
-
-            <!-- Intro -->
-            <section id="intro" class="container">
-                <div class="row">
-                    <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="100">
-                        <a href="https://youtube.com/@danimirallesmusic" target="_blank" class="box-link">
-                            <section class="first">
-                                <i class="icon brands fa-youtube icon-large"></i>
-                                <header><h2>YouTube</h2></header>
-                                <p>Aquí podrás ver mis videoclips y todo el contenido audiovisual</p>
-                            </section>
-                        </a>
-                    </div>
-                    <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="200">
-                        <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg" target="_blank" class="box-link">
-                            <section class="middle">
-                                <i class="icon brands fa-spotify icon-large"></i>
-                                <header><h2>Spotify</h2></header>
-                                <p>Escucha mis últimos lanzamientos y playlists.</p>
-                            </section>
-                        </a>
-                    </div>
-                    <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="300">
-                        <a href="https://instagram.com/danimiralles_oficial" target="_blank" class="box-link">
-                            <section class="last">
-                                <i class="icon brands fa-instagram icon-large"></i>
-                                <header><h2>Instagram</h2></header>
-                                <p>Sígueme para ver fotos, novedades y más arte.</p>
-                            </section>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-        </section>
-
-        <!-- Main -->
-        <section id="main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-
-                        <!-- Portfolio -->
-                        <section>
-                            <header class="major" data-aos="fade-up">
-                                <h2>Mis últimos temas</h2>
-                            </header>
-                            <div class="row">
-                                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="100">
-                                    <section class="box">
-                                        <a href="https://www.youtube.com/watch?v=5xMRXxRlA_s&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-                                        <header><h3>Me da Igual</h3></header>
-                                        <p>Lanzada el 20 de junio de 2025</p>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><a href="https://open.spotify.com/intl-es/track/1ve94TU6Jmt8Ft4VXBzIGX?si=36e3b1e83a794af8" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                                            </ul>
-                                        </footer>
-                                    </section>
-                                </div>
-                                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="200">
-                                    <section class="box">
-                                        <a href="https://www.youtube.com/watch?v=WfcxQZHlL_o&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-                                        <header><h3>Que suba el hielo</h3></header>
-                                        <p>Lanzada el 14 de Febrero de 2025</p>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><a href="https://open.spotify.com/intl-es/track/5Sdw0RqkfmwyGvj3vP91VT?si=4cd3331ca0594a85" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                                            </ul>
-                                        </footer>
-                                    </section>
-                                </div>
-                                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
-                                    <section class="box">
-                                        <a href="https://www.youtube.com/watch?v=BnIqryOP-Qk&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-                                        <header><h3>Aire Azul</h3></header>
-                                        <p>Lanzada el 27 de diciembre de 2024</p>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><a href="https://open.spotify.com/intl-es/track/3kTSqVEzBvpGDHxxqGr449?si=0efd2a7fe1584280" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                                            </ul>
-                                        </footer>
-                                    </section>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Blog -->
-                        <section>
-                            <header class="major" data-aos="fade-up">
-                                <h2>Mis temas más escuchados</h2>
-                            </header>
-                            <div class="row">
-                                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="100">
-                                    <section class="box">
-                                        <a href="https://www.youtube.com/watch?v=ZqUx26fxUX4&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
-                                        <header><h3>100 años del sueño del chepa</h3></header>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><a href="https://open.spotify.com/intl-es/track/5xwrpvnAlQh7scw4pEYvzy?si=e61974b35d124d23" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                                            </ul>
-                                        </footer>
-                                    </section>
-                                </div>
-                                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="200">
-                                    <section class="box">
-                                        <a href="https://www.youtube.com/watch?v=_aaVWiaV0Ak&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
-                                        <header><h3>El vaso medio lleno</h3></header>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><a href="https://open.spotify.com/intl-es/track/2DElrCCqIypOg6KbS8Xyi6?si=aa628ed0edaa4b03" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                                            </ul>
-                                        </footer>
-                                    </section>
-                                </div>
-                            </div>
-                        </section>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <section id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8 col-12-medium">
-                        <section>
-                            <header><h2>Próximos eventos</h2></header>
-                            <ul class="dates">
-                                <li>
-                                    <span class="date">Mes <strong>Día</strong></span>
-                                    <h3><a href="#">Todavía sin definir</a></h3>
-                                </li>
-                            </ul>
-                        </section>
-                    </div>
-                    <div class="col-4 col-12-medium">
-                        <section>
-                            <header><h2>Contacto</h2></header>
-                            <!--<ul class="social">
-                                <li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
-                            </ul>-->
-                            <ul class="contact">
-                                <li><h3>Dirección</h3></li>
-                                <li>
-                                    <h3>Email de contacto</h3>
-                                    <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
-                                </li>
-                                <li><h3>Teléfono</h3>
-									<p><a href="#">+34 722 73 59 86</a></p>
-								</li>
-                            </ul>
-                        </section>
-                    </div>
-                    <div class="col-12">
-                        <div id="copyright">
-                            <ul class="links">
-                                <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
-                                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+      <div class="dm-modal__footer">
+        <a class="dm-modal__cta" href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR" target="_blank" rel="noopener">Escuchar en Spotify</a>
+        <a class="dm-modal__cta" href="https://youtube.com/@danimirallesmusic" target="_blank" rel="noopener">Más en YouTube</a>
+      </div>
     </div>
 
-    <!-- Scripts: mantenemos los tuyos más nuestra llamada a AOS -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="assets/js/jquery.dropotron.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // 1) Inicializar AOS
-        AOS.init({
-          duration: 800,
-          once: true,
-          offset: 0
-        });
-        // 2) Refrescar posiciones y forzar un scroll trivial
-        AOS.refresh();
-        window.dispatchEvent(new Event('scroll'));
+    <!-- 👇 Render ABSOLUTO: no agranda el cajón -->
+    <img class="dm-modal__render" src="images/render-dani.png" alt="Dani Miralles sosteniendo el vídeo">
+  </div>
+</div>
+<!-- ===== Fin modal ===== -->
 
-        // 3) Efecto "pulse" al pulsar Spotify
-        document.querySelectorAll('a.button.alt[href*="spotify.com"]').forEach(function(btn) {
-          btn.addEventListener('mousedown', function() {
-            btn.classList.add('spotify-anim');
-            setTimeout(function() {
-              btn.classList.remove('spotify-anim');
-            }, 400);
-          });
+
+  <div id="page-wrapper">
+
+    <!-- Header -->
+    <section id="header">
+
+      <!-- Nav -->
+      <nav id="nav" data-aos="fade-down">
+        <ul>
+          <li class="current"><a href="index.html">Inicio</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Banner -->
+      <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
+        <header>
+          <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
+          <p>¡Puedes seguirme en mis redes sociales!</p>-->
+        </header>
+      </section>
+
+      <!-- Intro -->
+      <section id="intro" class="container">
+        <div class="row">
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://youtube.com/@danimirallesmusic" target="_blank" class="box-link">
+              <section class="first">
+                <i class="icon brands fa-youtube icon-large"></i>
+                <header><h2>YouTube</h2></header>
+                <p>Aquí podrás ver mis videoclips y todo el contenido audiovisual</p>
+              </section>
+            </a>
+          </div>
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg" target="_blank" class="box-link">
+              <section class="middle">
+                <i class="icon brands fa-spotify icon-large"></i>
+                <header><h2>Spotify</h2></header>
+                <p>Escucha mis últimos lanzamientos y playlists.</p>
+              </section>
+            </a>
+          </div>
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="300">
+            <a href="https://instagram.com/danimiralles_oficial" target="_blank" class="box-link">
+              <section class="last">
+                <i class="icon brands fa-instagram icon-large"></i>
+                <header><h2>Instagram</h2></header>
+                <p>Sígueme para ver fotos, novedades y más arte.</p>
+              </section>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- Main -->
+    <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+            <!-- Portfolio -->
+            <section>
+              <header class="major" data-aos="fade-up">
+                <h2>Mis últimos temas</h2>
+              </header>
+              <div class="row">
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=O-3UzMua1R4&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic19.jpg" alt="" /></a>
+                    <header><h3>Ovejas Negras</h3></header>
+                    <p>Lanzada el 12 de Septiembre de 2025</p>
+                    <footer>
+                      <ul class="actions">
+                        <li><a href="https://open.spotify.com/intl-es/track/0INNm3JFS8HtBK9ypjfNBP?si=968c89f4d9d64abe" target="_blank" class="button alt">Escuchar en Spotify</a></li>
+                      </ul>
+                    </footer>
+                  </section>
+                </div>
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="100">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=5xMRXxRlA_s&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+                    <header><h3>Me da Igual</h3></header>
+                    <p>Lanzada el 20 de junio de 2025</p>
+                    <footer>
+                      <ul class="actions">
+                        <li><a href="https://open.spotify.com/intl-es/track/1ve94TU6Jmt8Ft4VXBzIGX?si=36e3b1e83a794af8" target="_blank" class="button alt">Escuchar en Spotify</a></li>
+                      </ul>
+                    </footer>
+                  </section>
+                </div>
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="200">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=WfcxQZHlL_o&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+                    <header><h3>Que suba el hielo</h3></header>
+                    <p>Lanzada el 14 de Febrero de 2025</p>
+                    <footer>
+                      <ul class="actions">
+                        <li><a href="https://open.spotify.com/intl-es/track/5Sdw0RqkfmwyGvj3vP91VT?si=4cd3331ca0594a85" target="_blank" class="button alt">Escuchar en Spotify</a></li>
+                      </ul>
+                    </footer>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <!-- Blog -->
+            <section>
+              <header class="major" data-aos="fade-up">
+                <h2>Mis temas más escuchados</h2>
+              </header>
+              <div class="row">
+                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="100">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=ZqUx26fxUX4&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+                    <header><h3>100 años del sueño del chepa</h3></header>
+                    <footer>
+                      <ul class="actions">
+                        <li><a href="https://open.spotify.com/intl-es/track/5xwrpvnAlQh7scw4pEYvzy?si=e61974b35d124d23" target="_blank" class="button alt">Escuchar en Spotify</a></li>
+                      </ul>
+                    </footer>
+                  </section>
+                </div>
+                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="200">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=_aaVWiaV0Ak&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+                    <header><h3>El vaso medio lleno</h3></header>
+                    <footer>
+                      <ul class="actions">
+                        <li><a href="https://open.spotify.com/intl-es/track/2DElrCCqIypOg6KbS8Xyi6?si=aa628ed0edaa4b03" target="_blank" class="button alt">Escuchar en Spotify</a></li>
+                      </ul>
+                    </footer>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-8 col-12-medium">
+            <section>
+              <header><h2>Próximos eventos</h2></header>
+              <ul class="dates">
+                <li>
+                  <span class="date">Mes <strong>Día</strong></span>
+                  <h3><a href="#">Todavía sin definir</a></h3>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-4 col-12-medium">
+            <section>
+              <header><h2>Contacto</h2></header>
+              <!--<ul class="social">
+                <li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
+              </ul>-->
+              <ul class="contact">
+                <li><h3>Dirección</h3></li>
+                <li>
+                  <h3>Email de contacto</h3>
+                  <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                </li>
+                <li><h3>Teléfono</h3>
+                  <p><a href="#">+34 722 73 59 86</a></p>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-12">
+            <div id="copyright">
+              <ul class="links">
+                <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
+                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /#page-wrapper -->
+
+  <!-- Scripts: mantenemos los tuyos más nuestra llamada a AOS y el modal -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/jquery.dropotron.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1) Inicializar AOS
+      AOS.init({ duration: 800, once: true, offset: 0 });
+      AOS.refresh();
+      window.dispatchEvent(new Event('scroll'));
+
+      // 2) Efecto "pulse" al pulsar Spotify
+      document.querySelectorAll('a.button.alt[href*="spotify.com"]').forEach(function(btn) {
+        btn.addEventListener('mousedown', function() {
+          btn.classList.add('spotify-anim');
+          setTimeout(function() { btn.classList.remove('spotify-anim'); }, 400);
         });
       });
-    </script>
+
+      // 3) Modal de vídeo
+      const modal = document.getElementById('dm-video-modal');
+      const closeBtn = document.getElementById('dm-close-modal');
+      const iframe = document.getElementById('dm-youtube');
+
+      function openModal() {
+        modal.classList.add('is-active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('dm-modal-open');
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('dm-modal-open');
+        if (iframe) iframe.src = iframe.src; // detener vídeo
+      }
+
+      // Aparece al entrar (retardo suave)
+      const SHOW_ONCE = false;          // pon a true para mostrar solo una vez
+      const LS_KEY = 'dm-modal-seen';
+      const seen = localStorage.getItem(LS_KEY);
+
+      if (!SHOW_ONCE || !seen) {
+        setTimeout(openModal, 900);
+        if (SHOW_ONCE) localStorage.setItem(LS_KEY, String(Date.now()));
+      }
+
+      // Cierres
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    });
+  </script>
+
 </body>
 </html>
