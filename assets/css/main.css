@@ -2995,7 +2995,7 @@ body.dm-modal-open {
 #dm-video-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   display: flex;
@@ -3028,7 +3028,7 @@ body.dm-modal-open {
   min-height: 42px;
   padding: .5rem 2rem;
   padding-right: 10px;        /* deja hueco para el botón de cerrar */
-  background: linear-gradient(90deg, #b81e1e, #8f0f0f 60%, #b81e1e);
+  background: linear-gradient(90deg, #b0b0b0, #4b4b4b 60%, #000000);
   color: #fff;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -3070,7 +3070,7 @@ body.dm-modal-open {
   max-width: 220px;
   height: auto;
   pointer-events: none;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
   animation: dm-render-pop .6s ease;
 }
 
@@ -3141,7 +3141,7 @@ body.dm-modal-open {
 #dm-video-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   display: flex;
@@ -3168,7 +3168,7 @@ body.dm-modal-open { overflow: hidden; }
 /* Cajón negro: SOLO contiene video + botones y NO crece por el render */
 .dm-modal__content {
   position: relative;
-  background: #000;
+  background: #000000;
   border-radius: 10px;
   overflow: hidden;            /* respeta 16:9 y bordes */
   box-shadow: 0 12px 40px rgba(0,0,0,.5);
@@ -3239,5 +3239,159 @@ body.dm-modal-open { overflow: hidden; }
   .dm-modal__render img { width: 78%; max-width: none; }
 }
 
+/* === Escala de grises global, sin afectar la bandera ni el modal === */
+/* Escala de grises global */
+body.grayscale * {
+  filter: grayscale(100%) !important;
+  transition: filter 0.3s ease;
+}
+
+/* Excepciones (bandera y modal) */
+.no-grayscale,
+#dm-video-modal,
+#dm-video-modal * {
+  filter: none !important;
+}
 
 
+
+/* === Bandera centrada === */
+.flag-highlight {
+  display: block;
+  margin: 40px auto;
+  max-width: 300px;
+}
+
+/* === Cuenta atrás dentro del modal === */
+#countdown-modal {
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+#countdown-modal h2 {
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+
+#countdown-modal p {
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* === EFECTO LLUVIA GLOBAL === */
+.rain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(148, 148, 148, 0.775) 0px,
+    rgba(41, 41, 41, 0.722) 2px,
+    transparent 2px,
+    transparent 100px
+  );
+  background-size: 100% 100px;
+  animation: rainFall 0.1s linear infinite;
+  opacity: 0.95;
+}
+
+@keyframes rainFall {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}
+
+/* El modal y su contenido SIEMPRE a color */
+#dm-video-modal, #dm-video-modal * { filter: none !important; }
+
+/* Bandera dentro del modal (arriba del vídeo) */
+.dm-modal__flag {
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 0;
+  background: #000;            /* mismo fondo que el vídeo para continuidad */
+}
+.dm-modal__flag img {
+  max-width: 150px;            /* ajusta tamaño si quieres */
+  height: 150px;
+  display: block;
+}
+
+/* Lluvia con canvas */
+#rain-canvas{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9050;          /* normal: por encima del contenido, por debajo del modal */
+  pointer-events: none;   /* no bloquea clics */
+  transition: z-index .2s ease, opacity .2s ease;
+}
+
+/* Cuando el modal está abierto, la lluvia se renderiza por ENCIMA del modal */
+body.dm-modal-open #rain-canvas{
+  z-index: 12000;   /* modal estaba en ~11000; esto lo pone por encima */
+  opacity: 1.28;    /* si quieres más/menos intensidad, ajusta este valor */
+}
+
+.image.featured img.feature-image{
+  max-width: 110px !important; /* tamaño tope */
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* En móvil, que no quede demasiado pequeña */
+@media (max-width: 736px){
+  .image.featured img.feature-image{
+    width: 80% !important;
+  }
+}
+/* Bloque Próximamente (sin imagen) */
+.promo-section{
+  background: #faf9f9;
+  padding: 24px 22px;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.12);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 28px;
+}
+.promo-text{
+  margin: 0 0 14px;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.6;
+}
+
+/* Caja de cuenta atrás reutilizable en página (no modal) */
+.countdown-box{
+  display: inline-block;
+  background: rgba(0,0,0,.75);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  min-width: 260px;
+}
+.countdown-box h2{
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: .5px;
+}
+.countdown-box p{
+  margin: 0;
+  font-weight: 900;
+  line-height: 1;
+  font-size: clamp(28px, 5vw, 54px);
+  letter-spacing: 1px;
+}
