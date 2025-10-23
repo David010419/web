@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
   <head>
     <title>Contacto - Dani Miralles</title>
     <meta charset="utf-8" />
@@ -12,8 +12,34 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
     <link rel="manifest" href="/images/site.webmanifest" />
+
+    <!-- Efectos (lluvia + BN) -->
+    <style>
+      html, body { min-height: 100%; }
+
+      /* Canvas de lluvia por encima del contenido (no bloquea clics) */
+      #rain-canvas{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9050;          /* por encima del contenido */
+        pointer-events: none;   /* no bloquea clics */
+      }
+
+      /* Escala de grises aplicada al contenido (como en index) */
+      body.grayscale #page-wrapper{
+        filter: grayscale(100%);
+        transition: filter .3s ease;
+      }
+    </style>
   </head>
-  <body class="no-sidebar is-preload">
+
+  <!-- Arrancamos en BN; el script quitará BN/lluvia a la hora indicada -->
+  <body class="no-sidebar grayscale">
+    <!-- Lluvia -->
+    <canvas id="rain-canvas" aria-hidden="true"></canvas>
+
     <div id="page-wrapper">
 
       <!-- Header -->
@@ -25,84 +51,82 @@
           </ul>
         </nav>
         <!-- Banner -->
-            <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
-                <header>
-                    <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
-                    <p>¡Puedes seguirme en mis redes sociales!</p>-->
-                </header>
-            </section>
+        <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
+          <header>
+            <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
+            <p>¡Puedes seguirme en mis redes sociales!</p>-->
+          </header>
+        </section>
       </section>
 
       <!-- Main -->
-      <!-- Main -->
-<section id="main">
-  <div class="container">
-    <article class="box post">
-      <header>
-        <h2>Contacto</h2>
-        <p>Escríbeme para colaboraciones, eventos o más información</p>
-      </header>
+      <section id="main">
+        <div class="container">
+          <article class="box post">
+            <header>
+              <h2>Contacto</h2>
+              <p>Escríbeme para colaboraciones, eventos o más información</p>
+            </header>
 
-      <form
-        action="https://formsubmit.co/danimirallesoficial@gmail.com"
-        method="POST"
-      >
-        <!-- Honeypot anti-spam (no visible) -->
-        <input type="text" name="_honey" style="display:none" />
+            <form
+              action="https://formsubmit.co/danimirallesoficial@gmail.com"
+              method="POST"
+            >
+              <!-- Honeypot anti-spam (no visible) -->
+              <input type="text" name="_honey" style="display:none" />
 
-        <!-- Desactivar el captcha de FormSubmit si no lo necesitas -->
-        <input type="hidden" name="_captcha" value="false" />
+              <!-- Desactivar el captcha de FormSubmit si no lo necesitas -->
+              <input type="hidden" name="_captcha" value="false" />
 
-        <!-- Personaliza el asunto del correo -->
-        <input type="hidden" name="_subject" value="🤙 Nuevo mensaje desde tu web" />
+              <!-- Personaliza el asunto del correo -->
+              <input type="hidden" name="_subject" value="🤙 Nuevo mensaje desde tu web" />
 
-        <!-- (Opcional) Redirigir a una página de gracias tras el envío -->
-        <!-- <input type="hidden" name="_next" value="https://tusitio.com/gracias.html" /> -->
+              <!-- (Opcional) Redirigir a una página de gracias tras el envío -->
+              <!-- <input type="hidden" name="_next" value="https://tusitio.com/gracias.html" /> -->
 
-        <div class="row gtr-50 gtr-uniform">
-          <div class="col-6 col-12-mobilep">
-            <input
-              type="text"
-              name="nombre"
-              id="nombre"
-              placeholder="Tu nombre"
-              required
-            />
-          </div>
-          <div class="col-6 col-12-mobilep">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Tu correo electrónico"
-              required
-            />
-          </div>
-          <div class="col-12">
-            <textarea
-              name="mensaje"
-              id="mensaje"
-              placeholder="Tu mensaje"
-              rows="6"
-              required
-            ></textarea>
-          </div>
-          <div class="col-12">
-            <ul class="actions">
-              <li>
-                <input type="submit" value="Enviar mensaje" class="primary" />
-              </li>
-              <li>
-                <input type="reset" value="Limpiar" />
-              </li>
-            </ul>
-          </div>
+              <div class="row gtr-50 gtr-uniform">
+                <div class="col-6 col-12-mobilep">
+                  <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    placeholder="Tu nombre"
+                    required
+                  />
+                </div>
+                <div class="col-6 col-12-mobilep">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Tu correo electrónico"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <textarea
+                    name="mensaje"
+                    id="mensaje"
+                    placeholder="Tu mensaje"
+                    rows="6"
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <ul class="actions">
+                    <li>
+                      <input type="submit" value="Enviar mensaje" class="primary" />
+                    </li>
+                    <li>
+                      <input type="reset" value="Limpiar" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </form>
+          </article>
         </div>
-      </form>
-    </article>
-  </div>
-</section>
-
+      </section>
 
       <!-- Footer -->
       <section id="footer">
@@ -122,25 +146,216 @@
               </ul>
             </div>
             <div class="col-12">
-                        <div id="copyright">
-                            <ul class="links">
-                                <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
-                                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
-                            </ul>
-                        </div>
-                    </div>
+              <div id="copyright">
+                <ul class="links">
+                  <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
+                  <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts base -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/browser.min.js"></script>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <!-- Motor de lluvia con start/stop -->
+    <script>
+    (function(){
+      const canvas = document.getElementById('rain-canvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+      const drops = [];
+      const splashes = [];
+      let lastTime = performance.now();
+      let rafId = null;
+      let running = false;
+
+      function desiredDropCount() {
+        const px = Math.min(window.innerWidth, 1600);
+        return Math.round(px * 0.30); /* densidad de gotas */
+      }
+
+      function resize() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const target = desiredDropCount();
+        while (drops.length < target) drops.push(makeDrop(true));
+        while (drops.length > target) drops.pop();
+      }
+
+      function rand(min, max){ return Math.random() * (max - min) + min; }
+
+      function makeDrop(spawnTop=false){
+        const size = rand(1.5, 3.2);
+        const tail = rand(6, 16);
+        return {
+          x: rand(0, W),
+          y: spawnTop ? rand(-H, 0) : rand(-H*0.2, -10),
+          vy: rand(600, 1000),
+          vx: rand(-40, 40),
+          size, tail,
+          alpha: rand(0.45, 0.9)
+        };
+      }
+
+      function makeSplash(x, y){
+        const count = Math.round(rand(3, 6));
+        for (let i=0; i<count; i++){
+          splashes.push({
+            x, y,
+            vx: rand(-90, 90),
+            vy: rand(-180, -80),
+            life: rand(180, 300),
+            age: 0,
+            alpha: rand(0.4, 0.8),
+            size: rand(0.8, 1.8)
+          });
+        }
+      }
+
+      function drawDrop(d){
+        ctx.save();
+        ctx.translate(d.x, d.y);
+
+        // Estela
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(d.tail*0.25, -d.tail*0.5, 0, -d.tail);
+        ctx.quadraticCurveTo(-d.tail*0.25, -d.tail*0.5, 0, 0);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(200, 220, 255, ${0.18*d.alpha})`;
+        ctx.fill();
+
+        // Cuerpo con brillo
+        const g = ctx.createRadialGradient(-d.size*0.4, -d.size*0.5, 0, 0, 0, d.size);
+        g.addColorStop(0, `rgba(255,255,255,${0.9*d.alpha})`);
+        g.addColorStop(1, `rgba(180,200,255,${0.25*d.alpha})`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(0, 0, d.size, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawSplash(s){
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, s.alpha * (1 - s.age / s.life));
+        ctx.fillStyle = 'rgba(210,230,255,1)';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function loop(now){
+        if(!running) return;
+        const dt = Math.min(50, now - lastTime) / 1000;
+        lastTime = now;
+
+        ctx.clearRect(0, 0, W, H);
+
+        const g = 1400;  // gravedad
+        const wind = 0;
+
+        for (let i=0; i<drops.length; i++){
+          const d = drops[i];
+          d.vy += g * dt * 0.15;
+          d.x += (d.vx + wind) * dt;
+          d.y += d.vy * dt;
+
+          if (d.y > H - 2){
+            makeSplash(d.x, H - 2);
+            drops[i] = makeDrop();
+            continue;
+          }
+          if (d.x < -20) d.x = W + 20;
+          if (d.x > W + 20) d.x = -20;
+
+          drawDrop(d);
+        }
+
+        for (let i=splashes.length-1; i>=0; i--){
+          const s = splashes[i];
+          s.age += dt*1000;
+          if (s.age > s.life){ splashes.splice(i,1); continue; }
+          s.vy += g * dt * 0.5;
+          s.x += s.vx * dt;
+          s.y += s.vy * dt;
+          drawSplash(s);
+        }
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      // Control público
+      const resizeHandler = () => resize();
+
+      window.Rain = {
+        start(){
+          if (running) return;
+          running = true;
+          canvas.style.display = 'block';
+          resize();
+          window.addEventListener('resize', resizeHandler, { passive:true });
+          lastTime = performance.now();
+          rafId = requestAnimationFrame(loop);
+        },
+        stop(clearCanvas){
+          running = false;
+          if (rafId) cancelAnimationFrame(rafId);
+          window.removeEventListener('resize', resizeHandler);
+          if (clearCanvas){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+          }
+        }
+      };
+
+      // ¡Arrancamos lluvia por defecto! (el controlador de fecha la detendrá si toca)
+      window.Rain.start();
+    })();
+    </script>
+
+    <!-- Control de fecha para quitar BN + lluvia a las 00:25 del 24/10/2025 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        // Hora local del dispositivo
+        const cutoff = new Date('2025-10-29T00:00:00');
+        const now = new Date();
+
+        function desactivarEfectos(){
+          document.body.classList.remove('grayscale'); // quita BN
+          if (window.Rain && typeof window.Rain.stop === 'function'){
+            window.Rain.stop(true); // detiene animación y oculta canvas
+          }
+        }
+
+        if (now >= cutoff){
+          // Si ya ha pasado la hora, desactiva ya
+          desactivarEfectos();
+        } else {
+          // Aún no ha llegado: asegúrate de que BN está activo y programar cambio
+          document.body.classList.add('grayscale');
+          const ms = cutoff - now;
+          // Programar desactivación exacta
+          setTimeout(desactivarEfectos, ms);
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,69 +1,140 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
-    <title>Dani Miralles Oficial</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="google-site-verification" content="luKO0pPkkFBRJGfkaPcTMLRPCFOAl5XkewVdzyNLKjY" />
+  <title>Dani Miralles Oficial</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="google-site-verification" content="luKO0pPkkFBRJGfkaPcTMLRPCFOAl5XkewVdzyNLKjY" />
 
-    <meta name="description" content="Web de Dani Miralles Oficial, Música, Cantoautor, Artista">
-    <meta name="keywords" content="Que suba el hielo, 100 años del sueño del chepa, me da igual, artista, dani miralles, dani miralles web">
-    <meta name="author" content="Dani Miralles Oficial">
+  <meta name="description" content="Web de Dani Miralles Oficial, Música, Cantautor, Artista">
+  <meta name="keywords" content="Que suba el hielo, 100 años del sueño del chepa, me da igual, artista, dani miralles, dani miralles web">
+  <meta name="author" content="Dani Miralles Oficial">
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
 
-    <!-- AOS CSS for scroll animations -->  
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-    <link rel="shortcut icon" href="/images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
-    <link rel="manifest" href="/images/site.webmanifest" />
+  <!-- Favicons -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
+  <link rel="manifest" href="/images/site.webmanifest" />
+
+  <!-- Overrides críticos en línea -->
+  <style>
+    html, body { min-height:100%; }
+
+    /* ===== Lluvia con canvas (por encima del contenido) ===== */
+    #rain-canvas{
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9050;            /* por encima del contenido */
+      pointer-events: none;     /* no bloquea clics */
+      transition: z-index .2s ease, opacity .2s ease;
+    }
+    /* Cuando el modal está abierto, poner la lluvia ENCIMA del modal */
+    body.dm-modal-open #rain-canvas{ z-index: 12000; opacity: 0.28; }
+
+    /* BN solo al contenido, no al modal */
+    body.grayscale #page-wrapper{ filter:grayscale(100%); transition:filter .3s ease; }
+    #dm-video-modal, #dm-video-modal *{ filter:none !important; } /* modal siempre a color */
+
+    /* ===== Modal (base HIDDEN, visible solo con .is-active) ===== */
+    #dm-video-modal{
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.65); z-index:11000; opacity:0; visibility:hidden; pointer-events:none;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+    #dm-video-modal.is-active{ opacity:1; visibility:visible; pointer-events:auto; }
+
+    .dm-modal__content{ position:relative; z-index:11010; overflow:visible; background:#000; border-radius:10px; }
+
+    /* Cabecera del modal */
+    .dm-modal__flag{
+      position:relative; z-index:11012;
+      display:flex; align-items:center; justify-content:center; gap:16px;
+      padding:5px 5px 0; background:#000; flex-wrap:wrap; text-align:center;
+    }
+    .dm-modal__flag img{ max-width:150px; height:auto; display:block; flex:0 0 auto; }
+    .dm-flag-text{
+      color:#fff; font-weight:800; line-height:1.2;
+      font-size:clamp(10px, 2vw, 24px); max-width:min(900px, 92%); margin:0;
+    }
+
+    /* Vídeo responsive 16:9 */
+    .dm-modal__video{ position:relative; padding-bottom:56.25%; height:0; z-index:11011; }
+    .dm-modal__video video{ position:absolute; inset:0; width:100%; height:100%; border:0; background:#000; display:block; pointer-events:auto; }
+
+    /* Cuenta atrás en el modal */
+    #countdown-modal{
+      text-align:center; color:#fff; background:rgba(0,0,0,.6);
+      margin:16px; padding:14px 18px; border-radius:10px;
+      font-family:Arial, Helvetica, sans-serif; z-index:11011;
+    }
+    #countdown-modal h2{ margin:0 0 8px; font-weight:900; font-size:clamp(16px, 2vw, 20px); letter-spacing:0.5px; }
+    #countdown-modal p{ margin:0; font-weight:900; line-height:1; font-size:clamp(32px, 6vw, 64px); letter-spacing:1px; }
+
+    .dm-modal__close{ position:absolute; top:8px; right:10px; z-index:11020; }
+
+    /* Imagen del contenedor Próximamente */
+    .feature-image{ border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
+
+    /* Cuenta atrás del contenedor Próximamente */
+    #countdown-teaser{
+      text-align:center; background:#faf9f9; border:1px solid #ddd; border-radius:8px;
+      padding:14px 18px; margin-top:14px;
+    }
+    #countdown-teaser h3{ margin:0 0 8px; font-weight:900; font-size:1.2rem; }
+    #countdown-teaser p{ margin:0; font-weight:800; font-size:1.4rem; letter-spacing:.5px; }
+  </style>
 </head>
 
-<!-- Aquí, sólo "homepage" (quitamos is-preload) -->
-<body class="homepage">
+<body class="homepage grayscale">
 
-<!-- ===== Modal promocional de vídeo ===== -->
-<div id="dm-video-modal" aria-hidden="true" role="dialog" aria-label="Nuevo lanzamiento">
-  <div class="dm-modal__stack">
-    <div class="dm-modal__content">
-      <button class="dm-modal__close" id="dm-close-modal" aria-label="Cerrar">&times;</button>
-  <!-- 👇 NUEVO: franja superior -->
-      <div class="dm-modal__ribbon" aria-hidden="true">
-        <span>NUEVO LANZAMIENTO! <strong>OVEJAS NEGRAS</strong></span>
-      </div>
-      <div class="dm-modal__video">
-        <iframe id="dm-youtube"
-          src="https://www.youtube-nocookie.com/embed/O-3UzMua1R4?autoplay=1&mute=1&rel=0&showinfo=0"
-          title="Videoclip - Dani Miralles"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
+  <!-- Canvas lluvia -->
+  <canvas id="rain-canvas" aria-hidden="true"></canvas>
 
-      <div class="dm-modal__footer">
-        <a class="dm-modal__cta" href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR" target="_blank" rel="noopener">Escuchar en Spotify</a>
-        <a class="dm-modal__cta" href="https://youtube.com/@danimirallesmusic" target="_blank" rel="noopener">Más en YouTube</a>
+  <!-- ===== MODAL PROMOCIONAL DE VÍDEO ===== -->
+  <div id="dm-video-modal" aria-hidden="true" role="dialog" aria-label="Nuevo lanzamiento">
+    <div class="dm-modal__stack">
+      <div class="dm-modal__content">
+        <button class="dm-modal__close" id="dm-close-modal" aria-label="Cerrar">&times;</button>
+
+        <div class="dm-modal__flag">
+          <img src="images/bandera.png" alt="Bandera">
+          <p class="dm-flag-text">
+            LLUM, el próximo single de Dani Miralles, verá la luz el miércoles 29 de octubre de 2025 a las 00:00h.<br>
+            Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.<br>
+            Una historia de amor eterno. En memoria de <em>“Tots els que hui brillen més que mai”.</em>
+          </p>
+        </div>
+        <br>
+
+        <div class="dm-modal__video">
+          <video id="dm-local-video" autoplay muted playsinline controls>
+            <source src="images/video-lanzamiento.mp4" type="video/mp4">
+            <source src="images/video-lanzamiento.mov" type="video/quicktime">
+            Tu navegador no soporta la reproducción de vídeo.
+          </video>
+        </div>
+        <br>
+        <div id="countdown-modal"></div>
       </div>
     </div>
-
-    <!-- 👇 Render ABSOLUTO: no agranda el cajón -->
-    <img class="dm-modal__render" src="images/render-dani.png" alt="Dani Miralles sosteniendo el vídeo">
   </div>
-</div>
-<!-- ===== Fin modal ===== -->
 
-
+  <!-- ===== CONTENIDO PRINCIPAL (BN) ===== -->
   <div id="page-wrapper">
 
-    <!-- Header -->
+    <!-- HEADER -->
     <section id="header">
-
-      <!-- Nav -->
       <nav id="nav" data-aos="fade-down">
         <ul>
           <li class="current"><a href="index.html">Inicio</a></li>
@@ -71,12 +142,8 @@
         </ul>
       </nav>
 
-      <!-- Banner -->
       <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
-        <header>
-          <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
-          <p>¡Puedes seguirme en mis redes sociales!</p>-->
-        </header>
+        <header></header>
       </section>
 
       <!-- Intro -->
@@ -92,7 +159,7 @@
             </a>
           </div>
           <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="200">
-            <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg" target="_blank" class="box-link">
+            <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR" target="_blank" class="box-link">
               <section class="middle">
                 <i class="icon brands fa-spotify icon-large"></i>
                 <header><h2>Spotify</h2></header>
@@ -111,86 +178,84 @@
           </div>
         </div>
       </section>
-
     </section>
 
-    <!-- Main -->
+
+    <!-- MAIN -->
     <section id="main">
       <div class="container">
         <div class="row">
           <div class="col-12">
 
-            <!-- Portfolio -->
+            <section class="container" id="proximamente" data-aos="fade-up">
+            <header class="major" data-aos="fade-up"><h2>Proximamente</h2></header>
+             <div class="promo-section">
+          <p class="promo-text">
+           LLUM, el próximo single de Dani Miralles, verá la luz el miércoles 29 de octubre de 2025 a las 00:00h.
+            Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.
+            Una historia de amor eterno. En memoria de <em>“Tots els que hui brillen més que mai”.</em>
+            </p>
+
+    <!-- Cuenta atrás del bloque -->
+            <div id="countdown-teaser">
+              <h3>Cuenta atrás</h3>
+              <p>—</p>
+            </div>
+    <!-- Botón de pre-save -->
+    <p style="margin-top:16px">
+      <a class="button" target="_blank" rel="noopener"
+         href="https://share.amuse.io/hf7nCLhFlamL">Haz pre-save de LLUM</a>
+    </p>
+  </div>
+</section>
+
+            <!-- ÚLTIMOS TEMAS -->
             <section>
-              <header class="major" data-aos="fade-up">
-                <h2>Mis últimos temas</h2>
-              </header>
+              <header class="major" data-aos="fade-up"><h2>Mis últimos temas</h2></header>
               <div class="row">
                 <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
                   <section class="box">
-                    <a href="https://www.youtube.com/watch?v=O-3UzMua1R4&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic19.jpg" alt="" /></a>
+                    <a href="https://www.youtube.com/watch?v=O-3UzMua1R4" target="_blank" class="image featured"><img src="images/pic19.jpg" alt="Ovejas Negras" /></a>
                     <header><h3>Ovejas Negras</h3></header>
                     <p>Lanzada el 12 de Septiembre de 2025</p>
-                    <footer>
-                      <ul class="actions">
-                        <li><a href="https://open.spotify.com/intl-es/track/0INNm3JFS8HtBK9ypjfNBP?si=968c89f4d9d64abe" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                      </ul>
-                    </footer>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/0INNm3JFS8HtBK9ypjfNBP" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
                   </section>
                 </div>
                 <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="100">
                   <section class="box">
-                    <a href="https://www.youtube.com/watch?v=5xMRXxRlA_s&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+                    <a href="https://www.youtube.com/watch?v=5xMRXxRlA_s" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="Me da Igual" /></a>
                     <header><h3>Me da Igual</h3></header>
                     <p>Lanzada el 20 de junio de 2025</p>
-                    <footer>
-                      <ul class="actions">
-                        <li><a href="https://open.spotify.com/intl-es/track/1ve94TU6Jmt8Ft4VXBzIGX?si=36e3b1e83a794af8" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                      </ul>
-                    </footer>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/1ve94TU6Jmt8Ft4VXBzIGX" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
                   </section>
                 </div>
                 <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="200">
                   <section class="box">
-                    <a href="https://www.youtube.com/watch?v=WfcxQZHlL_o&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+                    <a href="https://www.youtube.com/watch?v=WfcxQZHlL_o" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="Que suba el hielo" /></a>
                     <header><h3>Que suba el hielo</h3></header>
                     <p>Lanzada el 14 de Febrero de 2025</p>
-                    <footer>
-                      <ul class="actions">
-                        <li><a href="https://open.spotify.com/intl-es/track/5Sdw0RqkfmwyGvj3vP91VT?si=4cd3331ca0594a85" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                      </ul>
-                    </footer>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/5Sdw0RqkfmwyGvj3vP91VT" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
                   </section>
                 </div>
               </div>
             </section>
 
-            <!-- Blog -->
+            <!-- MÁS ESCUCHADOS -->
             <section>
-              <header class="major" data-aos="fade-up">
-                <h2>Mis temas más escuchados</h2>
-              </header>
+              <header class="major" data-aos="fade-up"><h2>Mis temas más escuchados</h2></header>
               <div class="row">
                 <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="100">
                   <section class="box">
-                    <a href="https://www.youtube.com/watch?v=ZqUx26fxUX4&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+                    <a href="https://www.youtube.com/watch?v=ZqUx26fxUX4" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="100 años del sueño del chepa" /></a>
                     <header><h3>100 años del sueño del chepa</h3></header>
-                    <footer>
-                      <ul class="actions">
-                        <li><a href="https://open.spotify.com/intl-es/track/5xwrpvnAlQh7scw4pEYvzy?si=e61974b35d124d23" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                      </ul>
-                    </footer>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/5xwrpvnAlQh7scw4pEYvzy" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
                   </section>
                 </div>
                 <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="200">
                   <section class="box">
-                    <a href="https://www.youtube.com/watch?v=_aaVWiaV0Ak&ab_channel=DaniMiralles" target="_blank" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+                    <a href="https://www.youtube.com/watch?v=_aaVWiaV0Ak" target="_blank" class="image featured"><img src="images/pic09.jpg" alt="El vaso medio lleno" /></a>
                     <header><h3>El vaso medio lleno</h3></header>
-                    <footer>
-                      <ul class="actions">
-                        <li><a href="https://open.spotify.com/intl-es/track/2DElrCCqIypOg6KbS8Xyi6?si=aa628ed0edaa4b03" target="_blank" class="button alt">Escuchar en Spotify</a></li>
-                      </ul>
-                    </footer>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/2DElrCCqIypOg6KbS8Xyi6" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
                   </section>
                 </div>
               </div>
@@ -201,44 +266,56 @@
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <section id="footer">
       <div class="container">
         <div class="row">
+          <!-- Próximos eventos -->
           <div class="col-8 col-12-medium">
             <section>
               <header><h2>Próximos eventos</h2></header>
               <ul class="dates">
                 <li>
-                  <span class="date">Mes <strong>Día</strong></span>
-                  <h3><a href="#">Todavía sin definir</a></h3>
+                  <span class="date">Oct <strong>29</strong></span>
+                  <h3><a href="#">Presentación “LLUM” </a></h3>
+                  <p></p>
+                </li>
+                <li>
+                  <span class="date">0 <strong>00</strong></span>
+                  <h3><a href="#">Sin fecha</a></h3>
+                  <p></p>
+                </li>
+                <li>
+                  <span class="date">0 <strong>00</strong></span>
+                  <h3><a href="#">Sin fecha</a></h3>
+                  <p>Más info en redes.</p>
                 </li>
               </ul>
             </section>
           </div>
+
+          <!-- Contacto -->
           <div class="col-4 col-12-medium">
             <section>
               <header><h2>Contacto</h2></header>
-              <!--<ul class="social">
-                <li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
-              </ul>-->
               <ul class="contact">
-                <li><h3>Dirección</h3></li>
                 <li>
                   <h3>Email de contacto</h3>
                   <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
                 </li>
-                <li><h3>Teléfono</h3>
-                  <p><a href="#">+34 722 73 59 86</a></p>
+                <li>
+                  <h3>Teléfono</h3>
+                  <p><a href="tel:+34722735986">+34 722 73 59 86</a></p>
                 </li>
               </ul>
             </section>
           </div>
+
           <div class="col-12">
             <div id="copyright">
               <ul class="links">
                 <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
-                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
+                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada por: David Castillo Gallardo</a></li>
               </ul>
             </div>
           </div>
@@ -248,7 +325,7 @@
 
   </div><!-- /#page-wrapper -->
 
-  <!-- Scripts: mantenemos los tuyos más nuestra llamada a AOS y el modal -->
+  <!-- ===== SCRIPTS ===== -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="assets/js/jquery.dropotron.min.js"></script>
@@ -258,54 +335,257 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // 1) Inicializar AOS
-      AOS.init({ duration: 800, once: true, offset: 0 });
-      AOS.refresh();
-      window.dispatchEvent(new Event('scroll'));
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ duration: 800, once: true, offset: 0 });
 
-      // 2) Efecto "pulse" al pulsar Spotify
-      document.querySelectorAll('a.button.alt[href*="spotify.com"]').forEach(function(btn) {
-        btn.addEventListener('mousedown', function() {
-          btn.classList.add('spotify-anim');
-          setTimeout(function() { btn.classList.remove('spotify-anim'); }, 400);
-        });
-      });
+    const modal = document.getElementById('dm-video-modal');
+    const closeBtn = document.getElementById('dm-close-modal');
+    const video = document.getElementById('dm-local-video');
+    const countdownModal = document.getElementById('countdown-modal');
+    const countdownTeaser = document.getElementById('countdown-teaser')?.querySelector('p');
+    const targetDate = new Date('2025-10-29T00:00:00');
 
-      // 3) Modal de vídeo
-      const modal = document.getElementById('dm-video-modal');
-      const closeBtn = document.getElementById('dm-close-modal');
-      const iframe = document.getElementById('dm-youtube');
+    function openModal() {
+      modal.classList.add('is-active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('dm-modal-open');
+    }
+    function closeModal() {
+      modal.classList.remove('is-active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dm-modal-open');
+      if (video){
+        video.pause();
+        try { video.currentTime = 0; } catch(e){}
+      }
+    }
 
-      function openModal() {
-        modal.classList.add('is-active');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('dm-modal-open');
+    setTimeout(openModal, 900);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // ===== Cuenta atrás (modal + teaser) =====
+    function fmt(n){ return String(n).padStart(2,'0'); }
+    function tick() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        if (countdownModal) countdownModal.innerHTML = "<p>Lanzamiento disponible 🎉</p>";
+        if (countdownTeaser) countdownTeaser.textContent = "¡Lanzamiento disponible 🎉!";
+        document.body.classList.remove('grayscale');
+        return;
       }
 
-      function closeModal() {
-        modal.classList.remove('is-active');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('dm-modal-open');
-        if (iframe) iframe.src = iframe.src; // detener vídeo
-      }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff/(1000*60*60))%24);
+      const minutes = Math.floor((diff/(1000*60))%60);
+      const seconds = Math.floor((diff/1000)%60);
 
-      // Aparece al entrar (retardo suave)
-      const SHOW_ONCE = false;          // pon a true para mostrar solo una vez
-      const LS_KEY = 'dm-modal-seen';
-      const seen = localStorage.getItem(LS_KEY);
-
-      if (!SHOW_ONCE || !seen) {
-        setTimeout(openModal, 900);
-        if (SHOW_ONCE) localStorage.setItem(LS_KEY, String(Date.now()));
-      }
-
-      // Cierres
-      closeBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-    });
+      const htmlModal = `
+        <h2>Cuenta atrás para el lanzamiento</h2>
+        <p>${days}d ${fmt(hours)}h ${fmt(minutes)}m ${fmt(seconds)}s</p>
+      `;
+      if (countdownModal) countdownModal.innerHTML = htmlModal;
+      if (countdownTeaser) countdownTeaser.textContent = `${days}d ${fmt(hours)}h ${fmt(minutes)}m ${fmt(seconds)}s`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  });
   </script>
+
+  <!-- ===== Motor de lluvia (canvas con gotas y salpicaduras) ===== -->
+  <!-- Motor de lluvia con start/stop -->
+    <script>
+    (function(){
+      const canvas = document.getElementById('rain-canvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+      const drops = [];
+      const splashes = [];
+      let lastTime = performance.now();
+      let rafId = null;
+      let running = false;
+
+      function desiredDropCount() {
+        const px = Math.min(window.innerWidth, 1600);
+        return Math.round(px * 0.30); /* densidad de gotas */
+      }
+
+      function resize() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const target = desiredDropCount();
+        while (drops.length < target) drops.push(makeDrop(true));
+        while (drops.length > target) drops.pop();
+      }
+
+      function rand(min, max){ return Math.random() * (max - min) + min; }
+
+      function makeDrop(spawnTop=false){
+        const size = rand(1.5, 3.2);
+        const tail = rand(6, 16);
+        return {
+          x: rand(0, W),
+          y: spawnTop ? rand(-H, 0) : rand(-H*0.2, -10),
+          vy: rand(600, 1000),
+          vx: rand(-40, 40),
+          size, tail,
+          alpha: rand(0.45, 0.9)
+        };
+      }
+
+      function makeSplash(x, y){
+        const count = Math.round(rand(3, 6));
+        for (let i=0; i<count; i++){
+          splashes.push({
+            x, y,
+            vx: rand(-90, 90),
+            vy: rand(-180, -80),
+            life: rand(180, 300),
+            age: 0,
+            alpha: rand(0.4, 0.8),
+            size: rand(0.8, 1.8)
+          });
+        }
+      }
+
+      function drawDrop(d){
+        ctx.save();
+        ctx.translate(d.x, d.y);
+
+        // Estela
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(d.tail*0.25, -d.tail*0.5, 0, -d.tail);
+        ctx.quadraticCurveTo(-d.tail*0.25, -d.tail*0.5, 0, 0);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(200, 220, 255, ${0.18*d.alpha})`;
+        ctx.fill();
+
+        // Cuerpo con brillo
+        const g = ctx.createRadialGradient(-d.size*0.4, -d.size*0.5, 0, 0, 0, d.size);
+        g.addColorStop(0, `rgba(255,255,255,${0.9*d.alpha})`);
+        g.addColorStop(1, `rgba(180,200,255,${0.25*d.alpha})`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(0, 0, d.size, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawSplash(s){
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, s.alpha * (1 - s.age / s.life));
+        ctx.fillStyle = 'rgba(210,230,255,1)';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function loop(now){
+        if(!running) return;
+        const dt = Math.min(50, now - lastTime) / 1000;
+        lastTime = now;
+
+        ctx.clearRect(0, 0, W, H);
+
+        const g = 1400;  // gravedad
+        const wind = 0;
+
+        for (let i=0; i<drops.length; i++){
+          const d = drops[i];
+          d.vy += g * dt * 0.15;
+          d.x += (d.vx + wind) * dt;
+          d.y += d.vy * dt;
+
+          if (d.y > H - 2){
+            makeSplash(d.x, H - 2);
+            drops[i] = makeDrop();
+            continue;
+          }
+          if (d.x < -20) d.x = W + 20;
+          if (d.x > W + 20) d.x = -20;
+
+          drawDrop(d);
+        }
+
+        for (let i=splashes.length-1; i>=0; i--){
+          const s = splashes[i];
+          s.age += dt*1000;
+          if (s.age > s.life){ splashes.splice(i,1); continue; }
+          s.vy += g * dt * 0.5;
+          s.x += s.vx * dt;
+          s.y += s.vy * dt;
+          drawSplash(s);
+        }
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      // Control público
+      const resizeHandler = () => resize();
+
+      window.Rain = {
+        start(){
+          if (running) return;
+          running = true;
+          canvas.style.display = 'block';
+          resize();
+          window.addEventListener('resize', resizeHandler, { passive:true });
+          lastTime = performance.now();
+          rafId = requestAnimationFrame(loop);
+        },
+        stop(clearCanvas){
+          running = false;
+          if (rafId) cancelAnimationFrame(rafId);
+          window.removeEventListener('resize', resizeHandler);
+          if (clearCanvas){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+          }
+        }
+      };
+
+      // ¡Arrancamos lluvia por defecto! (el controlador de fecha la detendrá si toca)
+      window.Rain.start();
+    })();
+    </script>
+
+    <!-- Control de fecha para quitar BN + lluvia a las 00:25 del 24/10/2025 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        // Hora local del dispositivo
+        const cutoff = new Date('2025-10-29T00:00:00');
+        const now = new Date();
+
+        function desactivarEfectos(){
+          document.body.classList.remove('grayscale'); // quita BN
+          if (window.Rain && typeof window.Rain.stop === 'function'){
+            window.Rain.stop(true); // detiene animación y oculta canvas
+          }
+        }
+
+        if (now >= cutoff){
+          // Si ya ha pasado la hora, desactiva ya
+          desactivarEfectos();
+        } else {
+          // Aún no ha llegado: asegúrate de que BN está activo y programar cambio
+          document.body.classList.add('grayscale');
+          const ms = cutoff - now;
+          // Programar desactivación exacta
+          setTimeout(desactivarEfectos, ms);
+        }
+      });
+    </script>
 
 </body>
 </html>
