@@ -560,32 +560,77 @@
     })();
     </script>
 
-    <!-- Control de fecha para quitar BN + lluvia a las 00:25 del 24/10/2025 -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function(){
-        // Hora local del dispositivo
-        const cutoff = new Date('2025-10-29T00:00:00');
-        const now = new Date();
+   <!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
 
-        function desactivarEfectos(){
-          document.body.classList.remove('grayscale'); // quita BN
-          if (window.Rain && typeof window.Rain.stop === 'function'){
-            window.Rain.stop(true); // detiene animación y oculta canvas
-          }
-        }
+<!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
+<!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 📅 FECHA DE ACTIVACIÓN
+  const cutoff = new Date("2025-10-29T00:00:00");
+  const now = new Date();
 
-        if (now >= cutoff){
-          // Si ya ha pasado la hora, desactiva ya
-          desactivarEfectos();
-        } else {
-          // Aún no ha llegado: asegúrate de que BN está activo y programar cambio
-          document.body.classList.add('grayscale');
-          const ms = cutoff - now;
-          // Programar desactivación exacta
-          setTimeout(desactivarEfectos, ms);
-        }
-      });
-    </script>
+  const videoContainer = document.querySelector(".dm-modal__video");
+  const localVideo = document.getElementById("dm-local-video");
+
+  // 🎬 ID del vídeo de YouTube (nuevo)
+  const youtubeId = "76Bs9JIh7YM";
+
+  // 🧩 Iframe seguro (usa dominio estándar para máxima compatibilidad)
+  const youtubeEmbed = `
+    <iframe id="dm-youtube"
+            width="100%" height="100%"
+            src="https://www.youtube-nocookie.com/embed/WCBSA3nKGSE?autoplay=1&mute=1&rel=0&showinfo=0"
+            title="Videoclip – Dani Miralles"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowfullscreen>
+    </iframe>
+  `;
+
+  // 🚀 Función principal: activar lanzamiento
+  function activarLanzamiento() {
+    // 1. Quitar blanco y negro
+    document.body.classList.remove("grayscale");
+
+    // 2. Detener y ocultar lluvia
+    if (window.Rain && typeof window.Rain.stop === "function") {
+      window.Rain.stop(true);
+    }
+
+    // 3. Sustituir el vídeo local por YouTube
+    if (videoContainer) {
+      // Pausa el vídeo local si sigue activo
+      if (localVideo) {
+        try { localVideo.pause(); } catch (e) {}
+      }
+      // Añadimos pequeño retardo para garantizar render estable
+      setTimeout(() => {
+        videoContainer.innerHTML = youtubeEmbed;
+      }, 400);
+    }
+
+    console.log("🎉 Lanzamiento activado:", new Date().toLocaleString());
+  }
+
+  // 🕐 Si ya ha pasado la hora, ejecutar ahora mismo
+  if (now >= cutoff) {
+    activarLanzamiento();
+  } else {
+    // Aún no ha llegado → mantenemos efectos activos
+    document.body.classList.add("grayscale");
+    const ms = cutoff - now;
+    console.log(`⏳ Lanzamiento programado en ${(ms / 1000 / 60).toFixed(1)} min`);
+    setTimeout(activarLanzamiento, ms);
+  }
+});
+</script>
+
+
+
+
+
+
 
 </body>
 </html>
