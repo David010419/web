@@ -110,8 +110,8 @@
         <div class="dm-modal__flag">
           <img src="images/bandera.png" alt="Bandera">
           <p class="dm-flag-text">
-            LLUM, el próximo single de Dani Miralles, verá la luz el miércoles 29 de octubre de 2025 a las 00:00h.<br>
-            Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.<br>
+			LLUM, ya disponible el single de Dani Miralles,
+            Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.
             Una historia de amor eterno. En memoria de <em>“Tots els que hui brillen més que mai”.</em>
           </p>
         </div>
@@ -188,23 +188,27 @@
           <div class="col-12">
 
             <section class="container" id="proximamente" data-aos="fade-up">
-            <header class="major" data-aos="fade-up"><h2>Proximamente</h2></header>
+            <header class="major" data-aos="fade-up"><h2>Nuevo</h2></header>
              <div class="promo-section">
           <p class="promo-text">
-           LLUM, el próximo single de Dani Miralles, verá la luz el miércoles 29 de octubre de 2025 a las 00:00h.
+           LLUM, ya disponible el single de Dani Miralles,
             Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.
-            Una historia de amor eterno. En memoria de <em>“Tots els que hui brillen més que mai”.</em>
+            Una historia de amor eterno. En memoria de <h3>“Tots els que hui brillen més que mai”.</h3>
             </p>
 
-    <!-- Cuenta atrás del bloque -->
+    <!-- Cuenta atrás del bloque 
             <div id="countdown-teaser">
-              <h3>Cuenta atrás</h3>
+             <h3>Cuenta atrás</h3>
               <p>—</p>
+            </div> -->
+			<div>
+             <!--<img src="images/llum3.png" alt="Llum" width="300px" height="300px">-->
+			 <a href="https://www.youtube.com/watch?v=WCBSA3nKGSE" target="_blank"><img src="images/miniatura3.jpg" alt="Llum" width="500px" weight="500px" /></a>
             </div>
-    <!-- Botón de pre-save -->
+    <!-- Botón de pre-sav -->
     <p style="margin-top:16px">
       <a class="button" target="_blank" rel="noopener"
-         href="https://share.amuse.io/hf7nCLhFlamL">Haz pre-save de LLUM</a>
+         href="https://open.spotify.com/intl-es/track/2v6sijZjiZfwLbvpdoctIQ?si=764992ac1c384844">Escuchar en Spotify</a>
     </p>
   </div>
 </section>
@@ -372,8 +376,8 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        if (countdownModal) countdownModal.innerHTML = "<p>Lanzamiento disponible 🎉</p>";
-        if (countdownTeaser) countdownTeaser.textContent = "¡Lanzamiento disponible 🎉!";
+        if (countdownModal) countdownModal.innerHTML = "<p></p>";
+        if (countdownTeaser) countdownTeaser.textContent = "";
         document.body.classList.remove('grayscale');
         return;
       }
