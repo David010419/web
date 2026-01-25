@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="assets/css/modern-style.css" />
     
-    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
 </head>
 
 <body>
@@ -32,6 +32,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Inicio</a></li>
             <li><a href="index.html#musica">Música</a></li>
+            <li><a href="discografia.html">Discografía</a></li>
             <li><a href="index.html#eventos">Eventos</a></li>
             <li><a href="contacto.html" class="active btn-contact">Contacto</a></li>
         </ul>
@@ -80,29 +81,28 @@
                 </div>
 
                 <div class="contact-form-box" data-aos="fade-left" data-aos-delay="200">
-                    <form action="https://formsubmit.co/danimirallesoficial@gmail.com" method="POST">
+                    <form id="contact-form">
                         
-                        <input type="text" name="_honey" style="display:none" />
-                        <input type="hidden" name="_captcha" value="false" />
-                        <input type="hidden" name="_subject" value="🤘 Nuevo mensaje desde la Web de Dani Miralles" />
-                        <input type="hidden" name="_next" value="https://danimiralles.com/gracias.html" /> <div class="input-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" id="nombre" placeholder="Tu nombre o empresa" required>
+                        <div class="input-group">
+                            <label for="from_name">Nombre</label>
+                            <input type="text" name="from_name" id="from_name" placeholder="Tu nombre o empresa" required>
                         </div>
 
                         <div class="input-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="tucorreo@ejemplo.com" required>
+                            <label for="email_id">Email</label>
+                            <input type="email" name="email_id" id="email_id" placeholder="tucorreo@ejemplo.com" required>
                         </div>
 
                         <div class="input-group">
-                            <label for="mensaje">Mensaje</label>
-                            <textarea name="mensaje" id="mensaje" rows="5" placeholder="Cuéntame tu propuesta..." required></textarea>
+                            <label for="message">Mensaje</label>
+                            <textarea name="message" id="message" rows="5" placeholder="Cuéntame tu propuesta..." required></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" class="submit-btn" id="btn-submit">
                             ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>
                         </button>
+                        
+                        <p id="msg-feedback" style="margin-top:15px; font-weight:bold; display:none; text-align:center;"></p>
                     </form>
                 </div>
 
@@ -115,30 +115,48 @@
             <div class="social-huge">
                 <a href="https://instagram.com/danimiralles_oficial" target="_blank">INSTAGRAM</a>
                 <a href="https://youtube.com/@danimirallesmusic" target="_blank">YOUTUBE</a>
+                <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=ISmD5ZjKRRKWtKoOUWQPKg" target="_blank">SPOTIFY</a>
             </div>
             <div class="footer-meta">
                 <p>© 2025 Dani Miralles. Rock & Autor.</p>
+                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                
+                <p class="dev-credits">
+                    Web creada y diseñada por: 
+                    <a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243" target="_blank" rel="noopener">David Castillo Gallardo</a>
+                </p>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function() {
+            // TU PUBLIC KEY (La misma que usaste en index.html)
+            emailjs.init("F4J0yiVKuR8LI3fzZ"); 
+        })();
+    </script>
+
     <script>
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
 
-        // Lógica del Menú Móvil (Igual que en index)
+        // Menú Móvil
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            if(navLinks.classList.contains('active')){
-                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
+        if(menuToggle){
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if(navLinks.classList.contains('active')){
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        }
 
         // Efecto Parallax luces
         document.addEventListener('mousemove', (e) => {
@@ -150,138 +168,70 @@
                 light.style.transform = `translate(${x * 20 * speed}px, ${y * 20 * speed}px)`;
             });
         });
+
+        // --- LÓGICA DE ENVÍO FORMULARIO CONTACTO ---
+        const contactForm = document.getElementById('contact-form');
+        
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita recarga
+
+                const btn = document.getElementById('btn-submit');
+                const feedback = document.getElementById('msg-feedback');
+                
+                // 1. Estado "Cargando"
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+                btn.style.opacity = '0.7';
+
+                // 2. CONFIGURACIÓN EMAILJS
+                const serviceID = 'service_m5o515n';   // Tu Service ID
+                // RECOMENDACIÓN: Crea un Template nuevo en EmailJS para "Contacto General" 
+                // que incluya {{from_name}}, {{email_id}} y {{message}}.
+                // Si usas el mismo del newsletter, asegúrate de que tenga esos campos.
+                const templateID = 'template_lqxxqss'; // Tu Template ID (o crea uno nuevo para contacto)
+
+                // 3. Envío
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        // ÉXITO
+                        btn.innerHTML = '<i class="fas fa-check"></i> MENSAJE ENVIADO';
+                        btn.style.background = '#1DB954';
+                        
+                        feedback.style.display = 'block';
+                        feedback.style.color = '#1DB954';
+                        feedback.innerText = "¡Gracias! He recibido tu mensaje. Te contestaré lo antes posible.";
+                        
+                        // Resetear formulario
+                        contactForm.reset();
+
+                        // Volver al estado normal tras 5 segundos
+                        setTimeout(() => {
+                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                            btn.style.background = ''; 
+                            btn.style.opacity = '1';
+                            feedback.style.display = 'none';
+                        }, 5000);
+
+                    }, (err) => {
+                        // ERROR
+                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
+                        btn.style.background = 'red';
+                        
+                        feedback.style.display = 'block';
+                        feedback.style.color = 'red';
+                        feedback.innerText = "Hubo un error al enviar. Por favor, escríbeme directamente al email.";
+                        console.log(JSON.stringify(err));
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                            btn.style.background = '';
+                            btn.style.opacity = '1';
+                        }, 5000);
+                    });
+            });
+        }
     </script>
-    
-    <!--<script>
-        (function(){
-          const canvas = document.getElementById('rain-canvas');
-          if(!canvas) return;
-          const ctx = canvas.getContext('2d');
-    
-          let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
-          
-          const snowflakes = []; 
-          const snowPile = [];
-          let heightMap = [];
-          
-          let lastTime = performance.now();
-          let rafId = null;
-          let running = false;
-    
-          const MAX_PILE_HEIGHT = 150; 
-          const MAX_PILE_PARTICLES = 800; 
-    
-          function desiredDropCount() {
-            const px = Math.min(window.innerWidth, 1600);
-            return Math.round(px * 0.15); 
-          }
-    
-          function resize() {
-            W = window.innerWidth;
-            H = window.innerHeight;
-            canvas.width = Math.floor(W * dpr);
-            canvas.height = Math.floor(H * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            heightMap = new Float32Array(Math.ceil(W)).fill(0);
-            snowPile.length = 0;
-            const target = desiredDropCount();
-            while (snowflakes.length < target) snowflakes.push(makeSnowflake(true));
-            while (snowflakes.length > target) snowflakes.pop();
-          }
-    
-          function rand(min, max){ return Math.random() * (max - min) + min; }
-    
-          function makeSnowflake(spawnTop=false){
-            return {
-              x: rand(0, W),
-              y: spawnTop ? rand(-H, 0) : rand(-50, -10),
-              vy: rand(40, 120),
-              size: rand(9, 12.5),
-              oscillation: rand(0, Math.PI * 2),
-              oscSpeed: rand(0.5, 2.0),
-              alpha: rand(0.4, 0.95)
-            };
-          }
-    
-          function drawSnowflake(s){
-            ctx.beginPath();
-            const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size);
-            g.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
-            g.addColorStop(1, `rgba(255, 255, 255, 0)`);
-            ctx.fillStyle = g;
-            ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
-            ctx.fill();
-          }
-    
-          function loop(now){
-            if(!running) return;
-            const dt = Math.min(50, now - lastTime) / 1000;
-            lastTime = now;
-            ctx.clearRect(0, 0, W, H);
-            
-            for (let i = 0; i < snowflakes.length; i++){
-              const s = snowflakes[i];
-              s.y += s.vy * dt;
-              s.oscillation += s.oscSpeed * dt;
-              s.x += Math.sin(s.oscillation) * 20 * dt; 
-              if (s.x < -10) s.x = W + 10;
-              if (s.x > W + 10) s.x = -10;
-              const floorIndex = Math.floor(Math.max(0, Math.min(W-1, s.x)));
-              const currentFloorHeight = heightMap[floorIndex];
-              if (s.y >= H - currentFloorHeight - 2) {
-                if (currentFloorHeight < MAX_PILE_HEIGHT) {
-                    snowPile.push({ x: s.x, y: H - currentFloorHeight, size: s.size, alpha: s.alpha });
-                    const heap = s.size * 0.8; 
-                    heightMap[floorIndex] += heap;
-                    if(floorIndex > 0) heightMap[floorIndex-1] += heap * 0.5;
-                    if(floorIndex < W-1) heightMap[floorIndex+1] += heap * 0.5;
-                }
-                snowflakes[i] = makeSnowflake();
-              } else {
-                drawSnowflake(s);
-              }
-            }
-    
-            if (snowPile.length > MAX_PILE_PARTICLES) {
-                const removed = snowPile.shift(); 
-                const idx = Math.floor(removed.x);
-                if (idx >= 0 && idx < W && heightMap[idx] > 0) {
-                    heightMap[idx] = Math.max(0, heightMap[idx] - removed.size);
-                }
-            }
-    
-            for (const p of snowPile) {
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha + 0.2)})`; 
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-                ctx.fill();
-            }
-            rafId = requestAnimationFrame(loop);
-          }
-    
-          const resizeHandler = () => resize();
-          window.Snow = {
-            start(){
-              if (running) return;
-              running = true;
-              canvas.style.display = 'block';
-              resize();
-              window.addEventListener('resize', resizeHandler, { passive:true });
-              lastTime = performance.now();
-              rafId = requestAnimationFrame(loop);
-            },
-            stop(clearCanvas){
-              running = false;
-              if (rafId) cancelAnimationFrame(rafId);
-              window.removeEventListener('resize', resizeHandler);
-              if (clearCanvas){
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                canvas.style.display = 'none';
-              }
-            }
-          };
-          window.Snow.start();
-        })();
-    </script> -->
+
 </body>
 </html>
