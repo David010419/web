@@ -564,10 +564,12 @@
             promoVideo.pause();
             intro.classList.remove('active'); // Ensure intro is not active initially
             gate.classList.remove('hidden'); // Ensure gate is visible initially
+            document.body.classList.add('premiere-active'); // Lock scroll on load
 
             enterBtn.addEventListener('click', () => {
                 intro.classList.add('dismissed');
                 promoVideo.pause();
+                document.body.classList.remove('premiere-active'); // Unlock scroll
                 // sessionStorage.setItem('premiereSeen', 'true');
 
                 // Activar AOS después de entrar para que no se ejecuten animaciones en segundo plano

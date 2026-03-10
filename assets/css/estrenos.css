@@ -9,6 +9,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+    /* Prevent internal scrollbars */
+}
+
+/* Scroll Lock Utility */
+body.premiere-active {
+    overflow: hidden !important;
+    height: 100vh;
 }
 
 #premiere-intro {
