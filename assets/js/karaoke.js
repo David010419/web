@@ -241,7 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     vinyl.addEventListener('click', () => {
         if (audio.paused) {
-            audio.play().catch(e => alert("Sube el archivo de audio a la carpeta assets/estrenos/audio/ para escuchar."));
+            audio.play().catch(e => {
+                console.error("Playback failed:", e);
+                alert("Error al cargar música. ID: " + currentSong + "\nArchivo esperado: " + audio.src + "\n\nPor favor, verifica que el archivo existe y es minúscula.");
+            });
             if (playIndicator) playIndicator.className = 'fas fa-pause';
             vinyl.classList.add('playing');
         } else {
