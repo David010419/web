@@ -339,54 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load
     loadSong('me-da-igual');
 
-    // Ambient Effects: Rain
-    (function () {
-        const canvas = document.getElementById('rain-canvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
-        const raindrops = [];
-        let lastTime = performance.now();
-
-        function resize() {
-            W = window.innerWidth;
-            H = window.innerHeight;
-            canvas.width = Math.floor(W * dpr);
-            canvas.height = Math.floor(H * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        function makeRaindrop() {
-            return {
-                x: Math.random() * W,
-                y: Math.random() * -H,
-                vy: Math.random() * 100 + 100, // Faster for "cañero" feel
-                size: Math.random() * 1 + 0.5,
-                alpha: Math.random() * 0.3 + 0.1
-            };
-        }
-
-        for (let i = 0; i < 150; i++) raindrops.push(makeRaindrop());
-
-        function loop(now) {
-            const dt = Math.min(50, now - lastTime) / 1000;
-            lastTime = now;
-            ctx.clearRect(0, 0, W, H);
-
-            ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-            for (let r of raindrops) {
-                r.y += r.vy * dt;
-                if (r.y > H) r.y = -10;
-                ctx.fillRect(r.x, r.y, r.size, r.size * 5); // Rectangular drops for speed look
-            }
-            requestAnimationFrame(loop);
-        }
-
-        resize();
-        window.addEventListener('resize', resize);
-        requestAnimationFrame(loop);
-    })();
 
     // Parallax Lights
     document.addEventListener('mousemove', (e) => {
