@@ -500,6 +500,14 @@
 
                 // Play with sound (allowed because of user click)
                 promoVideo.muted = false;
+
+                // Fallback for video errors
+                promoVideo.addEventListener('error', (e) => {
+                    console.error("Video error detected, showing poster fallback:", e);
+                    promoVideo.style.opacity = '0'; // Hide broken video
+                    intro.style.background = 'url("assets/estrenos/miniatura.png") center/cover no-repeat';
+                }, { once: true });
+
                 promoVideo.load();
                 promoVideo.play().catch(e => {
                     console.log("Error playing video:", e);
