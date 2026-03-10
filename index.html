@@ -79,7 +79,7 @@
     </div>
 
     <div id="premiere-intro">
-        <video id="promo-video-bg" class="premiere-video-bg" loop playsinline muted
+        <video id="promo-video-bg" class="premiere-video-bg" loop playsinline muted preload="auto"
             poster="assets/estrenos/miniatura.png">
             <source src="assets/estrenos/video promo web.mp4" type="video/mp4">
         </video>
@@ -500,6 +500,7 @@
 
                 // Play with sound (allowed because of user click)
                 promoVideo.muted = false;
+                promoVideo.load();
                 promoVideo.play().catch(e => {
                     console.log("Error playing video:", e);
                 });
