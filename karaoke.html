@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARAOKE EXPERIMENTAL | DANI MIRALLES | Canta sus éxitos</title>
+    <meta name="description"
+        content="Vive la experiencia interactiva de cantar los temas de Dani Miralles. Karaoke experimental de 'Me da igual', 'Ovejas Negras' y más.">
+    <meta name="keywords"
+        content="Karaoke Dani Miralles, cantar online, Me da igual karaoke, Ovejas Negras karaoke, música interactiva">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://danimiralles.es/karaoke.html">
+    <meta property="og:title" content="Karaoke Experimental | Dani Miralles">
+    <meta property="og:description"
+        content="Canta los temas de Dani Miralles en esta experiencia de karaoke interactiva única.">
+    <meta property="og:image" content="https://danimiralles.es/images/portadas/medaigual.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Karaoke Dani Miralles">
+    <meta property="twitter:description" content="¿Te atreves a cantar? Prueba el nuevo karaoke de Dani Miralles.">
+
+    <link rel="canonical" href="https://danimiralles.es/karaoke.html" />
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/modern-style.css">
+    <link rel="stylesheet" href="assets/css/karaoke.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="is-preload karaoke-body">
+    <div class="bg-noise"></div>
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+    <canvas id="rain-canvas"></canvas>
+
+    <div id="wrapper">
+        <!-- Main Navigation (Aligned with Site) -->
+        <nav class="main-nav">
+            <div class="brand-logo">
+                <span>DANI MIRALLES</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="discografia.html">Discografía</a></li>
+                <li><a href="karaoke.html" class="active">Karaoke</a></li>
+                <li><a href="index.html#ultimos">Últimos</a></li>
+                <li><a href="index.html#mas-escuchados">+ Escuchados</a></li>
+                <li><a href="index.html#eventos">Eventos</a></li>
+                <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
+            </ul>
+
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </nav>
+
+        <!-- Main Content -->
+        <main id="karaoke-container">
+            <div class="karaoke-layout">
+                <!-- Left Side: Song Selector -->
+                <aside class="song-list">
+                    <h2>MIS TEMAS</h2>
+                    <div class="selector-container">
+                        <button class="song-item active" data-song="me-da-igual">
+                            <span class="num">01</span>
+                            <span class="name">Me da igual</span>
+                        </button>
+                        <button class="song-item" data-song="que-suba-el-hielo">
+                            <span class="num">02</span>
+                            <span class="name">Que Suba el Hielo</span>
+                        </button>
+                        <button class="song-item" data-song="ovejas-negras">
+                            <span class="num">03</span>
+                            <span class="name">Ovejas Negras</span>
+                        </button>
+                        <button class="song-item" data-song="se-prometieron-el-mar">
+                            <span class="num">04</span>
+                            <span class="name">Se Prometieron el Mar</span>
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Center: Record Player & Control Deck -->
+                <section class="record-player">
+                    <div class="player-deck">
+                        <div class="deck-header">
+                            <div class="song-info-glitch">
+                                <span class="status-dot"></span>
+                                <h3 id="display-song-title" class="glitch" data-text="SELECT_TRACK">SELECT_TRACK</h3>
+                            </div>
+                        </div>
+
+                        <div class="vinyl-wrapper" id="vinyl-wrapper">
+                            <div class="vinyl" id="vinyl-record">
+                                <div class="vinyl-center">
+                                    <img id="song-cover" src="images/portadas/medaigual.jpg" alt="Cover">
+                                </div>
+                                <div class="play-indicator">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="stylus" id="stylus"></div>
+                        </div>
+
+                        <div class="audio-controls">
+                            <audio id="karaoke-audio"></audio>
+
+                            <div class="deck-row">
+                                <div class="playback-bar">
+                                    <span id="current-time">0:00</span>
+                                    <div class="progress-container">
+                                        <input type="range" id="progress-bar" value="0" min="0" max="100">
+                                    </div>
+                                    <span id="duration">0:00</span>
+                                </div>
+                            </div>
+
+                            <div class="deck-footer">
+                                <div class="volume-control">
+                                    <i class="fas fa-volume-down"></i>
+                                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.8">
+                                    <i class="fas fa-volume-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Side: Lyrics -->
+                <article class="lyrics-view">
+                    <div id="lyrics-container" class="lyrics-scroll">
+                        <p class="lyric-line placeholder">Elige una canción para empezar...</p>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>KARAOKE EXPERIMENTAL V1.0</h3>
+                    <p>Creado para Fans de Dani Miralles</p>
+                </section>
+            </section>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/karaoke.js"></script>
+</body>
+
+</html>

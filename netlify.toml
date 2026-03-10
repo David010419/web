@@ -1,0 +1,9 @@
+[build]
+  # Directorio con tu HTML/CSS/JS ('.' si tu index.html está en la raíz)
+  publish = "."
+  # Carpeta donde pusiste netlify/functions/contact.js
+  functions = "netlify/functions"
+
+[dev]
+  # Para probar localmente con el CLI
+  functions = "netlify/functions"

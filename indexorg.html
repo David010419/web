@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+  <title>Dani Miralles Oficial</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="google-site-verification" content="luKO0pPkkFBRJGfkaPcTMLRPCFOAl5XkewVdzyNLKjY" />
+
+  <meta name="description" content="Web de Dani Miralles Oficial, Música, Cantautor, Artista">
+  <meta name="keywords" content="Que suba el hielo, 100 años del sueño del chepa, me da igual, artista, dani miralles, dani miralles web">
+  <meta name="author" content="Dani Miralles Oficial">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
+  <link rel="manifest" href="/images/site.webmanifest" />
+
+  <!-- Overrides críticos en línea -->
+  <style>
+    html, body { min-height:100%; }
+
+    /* ===== Lluvia con canvas (por encima del contenido) ===== */
+    #rain-canvas{
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9050;            /* por encima del contenido */
+      pointer-events: none;     /* no bloquea clics */
+      transition: z-index .2s ease, opacity .2s ease;
+    }
+    /* Cuando el modal está abierto, poner la lluvia ENCIMA del modal */
+    body.dm-modal-open #rain-canvas{ z-index: 12000; opacity: 0.28; }
+
+    /* BN solo al contenido, no al modal */
+    body.grayscale #page-wrapper{ filter:grayscale(100%); transition:filter .3s ease; }
+    #dm-video-modal, #dm-video-modal *{ filter:none !important; } /* modal siempre a color */
+
+    /* ===== Modal (base HIDDEN, visible solo con .is-active) ===== */
+    #dm-video-modal{
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.65); z-index:11000; opacity:0; visibility:hidden; pointer-events:none;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+    #dm-video-modal.is-active{ opacity:1; visibility:visible; pointer-events:auto; }
+
+    .dm-modal__content{ position:relative; z-index:11010; overflow:visible; background:#000; border-radius:10px; }
+
+    /* Cabecera del modal */
+    .dm-modal__flag{
+      position:relative; z-index:11012;
+      display:flex; align-items:center; justify-content:center; gap:16px;
+      padding:5px 5px 0; background:#000; flex-wrap:wrap; text-align:center;
+    }
+    .dm-modal__flag img{ max-width:150px; height:auto; display:block; flex:0 0 auto; }
+    .dm-flag-text{
+      color:#fff; font-weight:800; line-height:1.2;
+      font-size:clamp(10px, 2vw, 24px); max-width:min(900px, 92%); margin:0;
+    }
+
+    /* Vídeo responsive 16:9 */
+    .dm-modal__video{ position:relative; padding-bottom:56.25%; height:0; z-index:11011; }
+    .dm-modal__video video{ position:absolute; inset:0; width:100%; height:100%; border:0; background:#000; display:block; pointer-events:auto; }
+
+    /* Cuenta atrás en el modal */
+    #countdown-modal{
+      text-align:center; color:#fff; background:rgba(0,0,0,.6);
+      margin:16px; padding:14px 18px; border-radius:10px;
+      font-family:Arial, Helvetica, sans-serif; z-index:11011;
+    }
+    #countdown-modal h2{ margin:0 0 8px; font-weight:900; font-size:clamp(16px, 2vw, 20px); letter-spacing:0.5px; }
+    #countdown-modal p{ margin:0; font-weight:900; line-height:1; font-size:clamp(32px, 6vw, 64px); letter-spacing:1px; }
+
+    .dm-modal__close{ position:absolute; top:8px; right:10px; z-index:11020; }
+
+    /* Imagen del contenedor Próximamente */
+    .feature-image{ border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
+
+    /* Cuenta atrás del contenedor Próximamente */
+    #countdown-teaser{
+      text-align:center; background:#faf9f9; border:1px solid #ddd; border-radius:8px;
+      padding:14px 18px; margin-top:14px;
+    }
+    #countdown-teaser h3{ margin:0 0 8px; font-weight:900; font-size:1.2rem; }
+    #countdown-teaser p{ margin:0; font-weight:800; font-size:1.4rem; letter-spacing:.5px; }
+  </style>
+</head>
+
+<body class="homepage"> <!--homepage grayscale para escala de grises-->
+
+  <!-- Canvas lluvia -->
+  <canvas id="rain-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===== MODAL PROMOCIONAL DE VÍDEO ===== -->
+  <div id="dm-video-modal" aria-hidden="true" role="dialog" aria-label="Nuevo lanzamiento">
+    <div class="dm-modal__stack">
+      <div class="dm-modal__content">
+        <button class="dm-modal__close" id="dm-close-modal" aria-label="Cerrar">&times;</button>
+
+        <div class="dm-modal__flag">
+          <img src="images/bandera.png" alt="Bandera">
+          <p class="dm-flag-text">
+			LLUM, ya disponible el single de Dani Miralles,
+            Dedicado a las personas que ayudaron tras la DANA del 29/10/2024 en Valencia.
+            Una historia de amor eterno. En memoria de <em>“Tots els que hui brillen més que mai”.</em>
+          </p>
+        </div>
+        <br>
+
+        <div class="dm-modal__video">
+          <video id="dm-local-video" autoplay muted playsinline controls>
+            <source src="images/video-lanzamiento.mp4" type="video/mp4">
+            <source src="images/video-lanzamiento.mov" type="video/quicktime">
+            Tu navegador no soporta la reproducción de vídeo.
+          </video>
+        </div>
+        <br>
+        <div id="countdown-modal"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENIDO PRINCIPAL (BN) ===== -->
+  <div id="page-wrapper">
+
+    <!-- HEADER -->
+    <section id="header">
+      <nav id="nav" data-aos="fade-down">
+        <ul>
+          <li class="current"><a href="index.html">Inicio</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
+        <header></header>
+      </section>
+
+      <!-- Intro -->
+      <section id="intro" class="container">
+        <div class="row">
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://youtube.com/@danimirallesmusic" target="_blank" class="box-link">
+              <section class="first">
+                <i class="icon brands fa-youtube icon-large"></i>
+                <header><h2>YouTube</h2></header>
+                <p>Aquí podrás ver mis videoclips y todo el contenido audiovisual</p>
+              </section>
+            </a>
+          </div>
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR" target="_blank" class="box-link">
+              <section class="middle">
+                <i class="icon brands fa-spotify icon-large"></i>
+                <header><h2>Spotify</h2></header>
+                <p>Escucha mis últimos lanzamientos y playlists.</p>
+              </section>
+            </a>
+          </div>
+          <div class="col-4 col-12-medium" data-aos="fade-up" data-aos-delay="300">
+            <a href="https://instagram.com/danimiralles_oficial" target="_blank" class="box-link">
+              <section class="last">
+                <i class="icon brands fa-instagram icon-large"></i>
+                <header><h2>Instagram</h2></header>
+                <p>Sígueme para ver fotos, novedades y más arte.</p>
+              </section>
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- MAIN -->
+    <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+            <section class="container" id="proximamente" data-aos="fade-up">
+            <header class="major" data-aos="fade-up"><h2>Nuevo</h2></header>
+             <div class="promo-section">
+          <p class="promo-text">
+           <h3>Todo es Magia, ya disponible el single de Dani Miralles,
+            Con la colaboración del coro Josefinas del colegio Sagrada Familia de Alicante.</h3>
+            </p>
+
+    <!-- Cuenta atrás del bloque 
+            <div id="countdown-teaser">
+             <h3>Cuenta atrás</h3>
+              <p>—</p>
+            </div> -->
+			<div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
+            
+			 <section class="box">
+                    <a href="https://www.youtube.com/watch?v=Nd2nDOin758" target="_blank" class="image featured"><img src="images/miniaturatodoesmagia.jpg" alt="Todo es magia" /></a>
+                   
+                  </section>
+            </div>
+    <!-- Botón de pre-sav -->
+    <p style="margin-top:16px">
+      <a class="button" target="_blank" rel="noopener"
+         href="https://open.spotify.com/intl-es/track/3CNw6RrN9XQrtDF2wG3MKU?si=25ad4382c5bd46ec">Escucha Todo es Magia en Spotify</a>
+    </p>
+    
+  </div>
+</section>
+
+            <!-- ÚLTIMOS TEMAS -->
+            <section>
+              <header class="major" data-aos="fade-up"><h2>Mis últimos temas</h2></header>
+              <div class="row">
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=WCBSA3nKGSE" target="_blank" class="image featured"><img src="images/miniatura2.jpg" alt="Llum" /></a>
+                    <header><h3>Llum</h3></header>
+                    <p>Lanzada el 29 de Octubre de 2025</p>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/2v6sijZjiZfwLbvpdoctIQ?si=da5980079ccd4e3d" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="300">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=O-3UzMua1R4" target="_blank" class="image featured"><img src="images/pic19.jpg" alt="Ovejas Negras" /></a>
+                    <header><h3>Ovejas Negras</h3></header>
+                    <p>Lanzada el 12 de Septiembre de 2025</p>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/0INNm3JFS8HtBK9ypjfNBP" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="100">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=5xMRXxRlA_s" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="Me da Igual" /></a>
+                    <header><h3>Me da Igual</h3></header>
+                    <p>Lanzada el 20 de junio de 2025</p>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/1ve94TU6Jmt8Ft4VXBzIGX" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+                <div class="col-4 col-6-medium col-12-small" data-aos="fade-up" data-aos-delay="200">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=WfcxQZHlL_o" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="Que suba el hielo" /></a>
+                    <header><h3>Que suba el hielo</h3></header>
+                    <p>Lanzada el 14 de Febrero de 2025</p>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/5Sdw0RqkfmwyGvj3vP91VT" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+              
+              </div>
+            </section>
+
+            <!-- MÁS ESCUCHADOS -->
+            <section>
+              <header class="major" data-aos="fade-up"><h2>Mis temas más escuchados</h2></header>
+              <div class="row">
+                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="100">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=ZqUx26fxUX4" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="100 años del sueño del chepa" /></a>
+                    <header><h3>100 años del sueño del chepa</h3></header>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/5xwrpvnAlQh7scw4pEYvzy" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+                <div class="col-6 col-12-small" data-aos="fade-up" data-aos-delay="200">
+                  <section class="box">
+                    <a href="https://www.youtube.com/watch?v=_aaVWiaV0Ak" target="_blank" class="image featured"><img src="images/pic09.jpg" alt="El vaso medio lleno" /></a>
+                    <header><h3>El vaso medio lleno</h3></header>
+                    <footer><ul class="actions"><li><a href="https://open.spotify.com/intl-es/track/2DElrCCqIypOg6KbS8Xyi6" target="_blank" class="button alt">Escuchar en Spotify</a></li></ul></footer>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section id="footer">
+      <div class="container">
+        <div class="row">
+          <!-- Próximos eventos -->
+          <div class="col-8 col-12-medium">
+            <section>
+              <header><h2>Próximos eventos</h2></header>
+              <ul class="dates">
+                <li>
+                  <span class="date">Oct <strong>29</strong></span>
+                  <h3><a href="#">Presentación “LLUM” </a></h3>
+                  <p></p>
+                </li>
+                <li>
+                  <span class="date">0 <strong>00</strong></span>
+                  <h3><a href="#">Sin fecha</a></h3>
+                  <p></p>
+                </li>
+                <li>
+                  <span class="date">0 <strong>00</strong></span>
+                  <h3><a href="#">Sin fecha</a></h3>
+                  <p>Más info en redes.</p>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <!-- Contacto -->
+          <div class="col-4 col-12-medium">
+            <section>
+              <header><h2>Contacto</h2></header>
+              <ul class="contact">
+                <li>
+                  <h3>Email de contacto</h3>
+                  <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                </li>
+                <li>
+                  <h3>Teléfono</h3>
+                  <p><a href="tel:+34722735986">+34 722 73 59 86</a></p>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="col-12">
+            <div id="copyright">
+              <ul class="links">
+                <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
+                <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada por: David Castillo Gallardo</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /#page-wrapper -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/jquery.dropotron.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ duration: 800, once: true, offset: 0 });
+
+    const modal = document.getElementById('dm-video-modal');
+    const closeBtn = document.getElementById('dm-close-modal');
+    const video = document.getElementById('dm-local-video');
+    const countdownModal = document.getElementById('countdown-modal');
+    const countdownTeaser = document.getElementById('countdown-teaser')?.querySelector('p');
+    const targetDate = new Date('2025-10-29T00:00:00');
+
+    function openModal() {
+      modal.classList.add('is-active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('dm-modal-open');
+    }
+    function closeModal() {
+      modal.classList.remove('is-active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dm-modal-open');
+      if (video){
+        video.pause();
+        try { video.currentTime = 0; } catch(e){}
+      }
+    }
+
+    // setTimeout(openModal, 900);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // ===== Cuenta atrás (modal + teaser) =====
+    function fmt(n){ return String(n).padStart(2,'0'); }
+    function tick() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        if (countdownModal) countdownModal.innerHTML = "<p></p>";
+        if (countdownTeaser) countdownTeaser.textContent = "";
+        document.body.classList.remove('grayscale');
+        return;
+      }
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff/(1000*60*60))%24);
+      const minutes = Math.floor((diff/(1000*60))%60);
+      const seconds = Math.floor((diff/1000)%60);
+
+      const htmlModal = `
+        <h2>Cuenta atrás para el lanzamiento</h2>
+        <p>${days}d ${fmt(hours)}h ${fmt(minutes)}m ${fmt(seconds)}s</p>
+      `;
+      if (countdownModal) countdownModal.innerHTML = htmlModal;
+      if (countdownTeaser) countdownTeaser.textContent = `${days}d ${fmt(hours)}h ${fmt(minutes)}m ${fmt(seconds)}s`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  });
+  </script>
+
+  <script>
+    (function(){
+      const canvas = document.getElementById('rain-canvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+      
+      const snowflakes = [];     // Copos cayendo
+      const snowPile = [];       // Copos acumulados en el suelo
+      let heightMap = [];        // Mapa invisible para saber dónde está el suelo (para apilar)
+      
+      let lastTime = performance.now();
+      let rafId = null;
+      let running = false;
+
+      // Configuración
+      const MAX_PILE_HEIGHT = 150; // Altura máxima de la nieve acumulada (px)
+      const MAX_PILE_PARTICLES = 800; // Límite de copos en el suelo para rendimiento
+
+      function desiredDropCount() {
+        const px = Math.min(window.innerWidth, 1600);
+        return Math.round(px * 0.15); // Menos densidad que la lluvia, la nieve es más dispersa
+      }
+
+      function resize() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Reiniciar mapa de altura al cambiar tamaño
+        heightMap = new Float32Array(Math.ceil(W)).fill(0);
+        
+        // Limpiar pila antigua para evitar errores visuales
+        snowPile.length = 0;
+
+        const target = desiredDropCount();
+        while (snowflakes.length < target) snowflakes.push(makeSnowflake(true));
+        while (snowflakes.length > target) snowflakes.pop();
+      }
+
+      function rand(min, max){ return Math.random() * (max - min) + min; }
+
+      function makeSnowflake(spawnTop=false){
+        return {
+          x: rand(0, W),
+          y: spawnTop ? rand(-H, 0) : rand(-50, -10),
+          vy: rand(40, 120),        // Velocidad de caída mucho más lenta
+          size: rand(9, 12.5),      // Tamaño del copo
+          oscillation: rand(0, Math.PI * 2), // Para el movimiento lateral
+          oscSpeed: rand(0.5, 2.0),          // Velocidad del vaivén
+          alpha: rand(0.4, 0.95)
+        };
+      }
+
+      function drawSnowflake(s){
+        ctx.beginPath();
+        // Gradiente para que parezca un copo suave y difuso
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size);
+        g.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+        g.addColorStop(1, `rgba(255, 255, 255, 0)`);
+        
+        ctx.fillStyle = g;
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      function loop(now){
+        if(!running) return;
+        const dt = Math.min(50, now - lastTime) / 1000;
+        lastTime = now;
+
+        ctx.clearRect(0, 0, W, H);
+        
+        // 1. Dibujar y calcular copos cayendo
+        for (let i = 0; i < snowflakes.length; i++){
+          const s = snowflakes[i];
+          
+          // Física de caída
+          s.y += s.vy * dt;
+          
+          // Física de viento (movimiento lateral sinusoidal)
+          s.oscillation += s.oscSpeed * dt;
+          s.x += Math.sin(s.oscillation) * 20 * dt; 
+
+          // Wrap around (si sale por los lados vuelve a entrar)
+          if (s.x < -10) s.x = W + 10;
+          if (s.x > W + 10) s.x = -10;
+
+          // Detección de colisión con el suelo o la pila de nieve
+          const floorIndex = Math.floor(Math.max(0, Math.min(W-1, s.x)));
+          const currentFloorHeight = heightMap[floorIndex];
+          
+          // Si toca el suelo (H) menos la altura acumulada
+          if (s.y >= H - currentFloorHeight - 2) {
+            
+            // Lógica de acumulación
+            if (currentFloorHeight < MAX_PILE_HEIGHT) {
+                // Añadir a la pila estática
+                snowPile.push({ x: s.x, y: H - currentFloorHeight, size: s.size, alpha: s.alpha });
+                
+                // Aumentar el mapa de altura en esa zona (y un poco a los lados para suavizar)
+                const heap = s.size * 0.8; 
+                heightMap[floorIndex] += heap;
+                // Suavizado simple a los vecinos
+                if(floorIndex > 0) heightMap[floorIndex-1] += heap * 0.5;
+                if(floorIndex < W-1) heightMap[floorIndex+1] += heap * 0.5;
+            }
+
+            // Reciclar el copo enviándolo arriba
+            snowflakes[i] = makeSnowflake();
+          } else {
+            // Si no toca suelo, dibujar
+            drawSnowflake(s);
+          }
+        }
+
+        // 2. Gestionar la acumulación (Derretir/Limitar)
+        // Si hay demasiados copos acumulados, quitamos los más viejos para rendimiento
+        if (snowPile.length > MAX_PILE_PARTICLES) {
+            // Eliminar los primeros (más viejos) y reducir el mapa de altura aleatoriamente
+            // para simular que la nieve se compacta o derrite
+            const removed = snowPile.shift(); 
+            // Reducir un poco la altura donde estaba ese copo (hack visual)
+            const idx = Math.floor(removed.x);
+            if (idx >= 0 && idx < W && heightMap[idx] > 0) {
+                heightMap[idx] = Math.max(0, heightMap[idx] - removed.size);
+            }
+        }
+
+        // 3. Dibujar la pila de nieve
+        for (const p of snowPile) {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha + 0.2)})`; // Más blanco al acumularse
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+            ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      // Control público
+      const resizeHandler = () => resize();
+
+      // Cambiamos el nombre a Window.Snow para mantener coherencia
+      window.Snow = {
+        start(){
+          if (running) return;
+          running = true;
+          canvas.style.display = 'block';
+          resize();
+          window.addEventListener('resize', resizeHandler, { passive:true });
+          lastTime = performance.now();
+          rafId = requestAnimationFrame(loop);
+        },
+        stop(clearCanvas){
+          running = false;
+          if (rafId) cancelAnimationFrame(rafId);
+          window.removeEventListener('resize', resizeHandler);
+          if (clearCanvas){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+          }
+        }
+      };
+
+      window.Snow.start();
+    })();
+</script>
+
+   <!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
+
+<!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
+<!-- Control de fecha: quitar BN + lluvia + cambiar vídeo del modal -->
+<!--<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 📅 FECHA DE ACTIVACIÓN
+  const cutoff = new Date("2025-10-29T00:00:00");
+  const now = new Date();
+
+  const videoContainer = document.querySelector(".dm-modal__video");
+  const localVideo = document.getElementById("dm-local-video");
+
+  // 🎬 ID del vídeo de YouTube (nuevo)
+  const youtubeId = "76Bs9JIh7YM";
+
+  // 🧩 Iframe seguro (usa dominio estándar para máxima compatibilidad)
+  const youtubeEmbed = `
+    <iframe id="dm-youtube"
+            width="100%" height="100%"
+            src="https://www.youtube-nocookie.com/embed/WCBSA3nKGSE?autoplay=1&mute=1&rel=0&showinfo=0"
+            title="Videoclip – Dani Miralles"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowfullscreen>
+    </iframe>
+  `;
+
+  // 🚀 Función principal: activar lanzamiento
+  function activarLanzamiento() {
+    // 1. Quitar blanco y negro
+    document.body.classList.remove("grayscale");
+
+    // 2. Detener y ocultar lluvia
+    if (window.Rain && typeof window.Rain.stop === "function") {
+      window.Rain.stop(true);
+    }
+
+    // 3. Sustituir el vídeo local por YouTube
+    if (videoContainer) {
+      // Pausa el vídeo local si sigue activo
+      if (localVideo) {
+        try { localVideo.pause(); } catch (e) {}
+      }
+      // Añadimos pequeño retardo para garantizar render estable
+      setTimeout(() => {
+        videoContainer.innerHTML = youtubeEmbed;
+      }, 400);
+    }
+
+    console.log("🎉 Lanzamiento activado:", new Date().toLocaleString());
+  }
+
+  // 🕐 Si ya ha pasado la hora, ejecutar ahora mismo
+  if (now >= cutoff) {
+    activarLanzamiento();
+  } else {
+    // Aún no ha llegado → mantenemos efectos activos
+    document.body.classList.add("grayscale");
+    const ms = cutoff - now;
+    console.log(`⏳ Lanzamiento programado en ${(ms / 1000 / 60).toFixed(1)} min`);
+    setTimeout(activarLanzamiento, ms);
+  }
+});
+</script>-->
+
+
+
+
+
+
+
+</body>
+</html>

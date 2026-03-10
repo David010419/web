@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html lang="es">
+  <head>
+    <title>Contacto - Dani Miralles</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Dani Miralles" />
+    <link rel="manifest" href="/images/site.webmanifest" />
+
+    <!-- Efectos (lluvia + BN) -->
+    <style>
+      html, body { min-height: 100%; }
+
+      /* Canvas de lluvia por encima del contenido (no bloquea clics) */
+      #rain-canvas{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9050;          /* por encima del contenido */
+        pointer-events: none;   /* no bloquea clics */
+      }
+
+      /* Escala de grises aplicada al contenido (como en index) */
+      body.grayscale #page-wrapper{
+        filter: grayscale(100%);
+        transition: filter .3s ease;
+      }
+    </style>
+  </head>
+
+  <!-- Arrancamos en BN; el script quitará BN/lluvia a la hora indicada -->
+  <body class="no-sidebar">
+    <!-- Lluvia -->
+    <canvas id="rain-canvas" aria-hidden="true"></canvas>
+    <canvas id="ornaments-canvas" aria-hidden="true"></canvas>
+
+    <div id="page-wrapper">
+
+      <!-- Header -->
+      <section id="header">
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="current"><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+        <!-- Banner -->
+        <section id="banner" data-aos="zoom-in" data-aos-duration="1000">
+          <header>
+            <!--<h2>Bienvenidos a Dani Miralles Oficial</h2>
+            <p>¡Puedes seguirme en mis redes sociales!</p>-->
+          </header>
+        </section>
+      </section>
+
+      <!-- Main -->
+      <section id="main">
+        <div class="container">
+          <article class="box post">
+            <header>
+              <h2>Contacto</h2>
+              <p>Escríbeme para colaboraciones, eventos o más información</p>
+            </header>
+
+            <form
+              action="https://formsubmit.co/danimirallesoficial@gmail.com"
+              method="POST"
+            >
+              <!-- Honeypot anti-spam (no visible) -->
+              <input type="text" name="_honey" style="display:none" />
+
+              <!-- Desactivar el captcha de FormSubmit si no lo necesitas -->
+              <input type="hidden" name="_captcha" value="false" />
+
+              <!-- Personaliza el asunto del correo -->
+              <input type="hidden" name="_subject" value="🤙 Nuevo mensaje desde tu web" />
+
+              <!-- (Opcional) Redirigir a una página de gracias tras el envío -->
+              <!-- <input type="hidden" name="_next" value="https://tusitio.com/gracias.html" /> -->
+
+              <div class="row gtr-50 gtr-uniform">
+                <div class="col-6 col-12-mobilep">
+                  <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    placeholder="Tu nombre"
+                    required
+                  />
+                </div>
+                <div class="col-6 col-12-mobilep">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Tu correo electrónico"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <textarea
+                    name="mensaje"
+                    id="mensaje"
+                    placeholder="Tu mensaje"
+                    rows="6"
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <ul class="actions">
+                    <li>
+                      <input type="submit" value="Enviar mensaje" class="primary" />
+                    </li>
+                    <li>
+                      <input type="reset" value="Limpiar" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section id="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <ul class="social">
+                <li><a class="icon brands fa-instagram" href="https://instagram.com/danimiralles_oficial"><span class="label">Instagram</span></a></li>
+                <li><a class="icon brands fa-spotify" href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg"><span class="label">Spotify</span></a></li>
+                <li><a class="icon brands fa-youtube" href="https://youtube.com/@danimirallesmusic"><span class="label">YouTube</span></a></li>
+              </ul>
+              <ul class="contact">
+                <li>
+                  <h3>Email</h3>
+                  <p><a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12">
+              <div id="copyright">
+                <ul class="links">
+                  <li>&copy; Dani Miralles Oficial. Todos los derechos reservados 2025</li>
+                  <li><a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243/" target="_blank">Creada Por: David Castillo Gallardo</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Scripts base -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+     <script>
+    (function(){
+      const canvas = document.getElementById('rain-canvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+      
+      const snowflakes = [];     // Copos cayendo
+      const snowPile = [];       // Copos acumulados en el suelo
+      let heightMap = [];        // Mapa invisible para saber dónde está el suelo (para apilar)
+      
+      let lastTime = performance.now();
+      let rafId = null;
+      let running = false;
+
+      // Configuración
+      const MAX_PILE_HEIGHT = 150; // Altura máxima de la nieve acumulada (px)
+      const MAX_PILE_PARTICLES = 800; // Límite de copos en el suelo para rendimiento
+
+      function desiredDropCount() {
+        const px = Math.min(window.innerWidth, 1600);
+        return Math.round(px * 0.15); // Menos densidad que la lluvia, la nieve es más dispersa
+      }
+
+      function resize() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Reiniciar mapa de altura al cambiar tamaño
+        heightMap = new Float32Array(Math.ceil(W)).fill(0);
+        
+        // Limpiar pila antigua para evitar errores visuales
+        snowPile.length = 0;
+
+        const target = desiredDropCount();
+        while (snowflakes.length < target) snowflakes.push(makeSnowflake(true));
+        while (snowflakes.length > target) snowflakes.pop();
+      }
+
+      function rand(min, max){ return Math.random() * (max - min) + min; }
+
+      function makeSnowflake(spawnTop=false){
+        return {
+          x: rand(0, W),
+          y: spawnTop ? rand(-H, 0) : rand(-50, -10),
+          vy: rand(40, 120),        // Velocidad de caída mucho más lenta
+          size: rand(9, 12.5),      // Tamaño del copo
+          oscillation: rand(0, Math.PI * 2), // Para el movimiento lateral
+          oscSpeed: rand(0.5, 2.0),          // Velocidad del vaivén
+          alpha: rand(0.4, 0.95)
+        };
+      }
+
+      function drawSnowflake(s){
+        ctx.beginPath();
+        // Gradiente para que parezca un copo suave y difuso
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size);
+        g.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+        g.addColorStop(1, `rgba(255, 255, 255, 0)`);
+        
+        ctx.fillStyle = g;
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      function loop(now){
+        if(!running) return;
+        const dt = Math.min(50, now - lastTime) / 1000;
+        lastTime = now;
+
+        ctx.clearRect(0, 0, W, H);
+        
+        // 1. Dibujar y calcular copos cayendo
+        for (let i = 0; i < snowflakes.length; i++){
+          const s = snowflakes[i];
+          
+          // Física de caída
+          s.y += s.vy * dt;
+          
+          // Física de viento (movimiento lateral sinusoidal)
+          s.oscillation += s.oscSpeed * dt;
+          s.x += Math.sin(s.oscillation) * 20 * dt; 
+
+          // Wrap around (si sale por los lados vuelve a entrar)
+          if (s.x < -10) s.x = W + 10;
+          if (s.x > W + 10) s.x = -10;
+
+          // Detección de colisión con el suelo o la pila de nieve
+          const floorIndex = Math.floor(Math.max(0, Math.min(W-1, s.x)));
+          const currentFloorHeight = heightMap[floorIndex];
+          
+          // Si toca el suelo (H) menos la altura acumulada
+          if (s.y >= H - currentFloorHeight - 2) {
+            
+            // Lógica de acumulación
+            if (currentFloorHeight < MAX_PILE_HEIGHT) {
+                // Añadir a la pila estática
+                snowPile.push({ x: s.x, y: H - currentFloorHeight, size: s.size, alpha: s.alpha });
+                
+                // Aumentar el mapa de altura en esa zona (y un poco a los lados para suavizar)
+                const heap = s.size * 0.8; 
+                heightMap[floorIndex] += heap;
+                // Suavizado simple a los vecinos
+                if(floorIndex > 0) heightMap[floorIndex-1] += heap * 0.5;
+                if(floorIndex < W-1) heightMap[floorIndex+1] += heap * 0.5;
+            }
+
+            // Reciclar el copo enviándolo arriba
+            snowflakes[i] = makeSnowflake();
+          } else {
+            // Si no toca suelo, dibujar
+            drawSnowflake(s);
+          }
+        }
+
+        // 2. Gestionar la acumulación (Derretir/Limitar)
+        // Si hay demasiados copos acumulados, quitamos los más viejos para rendimiento
+        if (snowPile.length > MAX_PILE_PARTICLES) {
+            // Eliminar los primeros (más viejos) y reducir el mapa de altura aleatoriamente
+            // para simular que la nieve se compacta o derrite
+            const removed = snowPile.shift(); 
+            // Reducir un poco la altura donde estaba ese copo (hack visual)
+            const idx = Math.floor(removed.x);
+            if (idx >= 0 && idx < W && heightMap[idx] > 0) {
+                heightMap[idx] = Math.max(0, heightMap[idx] - removed.size);
+            }
+        }
+
+        // 3. Dibujar la pila de nieve
+        for (const p of snowPile) {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha + 0.2)})`; // Más blanco al acumularse
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+            ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      // Control público
+      const resizeHandler = () => resize();
+
+      // Cambiamos el nombre a Window.Snow para mantener coherencia
+      window.Snow = {
+        start(){
+          if (running) return;
+          running = true;
+          canvas.style.display = 'block';
+          resize();
+          window.addEventListener('resize', resizeHandler, { passive:true });
+          lastTime = performance.now();
+          rafId = requestAnimationFrame(loop);
+        },
+        stop(clearCanvas){
+          running = false;
+          if (rafId) cancelAnimationFrame(rafId);
+          window.removeEventListener('resize', resizeHandler);
+          if (clearCanvas){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+          }
+        }
+      };
+
+      window.Snow.start();
+    })();
+</script>
+
+<style>
+  #ornaments-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9060; /* Un poco por encima de la nieve (que es 9050) */
+    pointer-events: none; /* Para que puedas hacer clic en los botones */
+  }
+</style>
+
+<script>
+(function(){
+  const canvas = document.getElementById('ornaments-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W = 0, H = 0;
+  // Ajustamos la calidad visual
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  
+  const ornaments = [];
+  let lastTime = performance.now();
+  let rafId = null;
+
+  // Colores típicos de bolas de navidad (Rojo, Oro, Verde, Azul, Plata)
+  const colors = [
+    { base: '#D42426', highlight: '#FF6B6B' }, // Rojo
+    { base: '#D4AF37', highlight: '#FFFACD' }, // Dorado
+    { base: '#146B3A', highlight: '#4ECCA3' }, // Verde
+    { base: '#0F52BA', highlight: '#6D9EEB' }, // Azul Real
+    { base: '#A0A0A0', highlight: '#E0E0E0' }  // Plata
+  ];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function rand(min, max){ return Math.random() * (max - min) + min; }
+
+  function createOrnament(spawnTop = false) {
+    const colorSet = colors[Math.floor(Math.random() * colors.length)];
+    const size = rand(15, 25); // Tamaño de la bola (radio)
+    return {
+      x: rand(20, W - 20),
+      y: spawnTop ? rand(-H, -50) : rand(-H, -50),
+      vy: rand(80, 200),        // Caen más rápido que la nieve (tienen peso)
+      rotation: rand(0, Math.PI * 2), // Ángulo inicial
+      rotSpeed: rand(-2, 2),    // Velocidad de rotación al caer
+      size: size,
+      color: colorSet.base,
+      highlight: colorSet.highlight,
+      stringLen: rand(10, 30)   // Longitud decorativa del hilo (opcional)
+    };
+  }
+
+  // Llenar el array inicial (pocas bolas, no queremos saturar)
+  function initBalls() {
+    // Calculamos cantidad según ancho de pantalla (aprox 1 bola cada 150px)
+    const count = Math.max(5, Math.floor(window.innerWidth / 150));
+    for(let i=0; i<count; i++){
+      ornaments.push(createOrnament(true));
+      // Esparcirlas verticalmente al inicio
+      ornaments[i].y = rand(-H, H/2); 
+    }
+  }
+
+  function drawOrnament(o) {
+    ctx.save();
+    ctx.translate(o.x, o.y);
+    ctx.rotate(o.rotation);
+
+    // 1. Dibujar el hilo (pequeño detalle arriba)
+    ctx.fillStyle = '#888';
+    ctx.fillRect(-2, -o.size - 6, 4, 6); // El ganchito
+
+    // 2. Dibujar la bola (Cuerpo base)
+    ctx.beginPath();
+    ctx.arc(0, 0, o.size, 0, Math.PI * 2);
+    // Gradiente para efecto 3D
+    const grad = ctx.createRadialGradient(-o.size*0.3, -o.size*0.3, o.size*0.1, 0, 0, o.size);
+    grad.addColorStop(0, o.highlight);
+    grad.addColorStop(0.3, o.color);
+    grad.addColorStop(1, 'rgba(0,0,0,0.3)'); // Sombra interna
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // 3. Brillo especular fuerte (reflejo de luz)
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.arc(-o.size*0.35, -o.size*0.35, o.size*0.15, 0, Math.PI*2);
+    ctx.fill();
+
+    // 4. Borde sutil dorado/oscuro para definir
+    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function loop(now) {
+    const dt = Math.min(50, now - lastTime) / 1000;
+    lastTime = now;
+
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < ornaments.length; i++) {
+      const o = ornaments[i];
+      
+      // Física
+      o.y += o.vy * dt;
+      o.rotation += o.rotSpeed * dt; // La bola gira mientras cae
+
+      // Si sale por abajo, vuelve a aparecer arriba
+      if (o.y > H + 50) {
+        ornaments[i] = createOrnament(); // Respawn nuevo
+      }
+
+      drawOrnament(o);
+    }
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  // Arranque
+  window.addEventListener('resize', resize);
+  resize();
+  initBalls();
+  rafId = requestAnimationFrame(loop);
+
+})();
+</script>
+
+    <!-- Control de fecha para quitar BN + lluvia a las 00:25 del 24/10/2025 -->
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        // Hora local del dispositivo
+        const cutoff = new Date('2025-10-29T00:00:00');
+        const now = new Date();
+
+        function desactivarEfectos(){
+          document.body.classList.remove('grayscale'); // quita BN
+          if (window.Rain && typeof window.Rain.stop === 'function'){
+            window.Rain.stop(true); // detiene animación y oculta canvas
+          }
+        }
+
+        if (now >= cutoff){
+          // Si ya ha pasado la hora, desactiva ya
+          desactivarEfectos();
+        } else {
+          // Aún no ha llegado: asegúrate de que BN está activo y programar cambio
+          document.body.classList.add('grayscale');
+          const ms = cutoff - now;
+          // Programar desactivación exacta
+          setTimeout(desactivarEfectos, ms);
+        }
+      });
+    </script> -->
+  </body>
+</html>

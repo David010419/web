@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+    <title>Contacto - Dani Miralles | Booking & Management</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Contacta con Dani Miralles para contratación, eventos o colaboraciones.">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="assets/css/modern-style.css" />
+
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+</head>
+
+<body>
+
+    <div class="bg-noise"></div>
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2" style="top:auto; bottom:0; right:0;"></div>
+
+    <canvas id="rain-canvas"></canvas>
+
+    <nav class="main-nav">
+        <div class="brand-logo">
+            <span>DANI MIRALLES</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#musica">Música</a></li>
+            <li><a href="discografia.html">Discografía</a></li>
+            <li><a href="karaoke.html">Karaoke</a></li>
+            <li><a href="index.html#eventos">Eventos</a></li>
+            <li><a href="contacto.html" class="active btn-contact">Contacto</a></li>
+        </ul>
+
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <main id="contact-page">
+        <div class="contact-container">
+
+            <div class="page-header" data-aos="fade-down">
+                <h1 class="glitch" data-text="CONTACTO">CONTACTO</h1>
+                <p class="handwritten">¿Hablamos? Hagamos ruido.</p>
+            </div>
+
+            <div class="contact-wrapper">
+
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Management & Booking</h3>
+                    <p>Estoy disponible para conciertos, festivales, acústicos privados y colaboraciones artísticas.</p>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span>Email Oficial</span>
+                            <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <span>Teléfono / WhatsApp</span>
+                            <a href="tel:+34722735986">+34 722 73 59 86</a>
+                        </div>
+                    </div>
+
+                    <div class="social-connect">
+                        <span>Sígueme:</span>
+                        <div class="icons">
+                            <a href="https://instagram.com/danimiralles_oficial" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=nW_Cs7eXQQOlIdzFPOHsKg"
+                                target="_blank"><i class="fab fa-spotify"></i></a>
+                            <a href="https://youtube.com/@danimirallesmusic" target="_blank"><i
+                                    class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-box" data-aos="fade-left" data-aos-delay="200">
+                    <form id="contact-form">
+
+                        <div class="input-group">
+                            <label for="from_name">Nombre</label>
+                            <input type="text" name="from_name" id="from_name" placeholder="Tu nombre o empresa"
+                                required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email_id">Email</label>
+                            <input type="email" name="email_id" id="email_id" placeholder="tucorreo@ejemplo.com"
+                                required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="message">Mensaje</label>
+                            <textarea name="message" id="message" rows="5" placeholder="Cuéntame tu propuesta..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="btn-submit">
+                            ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>
+                        </button>
+
+                        <p id="msg-feedback"
+                            style="margin-top:15px; font-weight:bold; display:none; text-align:center;"></p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-rock">
+        <div class="footer-content">
+            <div class="social-huge">
+                <a href="https://instagram.com/danimiralles_oficial" target="_blank">INSTAGRAM</a>
+                <a href="https://youtube.com/@danimirallesmusic" target="_blank">YOUTUBE</a>
+                <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=ISmD5ZjKRRKWtKoOUWQPKg"
+                    target="_blank">SPOTIFY</a>
+            </div>
+            <div class="footer-meta">
+                <p>© 2025 Dani Miralles. Rock & Autor.</p>
+                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+
+                <p class="dev-credits">
+                    Web creada y diseñada por:
+                    <a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243" target="_blank"
+                        rel="noopener">David Castillo Gallardo</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            // TU PUBLIC KEY (La misma que usaste en index.html)
+            emailjs.init("F4J0yiVKuR8LI3fzZ");
+        })();
+    </script>
+
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+
+        // Menú Móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        }
+
+        // Efecto Parallax luces
+        document.addEventListener('mousemove', (e) => {
+            const lights = document.querySelectorAll('.ambient-light');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            lights.forEach((light, index) => {
+                const speed = index + 1;
+                light.style.transform = `translate(${x * 20 * speed}px, ${y * 20 * speed}px)`;
+            });
+        });
+
+        // --- LÓGICA DE ENVÍO FORMULARIO CONTACTO ---
+        const contactForm = document.getElementById('contact-form');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Evita recarga
+
+                const btn = document.getElementById('btn-submit');
+                const feedback = document.getElementById('msg-feedback');
+
+                // 1. Estado "Cargando"
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+                btn.style.opacity = '0.7';
+
+                // 2. CONFIGURACIÓN EMAILJS
+                const serviceID = 'service_m5o515n';   // Tu Service ID
+                // RECOMENDACIÓN: Crea un Template nuevo en EmailJS para "Contacto General" 
+                // que incluya {{from_name}}, {{email_id}} y {{message}}.
+                // Si usas el mismo del newsletter, asegúrate de que tenga esos campos.
+                const templateID = 'template_lqxxqss'; // Tu Template ID (o crea uno nuevo para contacto)
+
+                // 3. Envío
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        // ÉXITO
+                        btn.innerHTML = '<i class="fas fa-check"></i> MENSAJE ENVIADO';
+                        btn.style.background = '#1DB954';
+
+                        feedback.style.display = 'block';
+                        feedback.style.color = '#1DB954';
+                        feedback.innerText = "¡Gracias! He recibido tu mensaje. Te contestaré lo antes posible.";
+
+                        // Resetear formulario
+                        contactForm.reset();
+
+                        // Volver al estado normal tras 5 segundos
+                        setTimeout(() => {
+                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                            btn.style.background = '';
+                            btn.style.opacity = '1';
+                            feedback.style.display = 'none';
+                        }, 5000);
+
+                    }, (err) => {
+                        // ERROR
+                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
+                        btn.style.background = 'red';
+
+                        feedback.style.display = 'block';
+                        feedback.style.color = 'red';
+                        feedback.innerText = "Hubo un error al enviar. Por favor, escríbeme directamente al email.";
+                        console.log(JSON.stringify(err));
+
+                        setTimeout(() => {
+                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                            btn.style.background = '';
+                            btn.style.opacity = '1';
+                        }, 5000);
+                    });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
