@@ -106,7 +106,6 @@
     <div class="bg-noise"></div>
     <div class="ambient-light light-1"></div>
     <div class="ambient-light light-2"></div>
-    <canvas id="rain-canvas"></canvas>
 
     <nav class="main-nav">
         <div class="brand-logo">
@@ -481,60 +480,6 @@
         }
     </script>
 
-    <!--<script>
-        // Aquí puedes pegar tu script de la lluvia (Window.Snow) si quieres conservarlo
-        (function(){
-          const canvas = document.getElementById('rain-canvas');
-          if(!canvas) return;
-          const ctx = canvas.getContext('2d');
-    
-          let W = 0, H = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
-          const snowflakes = []; 
-          let lastTime = performance.now();
-          let rafId = null;
-    
-          function resize() {
-            W = window.innerWidth;
-            H = window.innerHeight;
-            canvas.width = Math.floor(W * dpr);
-            canvas.height = Math.floor(H * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          }
-          
-          function makeSnowflake(){
-            return {
-              x: Math.random() * W,
-              y: Math.random() * -H,
-              vy: Math.random() * 80 + 40,
-              size: Math.random() * 2 + 1,
-              alpha: Math.random() * 0.5 + 0.3
-            };
-          }
-
-          for(let i=0; i<100; i++) snowflakes.push(makeSnowflake());
-
-          function loop(now){
-            const dt = Math.min(50, now - lastTime) / 1000;
-            lastTime = now;
-            ctx.clearRect(0, 0, W, H);
-            
-            ctx.fillStyle = "#fff";
-            ctx.beginPath();
-            for(let s of snowflakes){
-                s.y += s.vy * dt;
-                if(s.y > H) s.y = -10;
-                ctx.moveTo(s.x, s.y);
-                ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
-            }
-            ctx.fill();
-            requestAnimationFrame(loop);
-          }
-          
-          resize();
-          window.addEventListener('resize', resize);
-          requestAnimationFrame(loop);
-        })();
-    </script>-->
 
     <script>
         // --- LÓGICA DE LA INTRO PREMIERE ---
