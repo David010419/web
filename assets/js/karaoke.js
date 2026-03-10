@@ -113,8 +113,8 @@ const lyricsData = {
         { time: 32, text: "Olas que vienen y van" }
     ],
     'ovejas-negras': [
-        { time: 8, text: "¿Cómo olvidar aquella noche de febrero?" },
-        { time: 13, text: "Tu de esmeralda y cadiz tan de carnaval" },
+        { time: 8, text: "Cómo olvidar aquella noche de febrero" },
+        { time: 13, text: "Tú de esmeralda y Cádiz tan de carnaval" },
         { time: 18, text: "Quise probar a volar a ras del suelo" },
         { time: 21, text: "Cuando tu luz me cegó al pasar" },
         { time: 26, text: "Como dos gorriones por la carretera" },
@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentLyrics = lyricsData[songId];
         audio.src = audioSources[songId];
+        audio.load(); // Force load on src change for mobile reliability
 
         // Sync Cover
         if (songCover) {
@@ -241,12 +242,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     vinyl.addEventListener('click', () => {
         if (audio.paused) {
-            audio.play().catch(e => {
-                console.error("Playback failed:", e);
-                alert("Error al cargar música. ID: " + currentSong + "\nArchivo esperado: " + audio.src + "\n\nPor favor, verifica que el archivo existe y es minúscula.");
-            });
-            if (playIndicator) playIndicator.className = 'fas fa-pause';
-            vinyl.classList.add('playing');
+            // Wait for play promise to update UI
+            audio.play()
+                .then(() => {
+                    if (playIndicator) playIndicator.className = 'fas fa-pause';
+                    vinyl.classList.add('playing');
+                })
+                .catch(e => {
+                    // Ignore AbortError (often caused by navigation or rapid clicking)
+                    if (e.name === 'AbortError') return;
+
+                    console.error("Playback failed:", e);
+                    alert("Error al cargar música. ID: " + currentSong +
+                        "\nArchivo esperado: " + audio.src +
+                        "\n\nError: " + e.message);
+                });
         } else {
             audio.pause();
             if (playIndicator) playIndicator.className = 'fas fa-play';
