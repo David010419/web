@@ -62,47 +62,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <link rel="stylesheet" href="assets/css/modern-style.css" />
-    <link rel="stylesheet" href="assets/css/estrenos.css" />
 </head>
 
 <body>
-
-    <!-- INTRO PREMIERE: SE PROMETIERON EL MAR -->
-    <div id="premiere-gate">
-        <div class="gate-content">
-            <img src="assets/estrenos/logo color portada.png" alt="Dani Miralles" class="gate-logo">
-            <div class="gate-btn">
-                <i class="fas fa-volume-up"></i>
-                <span>VIVE LA EXPERIENCIA (CON SONIDO)</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="premiere-intro">
-        <video id="promo-video-bg" class="premiere-video-bg" loop playsinline muted preload="auto"
-            poster="assets/estrenos/miniatura.png">
-            <source src="assets/estrenos/video promo web.mp4" type="video/mp4">
-        </video>
-
-        <div class="premiere-content">
-            <img src="assets/estrenos/logo color portada.png" alt="Dani Miralles" class="premiere-logo">
-
-            <img src="assets/estrenos/título color portada.png" alt="Se Prometieron El Mar" class="premiere-title-img">
-
-            <div class="premiere-release-info">
-                <img src="assets/estrenos/dia.png" alt="13 de Marzo" class="premiere-date-img">
-                <img src="assets/estrenos/hora.png" alt="20:00" class="premiere-hour-img">
-            </div>
-
-            <div class="premiere-actions">
-                <button id="toggle-sound" class="sound-toggle">
-                    <i class="fas fa-volume-up"></i>
-                    <span id="sound-label">DESACTIVAR SONIDO</span>
-                </button>
-                <button id="enter-site" class="enter-btn">ENTRAR A LA WEB</button>
-            </div>
-        </div>
-    </div>
 
     <div class="bg-noise"></div>
     <div class="ambient-light light-1"></div>
@@ -114,12 +76,11 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="#hero" class="active">Inicio</a></li>
+            <li><a href="#eventos" class="active">Inicio</a></li>
             <li><a href="discografia.html">Discografía</a></li>
             <li><a href="karaoke.html">Karaoke</a></li>
-            <li><a href="#ultimos">Últimos</a></li>
-            <li><a href="#mas-escuchados">+ Escuchados</a></li>
-            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#hero">Nuevo Disco</a></li>
+            <li><a href="#proximos-eventos">Eventos</a></li>
             <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
         </ul>
 
@@ -127,6 +88,59 @@
     </nav>
 
     <main id="page-wrapper">
+
+        <!-- HERO: CONCIERTO SALA EUTERPE -->
+        <section id="eventos" class="event-concert-hero">
+            <canvas id="event-particles" class="event-particles-canvas"></canvas>
+            <div class="event-concert-noise"></div>
+
+            <div class="event-concert-container">
+                <div class="event-poster-col">
+                    <div class="event-poster-glow"></div>
+                    <div class="event-poster-float">
+                        <div class="event-poster-glitch-wrap">
+                            <img src="images/unnamed.jpg" alt="Concierto Presentación de Disco · Sala Euterpe" class="event-poster-img">
+                            <div class="poster-scanline"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-details-col">
+                    <span class="event-live-badge">
+                        <span class="live-dot"></span> PRÓXIMO CONCIERTO
+                    </span>
+
+                    <h1 class="event-artist-name">CONCIERTO<br><span class="event-subtitle">PRESENTACIÓN DE DISCO</span></h1>
+
+                    <div class="event-venue-block">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="venue-text">
+                            <span class="venue-label">SALA</span>
+                            <span class="venue-name">EUTERPE</span>
+                        </div>
+                    </div>
+
+                    <div class="event-meta-row">
+                        <div class="event-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>12 · JUNIO</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>21:00H</span>
+                        </div>
+                    </div>
+
+                    <div class="event-cta-group">
+                        <a href="https://salaeuterpe.com/event/dani-miralles/" class="cta-button event-buy-btn" target="_blank" rel="noopener">
+                            <i class="fas fa-ticket-alt"></i> COMPRAR ENTRADAS
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down"></div>
+        </section>
 
         <section id="hero" class="mystery-mode">
             <div class="matrix-bg"></div>
@@ -173,9 +187,8 @@
                                     class="fas fa-check-circle ready"></i></li>
                             <li><span class="track-num">04.</span> <span class="track-name">Que Suba el Hielo</span> <i
                                     class="fas fa-check-circle ready"></i></li>
-                            <li class="redacted"><span class="track-num">05.</span> <span
-                                    class="track-name blur">*******</span> <i
-                                    class="fas fa-spinner fa-spin loading"></i></li>
+                            <li><span class="track-num">05.</span> <span class="track-name">Se Prometieron el Mar</span> <i
+                                    class="fas fa-check-circle ready"></i></li>
                             <li class="redacted"><span class="track-num">06.</span> <span
                                     class="track-name blur">*******</span> <i
                                     class="fas fa-spinner fa-spin loading"></i></li>
@@ -201,8 +214,8 @@
 
         <div class="marquee-strip">
             <div class="marquee-content">
-                <span>NUEVO LANZAMIENTO 13/03/2026 • SE PROMETIERON EL MAR • DISPONIBLE EN SPOTIFY • YOUTUBE •</span>
-                <span>NUEVO LANZAMIENTO 13/03/2026 • SE PROMETIERON EL MAR • DISPONIBLE EN SPOTIFY • YOUTUBE •</span>
+                <span>CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • 21:00H • ENTRADAS EN SALAEUTERPE.COM •</span>
+                <span>CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • 21:00H • ENTRADAS EN SALAEUTERPE.COM •</span>
             </div>
         </div>
 
@@ -322,6 +335,43 @@
                 </article>
             </div>
         </section>
+
+        <!-- SECCIÓN: PRÓXIMOS EVENTOS -->
+        <section id="proximos-eventos" class="events-list-section">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Próximos <span class="text-stroke">Eventos</span></h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="events-list">
+                <article class="event-row" data-aos="fade-up">
+                    <div class="event-row-date">
+                        <span class="erow-day">12</span>
+                        <span class="erow-month">JUN</span>
+                        <span class="erow-year">2026</span>
+                    </div>
+                    <div class="event-row-divider"></div>
+                    <div class="event-row-poster">
+                        <img src="images/unnamed.jpg" alt="Concierto Presentación de Disco · Sala Euterpe">
+                    </div>
+                    <div class="event-row-info">
+                        <span class="erow-tag"><i class="fas fa-compact-disc"></i> PRESENTACIÓN DE DISCO</span>
+                        <h3 class="erow-title">Dani Miralles</h3>
+                        <div class="erow-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Sala Euterpe · Alicante</span>
+                            <span><i class="fas fa-clock"></i> 21:00H · Puertas 20:30H</span>
+                        </div>
+                    </div>
+                    <div class="event-row-cta">
+                        <a href="https://salaeuterpe.com/event/dani-miralles/" class="event-row-btn" target="_blank" rel="noopener">
+                            <i class="fas fa-ticket-alt"></i> ENTRADAS
+                        </a>
+                        <span class="erow-available"><span class="erow-dot"></span> DISPONIBLE</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer-rock">
@@ -399,11 +449,18 @@
 
         // Menú Móvil
         const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks   = document.querySelector('.nav-links');
         if (menuToggle) {
             menuToggle.addEventListener('click', function () {
-                document.querySelector('.nav-links').classList.toggle('active');
+                navLinks.classList.toggle('active');
             });
         }
+        // Cerrar menú al pulsar cualquier link (móvil)
+        document.querySelectorAll('.nav-links a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('active');
+            });
+        });
 
         // --- LÓGICA DEL MODAL ---
         const notifyModal = document.getElementById('notify-modal');
@@ -483,71 +540,55 @@
 
 
     <script>
-        // --- LÓGICA DE LA INTRO PREMIERE ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const gate = document.getElementById('premiere-gate');
-            const intro = document.getElementById('premiere-intro');
-            const enterBtn = document.getElementById('enter-site');
-            const promoVideo = document.getElementById('promo-video-bg');
-            const soundToggle = document.getElementById('toggle-sound');
-            const icon = soundToggle.querySelector('i');
-            const label = document.getElementById('sound-label');
+        // ── Partículas flotantes del hero del evento ──
+        (function () {
+            const canvas = document.getElementById('event-particles');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
 
-            // Gate interaction to unlock audio
-            gate.addEventListener('click', () => {
-                gate.classList.add('hidden');
-                intro.classList.add('active');
+            function resize() {
+                canvas.width  = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
 
-                // Play with sound (allowed because of user click)
-                promoVideo.muted = false;
+            const COLORS = ['255,42,42', '112,0,255', '255,255,255'];
+            const particles = Array.from({ length: 80 }, () => makeParticle(canvas));
 
-                // Fallback for video errors
-                promoVideo.addEventListener('error', (e) => {
-                    console.error("Video error detected, showing poster fallback:", e);
-                    promoVideo.style.opacity = '0'; // Hide broken video
-                    intro.style.background = 'url("assets/estrenos/miniatura.png") center/cover no-repeat';
-                }, { once: true });
+            function makeParticle(c, fromBottom) {
+                return {
+                    x:       Math.random() * c.width,
+                    y:       fromBottom ? c.height + 10 : Math.random() * c.height,
+                    r:       Math.random() * 1.8 + 0.3,
+                    vy:      -(Math.random() * 0.6 + 0.15),
+                    vx:      (Math.random() - 0.5) * 0.25,
+                    opacity: Math.random() * 0.6 + 0.1,
+                    color:   COLORS[Math.floor(Math.random() * COLORS.length)],
+                    twinkle: Math.random() * Math.PI * 2
+                };
+            }
 
-                promoVideo.load();
-                promoVideo.play().catch(e => {
-                    console.log("Error playing video:", e);
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, i) => {
+                    p.y       += p.vy;
+                    p.x       += p.vx;
+                    p.twinkle += 0.04;
+                    const alpha = p.opacity * (0.6 + 0.4 * Math.sin(p.twinkle));
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${p.color},${alpha})`;
+                    ctx.fill();
+
+                    // reset cuando sale por arriba
+                    if (p.y < -10) particles[i] = makeParticle(canvas, true);
                 });
-            });
-
-            // Initial state: video is muted and paused, intro is hidden, gate is visible
-            promoVideo.muted = true;
-            promoVideo.pause();
-            intro.classList.remove('active'); // Ensure intro is not active initially
-            gate.classList.remove('hidden'); // Ensure gate is visible initially
-            document.body.classList.add('premiere-active'); // Lock scroll on load
-
-            enterBtn.addEventListener('click', () => {
-                intro.classList.add('dismissed');
-                promoVideo.pause();
-                document.body.classList.remove('premiere-active'); // Unlock scroll
-                // sessionStorage.setItem('premiereSeen', 'true');
-
-                // Activar AOS después de entrar para que no se ejecuten animaciones en segundo plano
-                setTimeout(() => {
-                    intro.style.display = 'none';
-                    gate.style.display = 'none'; // Hide gate as well
-                    AOS.refresh();
-                }, 1000);
-            });
-
-            soundToggle.addEventListener('click', () => {
-                const label = document.getElementById('sound-label');
-                if (promoVideo.muted) {
-                    promoVideo.muted = false;
-                    label.innerText = "DESACTIVAR SONIDO";
-                    icon.classList.replace('fa-volume-mute', 'fa-volume-up');
-                } else {
-                    promoVideo.muted = true;
-                    label.innerText = "ACTIVAR SONIDO";
-                    icon.classList.replace('fa-volume-up', 'fa-volume-mute');
-                }
-            });
-        });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
     </script>
 
 </body>
