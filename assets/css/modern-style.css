@@ -1356,3 +1356,683 @@ a.card-image {
         /* Botón ancho completo en móvil */
     }
 }
+
+/* =========================================
+   10. HERO EVENTO: CONCIERTO SALA EUTERPE
+   ========================================= */
+
+/* Canvas partículas */
+.event-particles-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.event-concert-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 5% 80px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 25% 50%, rgba(112, 0, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 50%, rgba(255, 42, 42, 0.14) 0%, transparent 55%),
+                var(--dark);
+}
+
+/* Líneas CRT horizontales */
+.event-concert-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 3px
+    );
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Barra de luz que barre la sección */
+.event-concert-hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(112, 0, 255, 0.05) 30%,
+        rgba(255, 42, 42, 0.07) 70%,
+        transparent
+    );
+    animation: heroSweep 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    top: -35%;
+}
+
+@keyframes heroSweep {
+    0%   { top: -35%; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { top: 120%;  opacity: 0; }
+}
+
+/* Grain texture */
+.event-concert-noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Layout dos columnas */
+.event-concert-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Columna cartel ── */
+.event-poster-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* Glow ambiental que muta de color */
+.event-poster-glow {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 0;
+    animation: glowMorph 5s ease-in-out infinite alternate;
+}
+
+@keyframes glowMorph {
+    0%   { background: radial-gradient(circle, rgba(112,0,255,0.5) 0%, transparent 70%); transform: scale(0.9);  }
+    50%  { background: radial-gradient(circle, rgba(255,42,42,0.4) 0%, transparent 70%);  transform: scale(1.1);  }
+    100% { background: radial-gradient(circle, rgba(112,0,255,0.45) 0%, transparent 70%); transform: scale(1.0); }
+}
+
+/* Wrapper float — movimiento suave perpetuo */
+.event-poster-float {
+    animation: posterFloat 5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes posterFloat {
+    0%,100% { transform: translateY(0px)    rotate(0deg);    }
+    33%      { transform: translateY(-10px)  rotate(0.4deg);  }
+    66%      { transform: translateY(-5px)   rotate(-0.3deg); }
+}
+
+/* Wrapper glitch — capas de color desfasadas */
+.event-poster-glitch-wrap {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Línea de escaneo que sube por el cartel */
+.poster-scanline {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    animation: posterScan 3.5s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+    top: -3px;
+}
+
+@keyframes posterScan {
+    0%   { top: -3px;   opacity: 0; }
+    5%   {              opacity: 1; }
+    95%  {              opacity: 1; }
+    100% { top: 101%;   opacity: 0; }
+}
+
+/* Imagen del cartel — glitch reveal al cargar */
+.event-poster-img {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.75),
+                0 0 0 1px rgba(112,0,255,0.15);
+    position: relative;
+    z-index: 1;
+    animation: glitchReveal 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+    transition: box-shadow 0.4s ease;
+}
+
+@keyframes glitchReveal {
+    0%   { clip-path: inset(100% 0 0 0);  filter: brightness(4) hue-rotate(90deg) saturate(4); transform: translateX(-8px); opacity: 0; }
+    8%   { clip-path: inset(70%  0 0 0);  filter: brightness(5) hue-rotate(-60deg);             transform: translateX(6px);  opacity: 1; }
+    14%  { clip-path: inset(70%  0 0 0);  filter: brightness(2);                                 transform: translateX(-5px); }
+    22%  { clip-path: inset(42%  0 0 0);  filter: brightness(3) hue-rotate(30deg);               transform: translateX(4px);  }
+    28%  { clip-path: inset(42%  0 0 0);  filter: brightness(1.5);                               transform: translateX(0);    }
+    38%  { clip-path: inset(18%  0 0 0);  filter: brightness(1.8);                               transform: translateX(-2px); }
+    48%  { clip-path: inset(3%   0 0 0);  filter: brightness(1.3);                               transform: translateX(2px);  }
+    55%  { clip-path: inset(0    0 0 0);  filter: brightness(2) contrast(1.2);                   transform: translateX(-1px); }
+    63%  { clip-path: none;               filter: brightness(1.4) hue-rotate(10deg);              transform: translateX(1px);  }
+    72%  { clip-path: none;               filter: brightness(1.1);                                transform: translateX(0);    }
+    82%  { clip-path: none;               filter: brightness(1.2) contrast(1.05);                 }
+    100% { clip-path: none;               filter: brightness(1);                                  transform: translateX(0);    }
+}
+
+/* Efecto chromatic aberration al hover */
+.event-poster-glitch-wrap:hover .event-poster-img {
+    box-shadow: 0 40px 100px rgba(0,0,0,0.85),
+                2px  0 12px rgba(255,0,0,0.35),
+               -2px  0 12px rgba(100,0,255,0.35),
+                0 0 50px rgba(112,0,255,0.3);
+    filter: drop-shadow(2px 0 3px rgba(255,0,0,0.4)) drop-shadow(-2px 0 3px rgba(0,50,255,0.4));
+}
+
+/* ── Columna detalles ── */
+.event-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Cada elemento aparece con wipe de izquierda a derecha */
+.event-details-col > * {
+    animation: textWipe 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    overflow: hidden;
+}
+
+.event-details-col > *:nth-child(1) { animation-delay: 0.6s;  }
+.event-details-col > *:nth-child(2) { animation-delay: 0.85s; }
+.event-details-col > *:nth-child(3) { animation-delay: 1.1s;  }
+.event-details-col > *:nth-child(4) { animation-delay: 1.3s;  }
+.event-details-col > *:nth-child(5) { animation-delay: 1.5s;  }
+
+@keyframes textWipe {
+    from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-10px); }
+    to   { opacity: 1; clip-path: inset(0 0%   0 0); transform: translateX(0);     }
+}
+
+/* Badge "PRÓXIMO CONCIERTO" */
+.event-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 42, 42, 0.08);
+    border: 1px solid rgba(255, 42, 42, 0.35);
+    color: var(--primary);
+    padding: 0.55rem 1.3rem;
+    border-radius: 50px;
+    font-size: 0.73rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    width: fit-content;
+    box-shadow: 0 0 20px rgba(255,42,42,0.08), inset 0 0 10px rgba(255,42,42,0.04);
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255,42,42,0.5);
+    animation: livePulse 1.4s infinite ease-in-out;
+    flex-shrink: 0;
+}
+
+@keyframes livePulse {
+    0%,100% { opacity:1; transform:scale(1);   box-shadow:0 0 10px var(--primary),0 0 20px rgba(255,42,42,0.5); }
+    50%      { opacity:.3; transform:scale(.6); box-shadow:0 0 4px var(--primary); }
+}
+
+/* Título */
+.event-artist-name {
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #fff;
+}
+
+.event-subtitle {
+    display: block;
+    font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-top: 0.3rem;
+    text-shadow: 0 0 30px rgba(255,42,42,0.4);
+}
+
+/* Bloque sala — borde se traza solo al aparecer */
+.event-venue-block {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    width: fit-content;
+    position: relative;
+    transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.event-venue-block:hover {
+    border-color: rgba(255,42,42,0.4);
+    box-shadow: 0 0 25px rgba(255,42,42,0.1), inset 0 0 15px rgba(255,42,42,0.04);
+}
+
+.event-venue-block > i {
+    font-size: 1.8rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(255,42,42,0.5));
+}
+
+.venue-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.venue-label {
+    font-size: 0.7rem;
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.venue-name {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Fecha / hora */
+.event-meta-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.event-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.event-meta-item i {
+    color: var(--accent);
+    font-size: 1rem;
+    filter: drop-shadow(0 0 4px rgba(112,0,255,0.6));
+}
+
+/* CTA */
+.event-cta-group { margin-top: 0.5rem; }
+
+.event-buy-btn {
+    position: relative;
+    overflow: hidden;
+    background: var(--primary);
+    border: none;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 1.2rem 3rem;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(255,42,42,0.35), 0 0 60px rgba(255,42,42,0.1);
+    animation: btnGlowPulse 2.5s ease-in-out infinite alternate;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+/* Shimmer sweep continuo */
+.event-buy-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -120%;
+    width: 80%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    animation: btnShimmer 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes btnShimmer {
+    0%,30% { left: -120%; }
+    60%,100%{ left: 160%;  }
+}
+
+@keyframes btnGlowPulse {
+    from { box-shadow: 0 0 20px rgba(255,42,42,0.3), 0 0 40px rgba(255,42,42,0.08); }
+    to   { box-shadow: 0 0 40px rgba(255,42,42,0.6), 0 0 80px rgba(255,42,42,0.2); }
+}
+
+.event-buy-btn:hover {
+    background: #e50000;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(255,0,0,0.5), 0 0 80px rgba(255,42,42,0.3);
+    color: #fff;
+}
+
+/* Gap con sección siguiente */
+.event-concert-hero + .mystery-mode { margin-top: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .event-concert-hero { padding: 110px 1.5rem 70px; }
+
+    .event-concert-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .event-poster-col  { order: 1; }
+    .event-details-col { order: 2; align-items: center; }
+
+    .event-poster-img  { max-width: 280px; }
+
+    .event-venue-block {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .event-meta-row   { justify-content: center; }
+    .event-live-badge { margin: 0 auto; }
+
+    .event-buy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   11. SECCIÓN: PRÓXIMOS EVENTOS
+   ========================================= */
+.events-list-section {
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+    padding: 0 2rem;
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* Fila de evento */
+.event-row {
+    display: grid;
+    grid-template-columns: 90px 1px 100px 1fr auto;
+    gap: 0;
+    align-items: center;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+    cursor: default;
+}
+
+.event-row:hover {
+    border-color: rgba(255,42,42,0.4);
+    box-shadow: 0 0 0 1px rgba(255,42,42,0.15),
+                0 20px 50px rgba(0,0,0,0.5),
+                0 0 40px rgba(255,42,42,0.07);
+    transform: translateY(-3px);
+}
+
+/* Bloque fecha */
+.event-row-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    background: rgba(255,42,42,0.08);
+    border-right: 1px solid rgba(255,42,42,0.12);
+    gap: 0;
+    min-height: 110px;
+}
+
+.erow-day {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,42,42,0.4);
+}
+
+.erow-month {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.erow-year {
+    font-size: 0.65rem;
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Línea divisoria vertical */
+.event-row-divider {
+    width: 1px;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+}
+
+/* Miniatura */
+.event-row-poster {
+    width: 100px;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.event-row-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.5s ease;
+}
+
+.event-row:hover .event-row-poster img {
+    transform: scale(1.08);
+}
+
+/* Info principal */
+.event-row-info {
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.erow-tag {
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.erow-tag i { font-size: 0.7rem; }
+
+.erow-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    margin: 0;
+}
+
+.erow-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.2rem;
+}
+
+.erow-meta span {
+    font-size: 0.82rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.erow-meta i { color: var(--primary); font-size: 0.75rem; }
+
+/* CTA derecho */
+.event-row-cta {
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    flex-shrink: 0;
+}
+
+.event-row-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 20px rgba(255,42,42,0.25);
+}
+
+.event-row-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 70%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: btnShimmer 3s ease-in-out 1.5s infinite;
+}
+
+.event-row-btn:hover {
+    background: #e50000;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,0,0,0.4);
+}
+
+.erow-available {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #1DB954;
+    text-transform: uppercase;
+}
+
+.erow-dot {
+    width: 6px; height: 6px;
+    background: #1DB954;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #1DB954;
+    animation: livePulse 1.6s infinite ease-in-out;
+    flex-shrink: 0;
+}
+
+/* Responsive eventos */
+@media (max-width: 900px) {
+    .event-row {
+        grid-template-columns: 70px 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .event-row-date {
+        grid-row: 1 / 3;
+        min-height: auto;
+        padding: 1rem 0.8rem;
+    }
+
+    .erow-day { font-size: 2rem; }
+
+    .event-row-divider { display: none; }
+
+    .event-row-poster {
+        display: none;
+    }
+
+    .event-row-info {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 1rem 1.2rem 0.5rem;
+    }
+
+    .event-row-cta {
+        grid-column: 2;
+        grid-row: 2;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 1.2rem 1rem;
+        gap: 0.6rem 1rem;
+    }
+
+    .erow-available {
+        font-size: 0.6rem;
+    }
+
+    .event-row-btn { padding: 0.65rem 1.2rem; }
+}
