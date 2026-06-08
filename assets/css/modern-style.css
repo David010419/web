@@ -168,6 +168,28 @@ body {
     color: #000 !important;
 }
 
+/* Merchandising nav item */
+.nav-merch-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.soon-badge {
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 2px 7px;
+    border-radius: 50px;
+    background: rgba(112, 0, 255, 0.1);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
 /* Menú Móvil Toggle */
 .menu-toggle {
     display: none;
@@ -227,7 +249,7 @@ body {
     z-index: 5;
 }
 
-/* --- PORTADA MISTERIOSA --- */
+/* --- PORTADA DISCO (FLIP 3D) --- */
 .mystery-cover-box {
     position: relative;
     width: 100%;
@@ -236,80 +258,142 @@ body {
     margin: 0 auto;
 }
 
-.glass-panel {
+/* Anillo giratorio exterior */
+.mystery-cover-box::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 24px;
+    background: conic-gradient(
+        from 0deg,
+        var(--primary),
+        var(--accent),
+        #ff6b6b,
+        var(--primary)
+    );
+    z-index: -1;
+    animation: ringRotate 18s linear infinite;
+    filter: blur(8px);
+    opacity: 0.03;
+}
+
+/* Capa negra que recorta el anillo y deja solo el borde */
+.mystery-cover-box::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: var(--dark);
+    z-index: -1;
+}
+
+@keyframes ringRotate {
+    to { transform: rotate(360deg); }
+}
+
+/* Contenedor perspectiva */
+.album-flip-card {
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    perspective: 1200px;
+    border-radius: 16px;
+}
+
+/* Inner que rota */
+.album-flip-inner {
     position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    animation: albumFlip 6s ease-in-out infinite;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.8),
+        0 0 50px rgba(112, 0, 255, 0.35),
+        0 0 100px rgba(255, 42, 42, 0.15);
+}
+
+/* Cara delantera y trasera */
+.album-flip-front,
+.album-flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.restricted-badge {
+.album-flip-front img,
+.album-flip-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+}
+
+/* Reflejo de luz que barre la portada */
+.album-flip-front::after,
+.album-flip-back::after {
+    content: '';
     position: absolute;
-    top: 20px;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 5px 15px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    font-weight: 900;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.6);
-    font-family: var(--font-main);
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,0.18) 50%,
+        rgba(255,255,255,0) 70%
+    );
+    animation: shineSwipe 6s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 16px;
 }
 
-.mystery-icon i {
-    font-size: clamp(5rem, 10vw, 8rem);
-    color: rgba(255, 255, 255, 0.8);
-    animation: pulseQuestion 3s infinite ease-in-out;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+@keyframes shineSwipe {
+    0%, 30%  { opacity: 0; transform: translateX(-100%); }
+    38%      { opacity: 1; transform: translateX(100%); }
+    50%, 80% { opacity: 0; transform: translateX(-100%); }
+    88%      { opacity: 1; transform: translateX(100%); }
+    100%     { opacity: 0; transform: translateX(100%); }
 }
 
-.lock-status {
-    position: absolute;
-    bottom: 30px;
-    color: #666;
-    font-family: var(--font-main);
-    letter-spacing: 3px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+/* La cara trasera empieza ya girada 180º */
+.album-flip-back {
+    transform: rotateY(180deg);
 }
 
-@keyframes pulseQuestion {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-
-    50% {
-        transform: scale(1.1);
-        opacity: 1;
-        text-shadow: 0 0 30px #fff;
-    }
+/* Animación: pausa → gira → pausa → vuelve */
+@keyframes albumFlip {
+    0%   { transform: rotateY(0deg)   scale(1); }
+    30%  { transform: rotateY(0deg)   scale(1); }
+    40%  { transform: rotateY(0deg)   scale(1.04); }
+    50%  { transform: rotateY(180deg) scale(1.04); }
+    60%  { transform: rotateY(180deg) scale(1); }
+    80%  { transform: rotateY(180deg) scale(1); }
+    90%  { transform: rotateY(180deg) scale(1.04); }
+    100% { transform: rotateY(360deg) scale(1); }
 }
 
+/* Halo de luz pulsante detrás */
 .glow-effect {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    background: var(--primary);
-    filter: blur(80px);
-    opacity: 0.2;
-    z-index: -1;
+    width: 90%;
+    height: 90%;
+    background: radial-gradient(circle, var(--accent) 0%, var(--primary) 50%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0;
+    z-index: -2;
+    animation: haloPulse 6s ease-in-out infinite;
+}
+
+@keyframes haloPulse {
+    0%, 25%  { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+    40%, 60% { opacity: 0.45; transform: translate(-50%, -50%) scale(1.2); }
+    75%,100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
 }
 
 /* --- DATOS (TRACKLIST & PROGRESO) --- */
@@ -377,7 +461,7 @@ body {
 
 .progress-fill {
     height: 100%;
-    width: 54%;
+    width: 100%;
     /* Progreso del álbum */
     background: linear-gradient(90deg, #ff2a2a, #ff6b6b);
     position: relative;
@@ -802,6 +886,93 @@ a.card-image {
 
 .music-card.popular:hover {
     border-color: var(--accent);
+}
+
+/* =========================================
+   MERCH TEASER BANNER
+   ========================================= */
+.merch-teaser {
+    margin: 3rem 5%;
+}
+
+.merch-teaser-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(112, 0, 255, 0.2);
+    border-radius: 14px;
+    padding: 1.4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.merch-teaser-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(112,0,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.merch-teaser-inner:hover {
+    border-color: rgba(112, 0, 255, 0.4);
+    box-shadow: 0 0 30px rgba(112, 0, 255, 0.08);
+}
+
+.merch-teaser-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.merch-teaser-text p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+.merch-teaser-text strong {
+    color: #fff;
+}
+
+.merch-teaser-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(112, 0, 255, 0.12);
+    border: 1px solid rgba(112, 0, 255, 0.4);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.3s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.merch-teaser-btn:hover {
+    background: rgba(112, 0, 255, 0.25);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .merch-teaser-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    .merch-teaser-text {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
 }
 
 /* =========================================
@@ -1700,6 +1871,50 @@ a.card-image {
     filter: drop-shadow(0 0 4px rgba(112,0,255,0.6));
 }
 
+/* Plataformas del álbum */
+.album-platforms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.platform-badges {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.platform-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.platform-badge.spotify {
+    background: rgba(30, 215, 96, 0.1);
+    border: 1px solid rgba(30, 215, 96, 0.4);
+    color: #1ed760;
+}
+
+.platform-badge.youtube {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff4444;
+}
+
+.platform-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
 /* CTA */
 .event-cta-group { margin-top: 0.5rem; }
 
@@ -1748,6 +1963,29 @@ a.card-image {
 
 /* Gap con sección siguiente */
 .event-concert-hero + .mystery-mode { margin-top: 0; }
+
+/* ── TRANSICIONES SUAVES ENTRE SECCIONES ── */
+.section-fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--dark));
+    pointer-events: none;
+    z-index: 5;
+}
+
+.section-fade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, transparent, var(--dark));
+    pointer-events: none;
+    z-index: 5;
+}
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
