@@ -1880,8 +1880,8 @@ a.card-image {
 
 .platform-badges {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 0.7rem;
+    flex-wrap: nowrap;
 }
 
 .platform-badge {
