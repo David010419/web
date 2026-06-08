@@ -81,6 +81,9 @@
             <li><a href="karaoke.html">Karaoke</a></li>
             <li><a href="#hero">Nuevo Disco</a></li>
             <li><a href="#proximos-eventos">Eventos</a></li>
+            <li class="nav-merch">
+                <a href="merchandising.html" class="nav-merch-link">Merchandising <span class="soon-badge">Próximamente</span></a>
+            </li>
             <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
         </ul>
 
@@ -143,74 +146,94 @@
         </section>
 
         <section id="hero" class="mystery-mode">
-            <div class="matrix-bg"></div>
 
             <div class="mystery-container">
-                <div class="mystery-cover-box" data-aos="flip-left" data-aos-duration="1500">
-                    <div class="glass-panel">
-                        <span class="restricted-badge">RESTRICTED ACCESS</span>
-                        <div class="mystery-icon">
-                            <i class="fas fa-question"></i>
-                        </div>
-                        <div class="lock-status">
-                            <i class="fas fa-lock"></i> LOCKED
+                <div class="mystery-cover-box" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="album-flip-card">
+                        <div class="album-flip-inner">
+                            <div class="album-flip-front">
+                                <img src="images/Disco1.jpeg" alt="Portada Disco - Cara A">
+                            </div>
+                            <div class="album-flip-back">
+                                <img src="images/Disco2.jpeg" alt="Portada Disco - Cara B">
+                            </div>
                         </div>
                     </div>
                     <div class="glow-effect"></div>
                 </div>
 
                 <div class="mystery-data" data-aos="fade-left">
-                    <div class="data-header">
-                        <h4 class="blinking-text">> SYSTEM_LOADING...</h4>
-                        <h1 class="glitch" data-text="DANI MIRALLES | PRÓXIMO ÁLBUM">PRÓXIMO ÁLBUM</h1>
+
+                    <span class="event-live-badge">
+                        <span class="live-dot"></span> NUEVO ÁLBUM
+                    </span>
+
+                    <h1 class="event-artist-name" style="margin-top: 1.2rem;">
+                        DANI MIRALLES<br><span class="event-subtitle">ME DA IGUAL</span>
+                    </h1>
+
+                    <div class="album-platforms" style="margin-top: 1.5rem;">
+                        <span class="venue-label">DISPONIBLE EN</span>
+                        <div class="platform-badges">
+                            <a href="https://open.spotify.com/intl-es/album/3W00RqfEizMJ56Ss2qBLDm?si=AanVEIROR82IaLm561Nfaw" target="_blank" rel="noopener" class="platform-badge spotify">
+                                <i class="fab fa-spotify"></i> SPOTIFY
+                            </a>
+                            <a href="https://www.youtube.com/@danimirallesmusic" target="_blank" rel="noopener" class="platform-badge youtube">
+                                <i class="fab fa-youtube"></i> YOUTUBE
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="progress-module">
-                        <div class="progress-labels">
-                            <span>ESTADO DE PRODUCCIÓN</span>
-                            <span class="percentage">54%</span>
+                    <div class="event-meta-row" style="margin-top: 1.2rem;">
+                        <div class="event-meta-item">
+                            <i class="fas fa-music"></i>
+                            <span>9 CANCIONES</span>
                         </div>
-                        <div class="progress-track">
-                            <div class="progress-fill"></div>
+                        <div class="event-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>JUNIO · 2026</span>
                         </div>
-                        <p class="status-msg">Masterizando pistas finales. Preparando lanzamiento.</p>
                     </div>
 
-                    <div class="tracklist-terminal">
-                        <h3>// TRACKLIST_PREVIEW</h3>
+                    <div class="tracklist-terminal" style="margin-top: 1.8rem;">
+                        <h3>TRACKLIST</h3>
                         <ul>
-                            <li><span class="track-num">01.</span> <span class="track-name">Me da igual</span> <i
-                                    class="fas fa-check-circle ready"></i></li>
-                            <li><span class="track-num">02.</span> <span class="track-name">Ovejas Negras</span> <i
-                                    class="fas fa-check-circle ready"></i></li>
-                            <li><span class="track-num">03.</span> <span class="track-name">Llum</span> <i
-                                    class="fas fa-check-circle ready"></i></li>
-                            <li><span class="track-num">04.</span> <span class="track-name">Que Suba el Hielo</span> <i
-                                    class="fas fa-check-circle ready"></i></li>
-                            <li><span class="track-num">05.</span> <span class="track-name">Se Prometieron el Mar</span> <i
-                                    class="fas fa-check-circle ready"></i></li>
-                            <li class="redacted"><span class="track-num">06.</span> <span
-                                    class="track-name blur">*******</span> <i
-                                    class="fas fa-spinner fa-spin loading"></i></li>
-                            <li class="redacted"><span class="track-num">07.</span> <span
-                                    class="track-name blur">*******</span> <i
-                                    class="fas fa-spinner fa-spin loading"></i></li>
-                            <li class="redacted"><span class="track-num">08.</span> <span
-                                    class="track-name blur">*******</span> <i
-                                    class="fas fa-spinner fa-spin loading"></i></li>
+                            <li><span class="track-num">01.</span> <span class="track-name">Me da igual</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">02.</span> <span class="track-name">Ovejas Negras</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">03.</span> <span class="track-name">Garfio</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">04.</span> <span class="track-name">Afilando mi voz</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">05.</span> <span class="track-name">Se Prometieron el Mar</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">06.</span> <span class="track-name">Llum</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">07.</span> <span class="track-name">Qué más da</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">08.</span> <span class="track-name">Nada</span> <i class="fas fa-check-circle ready"></i></li>
+                            <li><span class="track-num">09.</span> <span class="track-name">Que Suba el Hielo</span> <i class="fas fa-check-circle ready"></i></li>
                         </ul>
                     </div>
 
-                    <div class="hero-actions" style="justify-content: flex-start; margin-top: 2rem;">
-                        <a href="javascript:void(0)" id="open-notify-btn" class="cta-button notify-btn">
-                            <i class="far fa-bell"></i> AVÍSAME CUANDO SALGA
+                    <div class="event-cta-group">
+                        <a href="https://open.spotify.com/intl-es/album/3W00RqfEizMJ56Ss2qBLDm?si=AanVEIROR82IaLm561Nfaw" target="_blank" rel="noopener" class="cta-button event-buy-btn">
+                            <i class="fab fa-spotify"></i> AÑADE EL ÁLBUM A SPOTIFY
                         </a>
                     </div>
+
                 </div>
             </div>
 
             <div class="scroll-down"></div>
         </section>
+
+        <!-- AVISO MERCHANDISING -->
+        <div class="merch-teaser" data-aos="fade-up">
+            <div class="merch-teaser-inner">
+                <div class="merch-teaser-text">
+                    <span class="soon-badge">Próximamente</span>
+                    <p><strong>Merch oficial en camino.</strong> Camisetas, discos y más. Sé el primero en enterarte.</p>
+                </div>
+                <a href="merchandising.html" class="merch-teaser-btn">
+                    <i class="fas fa-tshirt"></i> Ver tienda
+                </a>
+            </div>
+        </div>
 
         <div class="marquee-strip">
             <div class="marquee-content">

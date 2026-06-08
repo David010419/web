@@ -1,0 +1,454 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+    <title>Merchandising - Dani Miralles</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Merchandising oficial de Dani Miralles. Próximamente disponible.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/modern-style.css" />
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+
+    <style>
+        /* ── PÁGINA MERCHANDISING ── */
+        #merch-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fondo sutil con gradiente */
+        #merch-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 40%, rgba(112,0,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── CABECERA ── */
+        .merch-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .merch-header .soon-badge-big {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(112, 0, 255, 0.08);
+            border: 1px solid rgba(112, 0, 255, 0.35);
+            color: var(--accent);
+            padding: 0.55rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .merch-header .soon-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(112,0,255,0.5);
+            animation: livePulse 1.4s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .merch-header h1 {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 0.95;
+            color: #fff;
+        }
+
+        .merch-header h1 span {
+            display: block;
+            color: var(--primary);
+            font-size: clamp(1.5rem, 3.5vw, 3rem);
+            letter-spacing: 4px;
+            margin-top: 0.4rem;
+            text-shadow: 0 0 30px rgba(255,42,42,0.4);
+        }
+
+        .merch-header p {
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.5);
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        /* ── GRID DE PRODUCTOS PLACEHOLDER ── */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 700px;
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .merch-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .merch-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,42,42,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(255,42,42,0.08);
+        }
+
+        .merch-card-img {
+            aspect-ratio: 1/1;
+            background: rgba(255,255,255,0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-card-img i {
+            font-size: 4rem;
+            color: rgba(255,255,255,0.08);
+        }
+
+        /* Efecto blur de "desvelado próximo" */
+        .merch-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(12px);
+            background: rgba(5,5,5,0.4);
+        }
+
+        .merch-locked {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+        }
+
+        .merch-locked i {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .merch-card-info {
+            padding: 1.2rem 1.4rem;
+        }
+
+        .merch-card-info h3 {
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.4rem;
+        }
+
+        .merch-card-info .merch-price {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 2px;
+        }
+
+        .merch-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 3;
+            background: rgba(112,0,255,0.15);
+            border: 1px solid rgba(112,0,255,0.4);
+            color: var(--accent);
+            font-size: 0.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: 3px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        /* ── FORMULARIO AVISO ── */
+        .merch-notify {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .merch-notify h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .merch-notify p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .merch-notify-form {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .merch-notify-form input {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 0.9rem 1.2rem;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .merch-notify-form input:focus {
+            border-color: rgba(255,42,42,0.5);
+        }
+
+        .merch-notify-form input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .merch-notify-form button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem 1.5rem;
+            font-family: var(--font-main);
+            font-weight: 900;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            white-space: nowrap;
+        }
+
+        .merch-notify-form button:hover {
+            background: #e50000;
+            transform: translateY(-2px);
+        }
+
+        #merch-feedback {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: none;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .merch-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
+            }
+
+            .merch-notify-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .merch-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-noise"></div>
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+
+    <nav class="main-nav">
+        <div class="brand-logo">
+            <a href="index.html" style="color:inherit; text-decoration:none;"><span>DANI MIRALLES</span></a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="discografia.html">Discografía</a></li>
+            <li><a href="karaoke.html">Karaoke</a></li>
+            <li><a href="index.html#hero">Nuevo Disco</a></li>
+            <li><a href="index.html#proximos-eventos">Eventos</a></li>
+            <li class="nav-merch">
+                <a href="merchandising.html" class="nav-merch-link active">Merchandising <span class="soon-badge">Próximamente</span></a>
+            </li>
+            <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
+        </ul>
+
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <main id="merch-page">
+
+        <div class="merch-header" data-aos="fade-down">
+            <div class="soon-badge-big">
+                <span class="soon-dot"></span> PRÓXIMAMENTE
+            </div>
+            <h1>MERCH<span>OFICIAL</span></h1>
+            <p>Algo se está cocinando...</p>
+        </div>
+
+        <div class="merch-grid" data-aos="fade-up">
+
+            <div class="merch-card">
+                <div class="merch-card-img">
+                    <i class="fas fa-tshirt"></i>
+                    <div class="merch-locked"><i class="fas fa-lock"></i></div>
+                </div>
+                <span class="merch-card-badge">Próximamente</span>
+                <div class="merch-card-info">
+                    <h3>Camiseta</h3>
+                    <p class="merch-price">— €</p>
+                </div>
+            </div>
+
+<div class="merch-card">
+                <div class="merch-card-img">
+                    <i class="fas fa-compact-disc"></i>
+                    <div class="merch-locked"><i class="fas fa-lock"></i></div>
+                </div>
+                <span class="merch-card-badge">Próximamente</span>
+                <div class="merch-card-info">
+                    <h3>Vinilo</h3>
+                    <p class="merch-price">— €</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="merch-notify" data-aos="fade-up" data-aos-delay="100">
+            <h3>Sé el primero en saberlo</h3>
+            <p>Déjanos tu correo y te avisamos cuando la tienda esté lista.</p>
+            <form class="merch-notify-form" id="merch-form">
+                <input type="email" name="user_email" placeholder="tu@email.com" required>
+                <button type="submit" id="merch-btn">
+                    <i class="fas fa-bell"></i> AVÍSAME
+                </button>
+            </form>
+            <p id="merch-feedback"></p>
+        </div>
+
+    </main>
+
+    <footer class="footer-rock">
+        <div class="footer-content">
+            <div class="social-huge">
+                <a href="https://instagram.com/danimiralles_oficial" target="_blank">INSTAGRAM</a>
+                <a href="https://youtube.com/@danimirallesmusic" target="_blank">YOUTUBE</a>
+                <a href="https://open.spotify.com/intl-es/artist/6cXCMxpukl1tzsq5monfJR?si=ISmD5ZjKRRKWtKoOUWQPKg" target="_blank">SPOTIFY</a>
+            </div>
+            <div class="footer-meta">
+                <p>© 2025 Dani Miralles. Autor.</p>
+                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                <p>Web creada y diseñada por:
+                    <a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243" target="_blank" rel="noopener">David Castillo Gallardo</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function () { emailjs.init("ZiKcCNO_OxbPuUtHf"); })();
+
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+
+        // Menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks   = document.querySelector('.nav-links');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        }
+        document.querySelectorAll('.nav-links a').forEach(l =>
+            l.addEventListener('click', () => navLinks.classList.remove('active'))
+        );
+
+        // Parallax luces
+        document.addEventListener('mousemove', (e) => {
+            const lights = document.querySelectorAll('.ambient-light');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            lights.forEach((light, i) => {
+                const s = i + 1;
+                light.style.transform = `translate(${x * 30 * s}px, ${y * 30 * s}px)`;
+            });
+        });
+
+        // Formulario aviso merch
+        const merchForm = document.getElementById('merch-form');
+        if (merchForm) {
+            merchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const btn = document.getElementById('merch-btn');
+                const feedback = document.getElementById('merch-feedback');
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+                btn.style.opacity = '0.7';
+
+                emailjs.sendForm('service_cfslftd', 'template_gcdc2qr', this)
+                    .then(() => {
+                        btn.innerHTML = '<i class="fas fa-check"></i> ENVIADO';
+                        btn.style.background = '#1DB954';
+                        feedback.style.display = 'block';
+                        feedback.style.color = '#1DB954';
+                        feedback.innerText = '¡Perfecto! Te avisamos cuando esté lista.';
+                        setTimeout(() => {
+                            btn.innerHTML = '<i class="fas fa-bell"></i> AVÍSAME';
+                            btn.style.background = '';
+                            btn.style.opacity = '1';
+                            merchForm.reset();
+                        }, 3000);
+                    }, () => {
+                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
+                        btn.style.background = 'red';
+                        feedback.style.display = 'block';
+                        feedback.style.color = 'red';
+                        feedback.innerText = 'Hubo un error. Inténtalo de nuevo.';
+                        setTimeout(() => {
+                            btn.innerHTML = '<i class="fas fa-bell"></i> AVÍSAME';
+                            btn.style.background = '';
+                            btn.style.opacity = '1';
+                        }, 3000);
+                    });
+            });
+        }
+    </script>
+
+</body>
+</html>
