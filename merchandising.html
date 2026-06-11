@@ -266,6 +266,215 @@
             display: none;
         }
 
+        /* ── IMAGEN REAL EN TARJETA ── */
+        .merch-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
+
+        .merch-card-img::after {
+            backdrop-filter: none;
+            background: none;
+        }
+
+        .merch-card:hover .merch-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            pointer-events: none;
+        }
+
+        /* ── BOTÓN PEDIR ── */
+        .btn-pedir {
+            display: block;
+            width: calc(100% - 2.8rem);
+            margin: 0 1.4rem 1.2rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-family: var(--font-main);
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-pedir:hover {
+            background: #e50000;
+            transform: translateY(-2px);
+        }
+
+        /* ── MODAL PEDIDO ── */
+        .order-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .order-modal-overlay.active {
+            display: flex;
+        }
+
+        .order-modal {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            max-width: 420px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .order-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .order-modal-close:hover { color: #fff; }
+
+        .order-modal h3 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+
+        .order-modal .modal-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 1.5rem;
+        }
+
+        .order-modal label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.4rem;
+        }
+
+        .order-modal select,
+        .order-modal input,
+        .order-modal textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+
+        .order-modal select option { background: #111; }
+
+        .order-modal select:focus,
+        .order-modal input:focus,
+        .order-modal textarea:focus {
+            border-color: rgba(255,42,42,0.5);
+        }
+
+        .order-modal textarea { resize: none; height: 80px; }
+
+        .order-modal .msg-preview {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            white-space: pre-wrap;
+        }
+
+        .order-modal .msg-preview strong {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn-copy {
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-copy:hover { background: rgba(255,255,255,0.12); }
+        .btn-copy.copied { background: rgba(29,185,84,0.2); border-color: #1DB954; color: #1DB954; }
+
+        .btn-ig {
+            flex: 1.4;
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-family: var(--font-main);
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .btn-ig:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .order-step { margin-bottom: 1rem; }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             .merch-grid {
@@ -304,7 +513,7 @@
             <li><a href="index.html#hero">Nuevo Disco</a></li>
             <li><a href="index.html#proximos-eventos">Eventos</a></li>
             <li class="nav-merch">
-                <a href="merchandising.html" class="nav-merch-link active">Merchandising <span class="soon-badge">Próximamente</span></a>
+                <a href="merchandising.html" class="nav-merch-link active">Merchandising</a>
             </li>
             <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
         </ul>
@@ -315,52 +524,40 @@
     <main id="merch-page">
 
         <div class="merch-header" data-aos="fade-down">
-            <div class="soon-badge-big">
-                <span class="soon-dot"></span> PRÓXIMAMENTE
-            </div>
             <h1>MERCH<span>OFICIAL</span></h1>
-            <p>Algo se está cocinando...</p>
+            <p>Edición limitada disponible ahora</p>
         </div>
 
         <div class="merch-grid" data-aos="fade-up">
 
             <div class="merch-card">
                 <div class="merch-card-img">
-                    <i class="fas fa-tshirt"></i>
-                    <div class="merch-locked"><i class="fas fa-lock"></i></div>
+                    <img src="images/camiseta-merch.png" alt="Camiseta Dani Miralles">
                 </div>
-                <span class="merch-card-badge">Próximamente</span>
                 <div class="merch-card-info">
                     <h3>Camiseta</h3>
-                    <p class="merch-price">— €</p>
+                    <p class="merch-price">Edición limitada</p>
                 </div>
+                <button class="btn-pedir" onclick="openOrderModal('Camiseta', true)">
+                    <i class="fas fa-shopping-bag"></i> PEDIR
+                </button>
             </div>
 
-<div class="merch-card">
+            <div class="merch-card">
                 <div class="merch-card-img">
-                    <i class="fas fa-compact-disc"></i>
-                    <div class="merch-locked"><i class="fas fa-lock"></i></div>
+                    <img src="images/disco-merch.png" alt="Disco Dani Miralles">
                 </div>
-                <span class="merch-card-badge">Próximamente</span>
                 <div class="merch-card-info">
                     <h3>Disco</h3>
-                    <p class="merch-price">— €</p>
+                    <p class="merch-price">Edición limitada</p>
                 </div>
+                <button class="btn-pedir" onclick="openOrderModal('Disco', false)">
+                    <i class="fas fa-shopping-bag"></i> PEDIR
+                </button>
             </div>
 
         </div>
 
-        <div class="merch-notify" data-aos="fade-up" data-aos-delay="100">
-            <h3>Sé el primero en saberlo</h3>
-            <p>Déjanos tu correo y te avisamos cuando la tienda esté lista.</p>
-            <form class="merch-notify-form" id="merch-form">
-                <input type="email" name="user_email" placeholder="tu@email.com" required>
-                <button type="submit" id="merch-btn">
-                    <i class="fas fa-bell"></i> AVÍSAME
-                </button>
-            </form>
-            <p id="merch-feedback"></p>
-        </div>
 
     </main>
 
@@ -380,6 +577,55 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL PEDIDO -->
+    <div class="order-modal-overlay" id="orderModalOverlay">
+        <div class="order-modal">
+            <button class="order-modal-close" onclick="closeOrderModal()"><i class="fas fa-times"></i></button>
+            <h3 id="modal-title">Solicitar pedido</h3>
+            <p class="modal-subtitle">Rellena los datos y envíanos el mensaje por Instagram.</p>
+
+            <div class="order-step">
+                <label>Tu nombre</label>
+                <input type="text" id="order-name" placeholder="Nombre y apellido" oninput="updatePreview()">
+            </div>
+
+            <div class="order-step" id="size-step">
+                <label>Talla</label>
+                <select id="order-size" onchange="updatePreview()">
+                    <option value="">Selecciona talla</option>
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                </select>
+            </div>
+
+            <div class="order-step">
+                <label>Dirección (opcional)</label>
+                <input type="text" id="order-address" placeholder="Por si hay que enviártelo" oninput="updatePreview()">
+            </div>
+
+            <div class="order-step">
+                <label>Nota extra (opcional)</label>
+                <textarea id="order-note" placeholder="Cualquier otra cosa que quieras comentar..." oninput="updatePreview()"></textarea>
+            </div>
+
+            <label>Mensaje que se enviará:</label>
+            <div class="msg-preview" id="msg-preview">...</div>
+
+            <div class="modal-actions">
+                <button class="btn-copy" id="btn-copy" onclick="copyMessage()">
+                    <i class="fas fa-copy"></i> Copiar
+                </button>
+                <a class="btn-ig" id="btn-ig" href="https://ig.me/m/danimiralles_oficial" target="_blank" rel="noopener">
+                    <i class="fab fa-instagram"></i> Ir al DM
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -408,6 +654,62 @@
                 const s = i + 1;
                 light.style.transform = `translate(${x * 30 * s}px, ${y * 30 * s}px)`;
             });
+        });
+
+        // ── MODAL PEDIDO ──
+        let currentProduct = '';
+        let hasSizes = false;
+
+        function openOrderModal(product, sizes) {
+            currentProduct = product;
+            hasSizes = sizes;
+            document.getElementById('modal-title').textContent = 'Solicitar — ' + product;
+            document.getElementById('size-step').style.display = sizes ? 'block' : 'none';
+            document.getElementById('order-name').value = '';
+            document.getElementById('order-size').value = '';
+            document.getElementById('order-address').value = '';
+            document.getElementById('order-note').value = '';
+            updatePreview();
+            document.getElementById('orderModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updatePreview() {
+            const name = document.getElementById('order-name').value.trim() || '(tu nombre)';
+            const size = hasSizes ? (document.getElementById('order-size').value || '(talla)') : null;
+            const address = document.getElementById('order-address').value.trim();
+            const note = document.getElementById('order-note').value.trim();
+
+            let msg = `Hola Dani! 👋 Me interesa el/la ${currentProduct}.\n`;
+            msg += `Nombre: ${name}\n`;
+            if (size) msg += `Talla: ${size}\n`;
+            if (address) msg += `Dirección: ${address}\n`;
+            if (note) msg += `Nota: ${note}\n`;
+            msg += `\nGracias! 🎵`;
+
+            document.getElementById('msg-preview').textContent = msg;
+
+            const btnCopy = document.getElementById('btn-copy');
+            btnCopy.classList.remove('copied');
+            btnCopy.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+        }
+
+        function copyMessage() {
+            const text = document.getElementById('msg-preview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado';
+            });
+        }
+
+        document.getElementById('orderModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeOrderModal();
         });
 
         // Formulario aviso merch
