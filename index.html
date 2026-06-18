@@ -90,6 +90,7 @@
             <li class="nav-merch">
                 <a href="merchandising.html" class="nav-merch-link">Merchandising</a>
             </li>
+            <li><a href="concierto-euterpe.html" class="nav-gallery-link"><i class="fas fa-images"></i> Galería</a></li>
             <li><a href="contacto.html" class="btn-contact">Contacto</a></li>
         </ul>
 
@@ -98,25 +99,43 @@
 
     <main id="page-wrapper">
 
-        <!-- HERO: CONCIERTO SALA EUTERPE -->
-        <section id="eventos" class="event-concert-hero">
+        <!-- BANNER MERCHANDISING — MUY DESTACADO, LO PRIMERO -->
+        <div class="merch-teaser merch-teaser--hero" data-aos="fade-up">
+            <div class="merch-teaser-inner merch-teaser-inner--hero">
+                <div class="merch-hero-imgs">
+                    <img src="images/camiseta-merch.png" alt="Camiseta Dani Miralles" class="merch-hero-img merch-hero-img--shirt">
+                    <img src="images/disco-merch.png" alt="Disco Dani Miralles" class="merch-hero-img merch-hero-img--disc">
+                </div>
+                <div class="merch-teaser-text">
+                    <p class="merch-hero-title"><strong>Merch oficial ya disponible</strong></p>
+                    <p>Camisetas y discos en edición limitada. ¡Hazte con el tuyo antes de que se agote!</p>
+                </div>
+                <a href="merchandising.html" class="merch-teaser-btn merch-teaser-btn--hero">
+                    <i class="fas fa-tshirt"></i> VER TIENDA
+                </a>
+            </div>
+        </div>
+
+        <!-- HERO: CONCIERTO SALA EUTERPE — SOLD OUT -->
+        <section id="eventos" class="event-concert-hero event-soldout-hero event-concert-hero--compact">
             <canvas id="event-particles" class="event-particles-canvas"></canvas>
             <div class="event-concert-noise"></div>
 
             <div class="event-concert-container">
                 <div class="event-poster-col">
-                    <div class="event-poster-glow"></div>
+                    <div class="event-poster-glow event-poster-glow--gold"></div>
                     <div class="event-poster-float">
                         <div class="event-poster-glitch-wrap">
-                            <img src="images/unnamed.jpg" alt="Concierto Presentación de Disco · Sala Euterpe" class="event-poster-img">
+                            <img src="images/IMG PORTADA.png" alt="Concierto Presentación de Disco · Sala Euterpe · Sold Out" class="event-poster-img">
                             <div class="poster-scanline"></div>
+                            <div class="soldout-stamp">SOLD OUT</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="event-details-col">
-                    <span class="event-live-badge">
-                        <span class="live-dot"></span> PRÓXIMO CONCIERTO
+                    <span class="event-live-badge event-soldout-badge">
+                        <i class="fas fa-fire"></i> SOLD OUT · AGOTADO
                     </span>
 
                     <h1 class="event-artist-name">CONCIERTO<br><span class="event-subtitle">PRESENTACIÓN DE DISCO</span></h1>
@@ -132,7 +151,7 @@
                     <div class="event-meta-row">
                         <div class="event-meta-item">
                             <i class="fas fa-calendar-alt"></i>
-                            <span>12 · JUNIO</span>
+                            <span>12 · JUNIO · 2026</span>
                         </div>
                         <div class="event-meta-item">
                             <i class="fas fa-clock"></i>
@@ -140,9 +159,11 @@
                         </div>
                     </div>
 
+                    <p class="soldout-message">El concierto del 12 de junio en la Sala Euterpe fue un éxito total. ¡Gracias a todos los que lo hicisteis posible!</p>
+
                     <div class="event-cta-group">
-                        <a href="https://salaeuterpe.com/event/dani-miralles/" class="cta-button event-buy-btn" target="_blank" rel="noopener">
-                            <i class="fas fa-ticket-alt"></i> COMPRAR ENTRADAS
+                        <a href="concierto-euterpe.html" class="cta-button event-gallery-btn">
+                            <i class="fas fa-images"></i> MIRA LO QUE VIVIMOS
                         </a>
                     </div>
                 </div>
@@ -228,22 +249,10 @@
             <div class="scroll-down"></div>
         </section>
 
-        <!-- AVISO MERCHANDISING -->
-        <div class="merch-teaser" data-aos="fade-up">
-            <div class="merch-teaser-inner">
-                <div class="merch-teaser-text">
-                    <p><strong>Merch oficial ya disponible.</strong> Camisetas y discos en edición limitada.</p>
-                </div>
-                <a href="merchandising.html" class="merch-teaser-btn">
-                    <i class="fas fa-tshirt"></i> Ver tienda
-                </a>
-            </div>
-        </div>
-
-        <div class="marquee-strip">
+        <div class="marquee-strip marquee-strip--soldout">
             <div class="marquee-content">
-                <span>CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • 21:00H • ENTRADAS EN SALAEUTERPE.COM •</span>
-                <span>CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • 21:00H • ENTRADAS EN SALAEUTERPE.COM •</span>
+                <span>🔥 SOLD OUT • CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • ¡GRACIAS A TODOS! • SOLD OUT •</span>
+                <span>🔥 SOLD OUT • CONCIERTO PRESENTACIÓN DE DISCO • SALA EUTERPE • 12 DE JUNIO • ¡GRACIAS A TODOS! • SOLD OUT •</span>
             </div>
         </div>
 
@@ -364,15 +373,15 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: PRÓXIMOS EVENTOS -->
+        <!-- SECCIÓN: EVENTOS PASADOS -->
         <section id="proximos-eventos" class="events-list-section">
             <div class="section-header" data-aos="fade-right">
-                <h2>Próximos <span class="text-stroke">Eventos</span></h2>
+                <h2>Últimos <span class="text-stroke">Eventos</span></h2>
                 <div class="line"></div>
             </div>
 
             <div class="events-list">
-                <article class="event-row" data-aos="fade-up">
+                <article class="event-row event-row--past" data-aos="fade-up">
                     <div class="event-row-date">
                         <span class="erow-day">12</span>
                         <span class="erow-month">JUN</span>
@@ -380,7 +389,7 @@
                     </div>
                     <div class="event-row-divider"></div>
                     <div class="event-row-poster">
-                        <img src="images/unnamed.jpg" alt="Concierto Presentación de Disco · Sala Euterpe">
+                        <img src="images/IMG PORTADA.png" alt="Concierto Presentación de Disco · Sala Euterpe">
                     </div>
                     <div class="event-row-info">
                         <span class="erow-tag"><i class="fas fa-compact-disc"></i> PRESENTACIÓN DE DISCO</span>
@@ -391,10 +400,10 @@
                         </div>
                     </div>
                     <div class="event-row-cta">
-                        <a href="https://salaeuterpe.com/event/dani-miralles/" class="event-row-btn" target="_blank" rel="noopener">
-                            <i class="fas fa-ticket-alt"></i> ENTRADAS
-                        </a>
-                        <span class="erow-available"><span class="erow-dot"></span> DISPONIBLE</span>
+                        <span class="event-row-btn event-row-btn--finished">
+                            <i class="fas fa-check-circle"></i> FINALIZADO
+                        </span>
+                        <span class="erow-available erow-soldout"><i class="fas fa-fire"></i> SOLD OUT</span>
                     </div>
                 </article>
             </div>
