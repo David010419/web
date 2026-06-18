@@ -168,6 +168,27 @@ body {
     color: #000 !important;
 }
 
+/* Galería nav button */
+.nav-gallery-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 180, 0, 0.45);
+    color: #FFB400 !important;
+    font-weight: 700;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.nav-gallery-link:hover {
+    background: rgba(255, 180, 0, 0.12);
+    border-color: rgba(255, 180, 0, 0.8);
+    color: #ffc933 !important;
+}
+
+.nav-gallery-link i { font-size: 0.85em; }
+
 /* Merchandising nav item */
 .nav-merch-link {
     position: relative;
@@ -2273,4 +2294,270 @@ a.card-image {
     }
 
     .event-row-btn { padding: 0.65rem 1.2rem; }
+}
+
+/* =========================================
+   SOLD OUT — HERO & ESTILOS ESPECIALES
+   ========================================= */
+
+/* Badge SOLD OUT en el hero */
+.event-soldout-badge {
+    background: linear-gradient(135deg, rgba(255, 180, 0, 0.15), rgba(255, 80, 0, 0.15));
+    border: 1px solid rgba(255, 180, 0, 0.5);
+    color: #FFB400;
+    gap: 10px;
+}
+
+.event-soldout-badge i {
+    color: #FF6B00;
+    animation: livePulse 1.2s infinite ease-in-out;
+}
+
+/* Stamp SOLD OUT sobre la imagen */
+.soldout-stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 4px;
+    color: transparent;
+    -webkit-text-stroke: 3px rgba(255, 60, 0, 0.85);
+    text-shadow: 0 0 30px rgba(255, 60, 0, 0.4);
+    pointer-events: none;
+    z-index: 10;
+    border: 4px solid rgba(255, 60, 0, 0.75);
+    padding: 0.3em 0.6em;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(2px);
+}
+
+/* Glow dorado para sold out */
+.event-poster-glow--gold {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.35) 0%, transparent 70%);
+}
+
+/* Mensaje bajo los meta-datos */
+.soldout-message {
+    margin-top: 1.2rem;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 420px;
+    border-left: 3px solid #FFB400;
+    padding-left: 1rem;
+}
+
+/* Botón galería */
+.event-gallery-btn {
+    background: linear-gradient(135deg, #FFB400, #FF6B00) !important;
+    border-color: transparent !important;
+    color: #000 !important;
+    font-weight: 900;
+}
+
+.event-gallery-btn:hover {
+    background: linear-gradient(135deg, #FFC933, #FF8C00) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 180, 0, 0.4) !important;
+}
+
+/* Evento pasado en la lista */
+.event-row--past {
+    opacity: 0.85;
+}
+
+.event-row--past .erow-day {
+    color: #888;
+    text-shadow: none;
+}
+
+/* Botón FINALIZADO */
+.event-row-btn--finished {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    cursor: default;
+    background: rgba(100, 100, 100, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Badge SOLD OUT en la lista de eventos */
+.erow-soldout {
+    color: #FFB400 !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 2px;
+    gap: 5px;
+}
+
+.erow-soldout i {
+    color: #FF6B00;
+}
+
+/* =========================================
+   MERCHANDISING HERO — BANNER DESTACADO
+   ========================================= */
+
+.merch-teaser--hero {
+    margin: 0;
+    /* Empuja hacia abajo para no quedar bajo la nav fija */
+    padding-top: 80px;
+}
+
+.merch-teaser-inner--hero {
+    background: linear-gradient(135deg,
+        rgba(112, 0, 255, 0.22) 0%,
+        rgba(80, 0, 200, 0.14) 50%,
+        rgba(112, 0, 255, 0.22) 100%
+    );
+    border: none;
+    border-top: 2px solid rgba(112, 0, 255, 0.55);
+    border-bottom: 2px solid rgba(112, 0, 255, 0.55);
+    border-radius: 0;
+    padding: 3.5rem 7%;
+    gap: 3rem;
+    box-shadow: 0 0 80px rgba(112, 0, 255, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.merch-hero-imgs {
+    position: relative;
+    width: 160px;
+    height: 130px;
+    flex-shrink: 0;
+}
+
+.merch-hero-img {
+    position: absolute;
+    width: 110px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.merch-hero-img--shirt {
+    top: 0;
+    left: 0;
+    transform: rotate(-6deg);
+    z-index: 2;
+}
+
+.merch-hero-img--disc {
+    bottom: 0;
+    right: 0;
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+.merch-teaser-inner--hero:hover .merch-hero-img--shirt {
+    transform: rotate(-8deg) translateY(-4px);
+}
+
+.merch-teaser-inner--hero:hover .merch-hero-img--disc {
+    transform: rotate(7deg) translateY(4px);
+}
+
+.merch-hero-title {
+    font-size: 1.55rem !important;
+    color: #fff !important;
+    margin-bottom: 0.4rem !important;
+    letter-spacing: 1px;
+}
+
+.merch-hero-title strong {
+    color: #fff !important;
+}
+
+.merch-teaser-inner--hero .merch-teaser-text p:last-child {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.merch-teaser-btn--hero {
+    padding: 1.1rem 2.8rem;
+    font-size: 0.88rem;
+    letter-spacing: 3px;
+    background: rgba(112, 0, 255, 0.3);
+    border: 1.5px solid rgba(140, 60, 255, 0.7);
+    color: #fff;
+    white-space: nowrap;
+}
+
+.merch-teaser-btn--hero:hover {
+    background: rgba(112, 0, 255, 0.55);
+    border-color: rgba(160, 90, 255, 1);
+    box-shadow: 0 0 40px rgba(112, 0, 255, 0.4);
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+/* Concierto más compacto */
+.event-concert-hero--compact {
+    min-height: 60vh !important;
+    padding: 60px 5% 50px !important;
+}
+
+.event-concert-hero--compact .event-artist-name {
+    font-size: clamp(1.8rem, 4vw, 3.2rem) !important;
+}
+
+.event-concert-hero--compact .event-subtitle {
+    font-size: clamp(0.85rem, 1.8vw, 1.4rem) !important;
+}
+
+.event-concert-hero--compact .event-poster-img {
+    max-height: 340px;
+    object-fit: cover;
+}
+
+.event-concert-hero--compact .event-venue-block {
+    padding: 0.7rem 1.2rem;
+}
+
+.event-concert-hero--compact .venue-name {
+    font-size: 1.3rem;
+}
+
+.event-concert-hero--compact .soldout-message {
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+}
+
+@media (max-width: 600px) {
+    .merch-teaser--hero {
+        padding-top: 70px;
+    }
+    .merch-teaser-inner--hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 5%;
+        gap: 1.5rem;
+    }
+    .merch-hero-imgs { width: 120px; height: 100px; }
+    .merch-hero-img { width: 85px; }
+    .merch-hero-title { font-size: 1.2rem !important; }
+    .soldout-stamp { font-size: 1.4rem; -webkit-text-stroke: 2px rgba(255, 60, 0, 0.85); }
+    .event-concert-hero--compact { min-height: auto !important; }
+}
+
+/* Marquee SOLD OUT */
+.marquee-strip--soldout {
+    background: linear-gradient(90deg, rgba(255, 180, 0, 0.08), rgba(255, 60, 0, 0.08), rgba(255, 180, 0, 0.08));
+    border-top: 1px solid rgba(255, 180, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 180, 0, 0.2);
+}
+
+.marquee-strip--soldout .marquee-content span {
+    color: #FFB400;
 }
