@@ -61,7 +61,7 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <span>Email Oficial</span>
-                            <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a>
+                            <a href="mailto:hola@danimirallesoficial.com">hola@danimirallesoficial.com</a>
                         </div>
                     </div>
 
@@ -130,7 +130,7 @@
             </div>
             <div class="footer-meta">
                 <p>© 2025 Dani Miralles. Rock & Autor.</p>
-                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                <p>Management: <a href="mailto:hola@danimirallesoficial.com">hola@danimirallesoficial.com</a></p>
 
                 <p class="dev-credits">
                     Web creada y diseñada por:
@@ -143,15 +143,6 @@
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script type="text/javascript">
-        (function () {
-            // TU PUBLIC KEY (La misma que usaste en index.html)
-            emailjs.init("F4J0yiVKuR8LI3fzZ");
-        })();
-    </script>
 
     <script>
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
@@ -181,66 +172,63 @@
             });
         });
 
-        // --- LÓGICA DE ENVÍO FORMULARIO CONTACTO ---
+        // --- LÓGICA DE ENVÍO FORMULARIO CONTACTO (via Netlify Function + Resend) ---
         const contactForm = document.getElementById('contact-form');
 
         if (contactForm) {
-            contactForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evita recarga
+            contactForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
 
                 const btn = document.getElementById('btn-submit');
                 const feedback = document.getElementById('msg-feedback');
 
-                // 1. Estado "Cargando"
-                const originalText = btn.innerHTML;
+                const nombre = document.getElementById('from_name').value.trim();
+                const email = document.getElementById('email_id').value.trim();
+                const mensaje = document.getElementById('message').value.trim();
+
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+                btn.disabled = true;
                 btn.style.opacity = '0.7';
 
-                // 2. CONFIGURACIÓN EMAILJS
-                const serviceID = 'service_m5o515n';   // Tu Service ID
-                // RECOMENDACIÓN: Crea un Template nuevo en EmailJS para "Contacto General" 
-                // que incluya {{from_name}}, {{email_id}} y {{message}}.
-                // Si usas el mismo del newsletter, asegúrate de que tenga esos campos.
-                const templateID = 'template_lqxxqss'; // Tu Template ID (o crea uno nuevo para contacto)
+                try {
+                    const res = await fetch('/.netlify/functions/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nombre, email, mensaje }),
+                    });
 
-                // 3. Envío
-                emailjs.sendForm(serviceID, templateID, this)
-                    .then(() => {
-                        // ÉXITO
+                    const data = await res.json();
+
+                    if (res.ok && data.ok) {
                         btn.innerHTML = '<i class="fas fa-check"></i> MENSAJE ENVIADO';
                         btn.style.background = '#1DB954';
 
                         feedback.style.display = 'block';
                         feedback.style.color = '#1DB954';
-                        feedback.innerText = "¡Gracias! He recibido tu mensaje. Te contestaré lo antes posible.";
+                        feedback.innerText = '¡Gracias! He recibido tu mensaje. Te contestaré lo antes posible.';
 
-                        // Resetear formulario
                         contactForm.reset();
+                    } else {
+                        throw new Error(data.error || 'Error desconocido');
+                    }
+                } catch (err) {
+                    btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
+                    btn.style.background = 'red';
 
-                        // Volver al estado normal tras 5 segundos
-                        setTimeout(() => {
-                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
-                            btn.style.background = '';
-                            btn.style.opacity = '1';
-                            feedback.style.display = 'none';
-                        }, 5000);
+                    feedback.style.display = 'block';
+                    feedback.style.color = 'red';
+                    feedback.innerText = 'Hubo un error al enviar. Por favor, escríbeme directamente al email.';
 
-                    }, (err) => {
-                        // ERROR
-                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
-                        btn.style.background = 'red';
-
-                        feedback.style.display = 'block';
-                        feedback.style.color = 'red';
-                        feedback.innerText = "Hubo un error al enviar. Por favor, escríbeme directamente al email.";
-                        console.log(JSON.stringify(err));
-
-                        setTimeout(() => {
-                            btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
-                            btn.style.background = '';
-                            btn.style.opacity = '1';
-                        }, 5000);
-                    });
+                    console.error(err);
+                } finally {
+                    btn.disabled = false;
+                    setTimeout(() => {
+                        btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                        btn.style.background = '';
+                        btn.style.opacity = '1';
+                        feedback.style.display = 'none';
+                    }, 5000);
+                }
             });
         }
     </script>

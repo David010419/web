@@ -1,11 +1,11 @@
 {
-  "name": "tu-sitio",
+  "name": "danimiralles-web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "echo \"No hay paso de build necesario\""
   },
   "dependencies": {
-    "nodemailer": "^6.9.0"
+    "resend": "^4.0.0"
   }
 }

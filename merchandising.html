@@ -593,7 +593,7 @@
             </div>
             <div class="footer-meta">
                 <p>© 2025 Dani Miralles. Autor.</p>
-                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                <p>Management: <a href="mailto:hola@danimirallesoficial.com">hola@danimirallesoficial.com</a></p>
                 <p>Web creada y diseñada por:
                     <a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243" target="_blank" rel="noopener">David Castillo Gallardo</a>
                 </p>
@@ -665,10 +665,7 @@
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        (function () { emailjs.init("ZiKcCNO_OxbPuUtHf"); })();
-
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
 
         // Menú móvil
@@ -750,45 +747,6 @@
         document.getElementById('orderModalOverlay').addEventListener('click', function(e) {
             if (e.target === this) closeOrderModal();
         });
-
-        // Formulario aviso merch
-        const merchForm = document.getElementById('merch-form');
-        if (merchForm) {
-            merchForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const btn = document.getElementById('merch-btn');
-                const feedback = document.getElementById('merch-feedback');
-
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
-                btn.style.opacity = '0.7';
-
-                emailjs.sendForm('service_cfslftd', 'template_gcdc2qr', this)
-                    .then(() => {
-                        btn.innerHTML = '<i class="fas fa-check"></i> ENVIADO';
-                        btn.style.background = '#1DB954';
-                        feedback.style.display = 'block';
-                        feedback.style.color = '#1DB954';
-                        feedback.innerText = '¡Perfecto! Te avisamos cuando esté lista.';
-                        setTimeout(() => {
-                            btn.innerHTML = '<i class="fas fa-bell"></i> AVÍSAME';
-                            btn.style.background = '';
-                            btn.style.opacity = '1';
-                            merchForm.reset();
-                        }, 3000);
-                    }, () => {
-                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
-                        btn.style.background = 'red';
-                        feedback.style.display = 'block';
-                        feedback.style.color = 'red';
-                        feedback.innerText = 'Hubo un error. Inténtalo de nuevo.';
-                        setTimeout(() => {
-                            btn.innerHTML = '<i class="fas fa-bell"></i> AVÍSAME';
-                            btn.style.background = '';
-                            btn.style.opacity = '1';
-                        }, 3000);
-                    });
-            });
-        }
     </script>
 
 </body>

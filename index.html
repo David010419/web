@@ -421,7 +421,7 @@
             </div>
             <div class="footer-meta">
                 <p>© 2025 Dani Miralles.Autor.</p>
-                <p>Management: <a href="mailto:danimirallesoficial@gmail.com">danimirallesoficial@gmail.com</a></p>
+                <p>Management: <a href="mailto:hola@danimirallesoficial.com">hola@danimirallesoficial.com</a></p>
 
                 <p>Web creada y diseñada por:
                     <a href="https://www.linkedin.com/in/david-castillo-gallardo-b9377a243" target="_blank"
@@ -459,15 +459,6 @@
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script type="text/javascript">
-        (function () {
-            // TU PUBLIC KEY
-            emailjs.init("ZiKcCNO_OxbPuUtHf");
-        })();
-    </script>
 
     <script>
         // Inicializar AOS
@@ -522,55 +513,64 @@
             if (e.target === notifyModal) notifyModal.classList.remove('active');
         });
 
-        // --- ENVÍO EMAILJS ---
+        // --- ENVÍO LISTA DE ESPERA (via Netlify Function + Resend) ---
         const contactForm = document.getElementById('contact-form');
         if (contactForm) {
-            contactForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evita recarga
+            contactForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
 
                 const btn = document.getElementById('btn-submit');
                 const feedback = document.getElementById('msg-feedback');
+                const email = document.getElementById('user_email').value.trim();
 
-                // Estado cargando
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+                btn.disabled = true;
                 btn.style.opacity = '0.7';
 
-                const serviceID = 'service_cfslftd';
-                const templateID = 'template_gcdc2qr';
+                try {
+                    const res = await fetch('/.netlify/functions/notify', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email }),
+                    });
 
-                emailjs.sendForm(serviceID, templateID, this)
-                    .then(() => {
-                        // ÉXITO
+                    const data = await res.json();
+
+                    if (res.ok && data.ok) {
                         btn.innerHTML = '<i class="fas fa-check"></i> ENVIADO';
                         btn.style.background = '#1DB954';
 
                         feedback.style.display = 'block';
                         feedback.style.color = '#1DB954';
-                        feedback.innerText = "¡Estás dentro! Te avisaré pronto.";
+                        feedback.innerText = '¡Estás dentro! Te avisaré pronto.';
 
                         setTimeout(() => {
                             notifyModal.classList.remove('active');
                             btn.innerHTML = '<i class="fas fa-paper-plane"></i> ENVIAR';
                             btn.style.background = '';
                             btn.style.opacity = '1';
+                            btn.disabled = false;
                         }, 3000);
+                    } else {
+                        throw new Error(data.error || 'Error desconocido');
+                    }
+                } catch (err) {
+                    btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
+                    btn.style.background = 'red';
 
-                    }, (err) => {
-                        // ERROR
-                        btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
-                        btn.style.background = 'red';
+                    feedback.style.display = 'block';
+                    feedback.style.color = 'red';
+                    feedback.innerText = 'Hubo un error. Inténtalo de nuevo.';
 
-                        feedback.style.display = 'block';
-                        feedback.style.color = 'red';
-                        feedback.innerText = "Hubo un error. Inténtalo de nuevo.";
-                        console.log(JSON.stringify(err));
+                    console.error(err);
 
-                        setTimeout(() => {
-                            btn.innerHTML = '<i class="fas fa-paper-plane"></i> ENVIAR';
-                            btn.style.background = '';
-                            btn.style.opacity = '1';
-                        }, 3000);
-                    });
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-paper-plane"></i> ENVIAR';
+                        btn.style.background = '';
+                        btn.style.opacity = '1';
+                        btn.disabled = false;
+                    }, 3000);
+                }
             });
         }
     </script>
