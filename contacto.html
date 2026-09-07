@@ -17,6 +17,121 @@
     <link rel="stylesheet" href="assets/css/modern-style.css" />
 
     <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+
+    <style>
+        /* ── OVERLAY ÉXITO ── */
+        #success-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(5, 5, 5, 0.97);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #success-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .success-inner {
+            text-align: center;
+            padding: 0 24px;
+            transform: translateY(40px) scale(0.95);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+        #success-overlay.active .success-inner {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        .success-icon-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 36px;
+        }
+        .success-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #ff2a2a;
+            animation: ringPulse 1.8s ease-out infinite;
+        }
+        .success-ring:nth-child(2) { animation-delay: 0.6s; }
+        .success-ring:nth-child(3) { animation-delay: 1.2s; }
+        @keyframes ringPulse {
+            0%   { transform: scale(1);   opacity: 0.8; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+        .success-check {
+            position: absolute;
+            inset: 0;
+            background: #ff2a2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #fff;
+            box-shadow: 0 0 40px rgba(255,42,42,0.6), 0 0 80px rgba(255,42,42,0.2);
+            animation: checkPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+        }
+        @keyframes checkPop {
+            0%   { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        .success-bar {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #7000ff, #ff2a2a);
+            margin: 0 auto 24px;
+        }
+        .success-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(40px, 10vw, 72px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #fff;
+            margin: 0 0 8px;
+            animation: glitchReveal 1s ease 0.3s both;
+        }
+        .success-title span { color: #ff2a2a; }
+        @keyframes glitchReveal {
+            0%   { clip-path: inset(100% 0 0 0); opacity: 0; transform: translateX(-6px); }
+            40%  { clip-path: inset(40% 0 0 0);  opacity: 1; transform: translateX(4px); }
+            70%  { clip-path: inset(10% 0 0 0);  transform: translateX(-2px); }
+            100% { clip-path: inset(0 0 0 0);    transform: translateX(0); }
+        }
+        .success-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #444;
+            margin: 20px 0 0;
+        }
+        .success-close {
+            margin-top: 40px;
+            background: none;
+            border: 1px solid #2a2a2a;
+            color: #555;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 12px 28px;
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .success-close:hover { border-color: #ff2a2a; color: #ff2a2a; }
+    </style>
 </head>
 
 <body>
@@ -141,6 +256,22 @@
         </div>
     </footer>
 
+    <!-- OVERLAY ÉXITO -->
+    <div id="success-overlay">
+        <div class="success-inner">
+            <div class="success-icon-wrap">
+                <div class="success-ring"></div>
+                <div class="success-ring"></div>
+                <div class="success-ring"></div>
+                <div class="success-check">✓</div>
+            </div>
+            <div class="success-bar"></div>
+            <h2 class="success-title">MENSAJE<br/><span>ENVIADO</span></h2>
+            <p class="success-sub">Me pondré en contacto contigo pronto</p>
+            <button class="success-close" onclick="closeSuccess()">CERRAR ×</button>
+        </div>
+    </div>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -172,18 +303,30 @@
             });
         });
 
-        // --- LÓGICA DE ENVÍO FORMULARIO CONTACTO (via Netlify Function + Resend) ---
+        // ── Overlay de éxito ──
+        function showSuccess() {
+            const overlay = document.getElementById('success-overlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => closeSuccess(), 6000);
+        }
+        function closeSuccess() {
+            const overlay = document.getElementById('success-overlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ── Envío del formulario de contacto ──
         const contactForm = document.getElementById('contact-form');
 
         if (contactForm) {
             contactForm.addEventListener('submit', async function (event) {
                 event.preventDefault();
 
-                const btn = document.getElementById('btn-submit');
+                const btn     = document.getElementById('btn-submit');
                 const feedback = document.getElementById('msg-feedback');
-
-                const nombre = document.getElementById('from_name').value.trim();
-                const email = document.getElementById('email_id').value.trim();
+                const nombre  = document.getElementById('from_name').value.trim();
+                const email   = document.getElementById('email_id').value.trim();
                 const mensaje = document.getElementById('message').value.trim();
 
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
@@ -200,32 +343,26 @@
                     const data = await res.json();
 
                     if (res.ok && data.ok) {
-                        btn.innerHTML = '<i class="fas fa-check"></i> MENSAJE ENVIADO';
-                        btn.style.background = '#1DB954';
-
-                        feedback.style.display = 'block';
-                        feedback.style.color = '#1DB954';
-                        feedback.innerText = '¡Gracias! He recibido tu mensaje. Te contestaré lo antes posible.';
-
                         contactForm.reset();
+                        btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
+                        btn.style.opacity = '1';
+                        btn.disabled = false;
+                        showSuccess();
                     } else {
                         throw new Error(data.error || 'Error desconocido');
                     }
                 } catch (err) {
                     btn.innerHTML = '<i class="fas fa-times"></i> ERROR';
                     btn.style.background = 'red';
-
                     feedback.style.display = 'block';
                     feedback.style.color = 'red';
                     feedback.innerText = 'Hubo un error al enviar. Por favor, escríbeme directamente al email.';
-
                     console.error(err);
-                } finally {
-                    btn.disabled = false;
                     setTimeout(() => {
                         btn.innerHTML = 'ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>';
                         btn.style.background = '';
                         btn.style.opacity = '1';
+                        btn.disabled = false;
                         feedback.style.display = 'none';
                     }, 5000);
                 }
