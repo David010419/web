@@ -117,7 +117,6 @@ function templateConfirmacion({ nombre }) {
 
   <!-- HERO -->
   <tr><td style="background:#080808;padding:56px 48px 48px;text-align:center;border-left:1px solid #161616;border-right:1px solid #161616;">
-    <p style="margin:0 0 20px;font-size:9px;font-weight:700;letter-spacing:7px;color:#7000ff;text-transform:uppercase;">Rock &amp; Autor</p>
     <h1 style="margin:0;font-size:62px;font-weight:900;color:#fff;letter-spacing:5px;line-height:0.9;text-transform:uppercase;">DANI<br/>MIRALLES</h1>
     <table width="280" cellpadding="0" cellspacing="0" style="margin:28px auto 0;">
       <tr>
