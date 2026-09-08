@@ -116,6 +116,9 @@
             </div>
         </div>
 
+        <!-- LAYOUT: CONCIERTO (izquierda) + PRÓXIMOS EVENTOS (derecha) -->
+        <div class="concert-layout-wrapper">
+
         <!-- HERO: CONCIERTO SALA EUTERPE — SOLD OUT -->
         <section id="eventos" class="event-concert-hero event-soldout-hero event-concert-hero--compact">
             <canvas id="event-particles" class="event-particles-canvas"></canvas>
@@ -171,6 +174,39 @@
 
             <div class="scroll-down"></div>
         </section>
+
+        <!-- PANEL DERECHO: PRÓXIMOS EVENTOS -->
+        <aside class="proximos-sidebar">
+            <div class="event-concert-noise"></div>
+            <div class="proximos-sidebar-inner">
+                <h2 class="proximos-title">PRÓXIMOS<span>EVENTOS</span></h2>
+
+                <div class="prox-event-card">
+                    <img src="images/4-10.jpg" alt="Dani Miralles en El Tumbao" class="prox-event-img">
+                    <div class="prox-event-body">
+                        <div class="prox-event-head">
+                            <div class="prox-event-date">
+                                <span class="pday">4</span>
+                                <span class="pmonth">OCT</span>
+                            </div>
+                            <div class="prox-event-info">
+                                <div class="prox-event-name">El Tumbao</div>
+                                <div class="prox-event-venue">
+                                    <i class="fas fa-map-marker-alt"></i> C/Arquitecto Guardiola 31, Alicante
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prox-event-meta">
+                            <span><i class="fas fa-clock"></i> 20:00H</span>
+                            <span><i class="fas fa-ticket-alt"></i> Taquilla desde las 19:30</span>
+                        </div>
+                        <span class="prox-event-tag">ENTRADAS DISPONIBLES</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        </div><!-- /concert-layout-wrapper -->
 
         <section id="hero" class="mystery-mode">
 
@@ -373,14 +409,45 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: EVENTOS PASADOS -->
+        <!-- SECCIÓN: EVENTOS -->
         <section id="proximos-eventos" class="events-list-section">
             <div class="section-header" data-aos="fade-right">
-                <h2>Últimos <span class="text-stroke">Eventos</span></h2>
+                <h2>Próximos y Últimos <span class="text-stroke">Eventos</span></h2>
                 <div class="line"></div>
             </div>
 
             <div class="events-list">
+
+                <!-- PRÓXIMO: El Tumbao 4 OCT -->
+                <article class="event-row" data-aos="fade-up">
+                    <div class="event-row-date">
+                        <span class="erow-day">4</span>
+                        <span class="erow-month">OCT</span>
+                        <span class="erow-year">2026</span>
+                    </div>
+                    <div class="event-row-divider"></div>
+                    <div class="event-row-poster">
+                        <img src="images/4-10.jpg" alt="Dani Miralles · El Tumbao · Alicante" loading="lazy">
+                    </div>
+                    <div class="event-row-info">
+                        <span class="erow-tag"><i class="fas fa-music"></i> CONCIERTO</span>
+                        <h3 class="erow-title">Dani Miralles</h3>
+                        <div class="erow-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> El Tumbao · C/Arquitecto Guardiola 31, Alicante</span>
+                            <span><i class="fas fa-clock"></i> 20:00H · Taquilla desde 19:30H</span>
+                        </div>
+                    </div>
+                    <div class="event-row-cta">
+                        <span class="event-row-btn">
+                            <i class="fas fa-ticket-alt"></i> ENTRADAS EN TAQUILLA
+                        </span>
+                        <span class="erow-available">
+                            <span class="erow-dot"></span> DISPONIBLES
+                        </span>
+                    </div>
+                </article>
+
+                <!-- PASADO: Sala Euterpe 12 JUN -->
                 <article class="event-row event-row--past" data-aos="fade-up">
                     <div class="event-row-date">
                         <span class="erow-day">12</span>
