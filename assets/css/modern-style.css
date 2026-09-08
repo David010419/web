@@ -26,6 +26,10 @@ html {
 }
 
 /* FIX CRÍTICO: Esto evita que la web baile a los lados en móvil */
+html {
+    overflow-x: clip; /* clip no crea BFC ni afecta scroll-y */
+}
+
 html,
 body {
     width: 100%;
@@ -227,6 +231,8 @@ body {
 #page-wrapper {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .mystery-mode {
@@ -708,15 +714,14 @@ body {
     color: #000;
     padding: 0.8rem 0;
     overflow: hidden;
-    transform: rotate(-2deg) scale(1.05);
+    transform: rotate(-2deg) scaleX(1.06);
     position: relative;
     z-index: 20;
     margin-bottom: 4rem;
     box-shadow: 0 0 20px rgba(255, 42, 42, 0.5);
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
-    width: 105%;
-    left: -2.5%;
+    width: 100%;
 }
 
 .marquee-content {
@@ -1343,13 +1348,9 @@ a.card-image {
     .marquee-strip {
         margin-top: 0;
         background-color: var(--primary);
-        /* Asegura que no tenga transparencia */
-        width: 120%;
-        /* Más ancha para asegurar que cubra al rotar */
-        margin-left: -10%;
-        transform: rotate(-2deg);
+        width: 100%;
+        transform: rotate(-2deg) scaleX(1.12);
         box-shadow: 0 -10px 40px var(--dark);
-        /* Sombra hacia arriba para tapar imperfecciones */
     }
 
     /* Contacto Móvil */
@@ -2010,7 +2011,7 @@ a.card-image {
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-    .event-concert-hero { padding: 110px 1.5rem 70px; }
+    .event-concert-hero { padding: 80px 1.5rem 40px; }
 
     .event-concert-container {
         grid-template-columns: 1fr;
@@ -2086,6 +2087,7 @@ a.card-image {
     border-right: 1px solid rgba(255,42,42,0.12);
     gap: 0;
     min-height: 110px;
+    align-self: stretch;
 }
 
 .erow-day {
@@ -2203,11 +2205,11 @@ a.card-image {
     background: var(--primary);
     color: #fff;
     text-decoration: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.4rem;
     border-radius: 6px;
     font-weight: 900;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     position: relative;
@@ -2377,18 +2379,11 @@ a.card-image {
 
 /* Botón FINALIZADO */
 .event-row-btn--finished {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.75rem 1.4rem;
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    border-radius: 6px;
     cursor: default;
     background: rgba(100, 100, 100, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.5);
+    box-shadow: none;
 }
 
 /* Badge SOLD OUT en la lista de eventos */
@@ -2423,8 +2418,8 @@ a.card-image {
     border-top: 2px solid rgba(112, 0, 255, 0.55);
     border-bottom: 2px solid rgba(112, 0, 255, 0.55);
     border-radius: 0;
-    padding: 3.5rem 7%;
-    gap: 3rem;
+    padding: 1.4rem 7%;
+    gap: 2rem;
     box-shadow: 0 0 80px rgba(112, 0, 255, 0.18),
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
@@ -2539,16 +2534,23 @@ a.card-image {
         padding-top: 70px;
     }
     .merch-teaser-inner--hero {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
         text-align: center;
-        padding: 2.5rem 5%;
-        gap: 1.5rem;
+        padding: 0.7rem 4%;
+        gap: 0.6rem;
     }
-    .merch-hero-imgs { width: 120px; height: 100px; }
-    .merch-hero-img { width: 85px; }
-    .merch-hero-title { font-size: 1.2rem !important; }
+    .merch-hero-imgs { width: 70px; height: 60px; }
+    .merch-hero-img { width: 52px; }
+    .merch-hero-title { font-size: 0.95rem !important; margin-bottom: 0.1rem !important; }
+    .merch-teaser-inner--hero .merch-teaser-text p:last-child { font-size: 0.78rem; }
+    .merch-teaser-btn--hero { padding: 0.55rem 1.2rem; font-size: 0.75rem; }
     .soldout-stamp { font-size: 1.4rem; -webkit-text-stroke: 2px rgba(255, 60, 0, 0.85); }
-    .event-concert-hero--compact { min-height: auto !important; }
+    .event-concert-hero--compact { min-height: auto !important; padding: 40px 4% 30px !important; }
+    .event-concert-hero--compact .event-poster-img { max-height: 200px; }
+    .event-concert-hero--compact .event-artist-name { font-size: clamp(1.4rem, 7vw, 2.2rem) !important; }
 }
 
 /* Marquee SOLD OUT */
@@ -2560,4 +2562,278 @@ a.card-image {
 
 .marquee-strip--soldout .marquee-content span {
     color: #FFB400;
+}
+
+/* =========================================
+   LAYOUT: CONCIERTO (izq) + PRÓXIMOS EVENTOS (dcha)
+   ========================================= */
+.concert-layout-wrapper {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden; /* evita scroll horizontal */
+    width: 100%;
+    max-width: 100%;
+}
+
+.concert-layout-wrapper > #eventos {
+    flex: 0 0 52%;
+    min-width: 0;
+}
+
+/* Panel lateral: próximos eventos — idéntico visualmente al hero de concierto */
+.proximos-sidebar {
+    flex: 1;
+    min-width: 0;
+    /* Mismo fondo exacto que .event-concert-hero */
+    background: radial-gradient(ellipse at 25% 50%, rgba(112, 0, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 50%, rgba(255, 42, 42, 0.14) 0%, transparent 55%),
+                var(--dark);
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 110px 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mismas líneas CRT que el hero de concierto */
+.proximos-sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 3px
+    );
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Mismo sweep de luz que el hero de concierto */
+.proximos-sidebar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(112, 0, 255, 0.05) 30%,
+        rgba(255, 42, 42, 0.07) 70%,
+        transparent
+    );
+    animation: heroSweep 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    top: -35%;
+}
+
+.proximos-sidebar-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.proximos-title {
+    font-size: clamp(1.2rem, 2.2vw, 2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1.2rem;
+}
+
+.proximos-title span {
+    display: block;
+    color: var(--primary);
+    font-size: 0.6em;
+    letter-spacing: 5px;
+    margin-top: 0.3rem;
+    text-shadow: 0 0 20px rgba(255, 42, 42, 0.4);
+}
+
+/* Tarjeta de evento individual en el sidebar */
+.prox-event-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.prox-event-card:hover {
+    border-color: rgba(255, 42, 42, 0.4);
+    box-shadow: 0 0 25px rgba(255, 42, 42, 0.08);
+}
+
+/* Imagen del evento — columna izquierda */
+.prox-event-img {
+    width: 110px;
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Cuerpo de la tarjeta — columna derecha */
+.prox-event-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0.9rem 1.1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+/* Fila: fecha + nombre sala */
+.prox-event-head {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.prox-event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 44px;
+    background: rgba(255, 42, 42, 0.1);
+    border-radius: 8px;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid rgba(255, 42, 42, 0.25);
+}
+
+.prox-event-date .pday {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.prox-event-date .pmonth {
+    font-size: 0.58rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.prox-event-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.prox-event-name {
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.prox-event-venue {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 3px;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    line-height: 1.4;
+}
+
+.prox-event-venue i {
+    color: var(--accent);
+    font-size: 0.65rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Hora y taquilla */
+.prox-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+}
+
+.prox-event-meta span {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.prox-event-meta i {
+    color: var(--accent);
+    font-size: 0.65rem;
+}
+
+.prox-event-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--primary);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    width: fit-content;
+    box-shadow: 0 0 12px rgba(255, 42, 42, 0.3);
+}
+
+/* Placeholder cuando no hay eventos */
+.proximos-placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    line-height: 2;
+}
+
+.proximos-placeholder i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    opacity: 0.3;
+}
+
+/* Responsive: en móvil se apilan */
+@media (max-width: 900px) {
+    .concert-layout-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .concert-layout-wrapper > #eventos {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .proximos-sidebar {
+        width: 100%;
+        min-width: 0;
+        padding: 2.5rem 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
 }
